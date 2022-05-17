@@ -5,17 +5,20 @@ import pandas as pd
 from PIL import Image
 import streamlit as st
 from datetime import datetime
+import os
 
 warnings.simplefilter("ignore")
 
+import omiclearn.utils
+
 # Session state
-import utils.session_states as session_states
+import omiclearn.utils.session_states as session_states
 
 # ML functionalities
-from utils.ml_helper import perform_cross_validation, transform_dataset, calculate_cm
+from omiclearn.utils.ml_helper import perform_cross_validation, transform_dataset, calculate_cm
 
 # Plotting
-from utils.plot_helper import (
+from omiclearn.utils.plot_helper import (
     plot_confusion_matrices,
     plot_feature_importance,
     plot_pr_curve_cv,
@@ -24,7 +27,7 @@ from utils.plot_helper import (
 )
 
 # UI components and others func.
-from utils.ui_helper import (
+from omiclearn.utils.ui_helper import (
     main_components,
     get_system_report,
     save_sessions,
@@ -37,15 +40,18 @@ from utils.ui_helper import (
     generate_footer_parts,
 )
 
+_this_file = os.path.abspath(__file__)
+_this_directory = os.path.dirname(_this_file)
+
 # Set the configs
 APP_TITLE = "OmicLearn — ML platform for omics datasets"
 st.set_page_config(
     page_title=APP_TITLE,
-    page_icon=Image.open("./utils/omic_learn.ico"),
+    page_icon=Image.open(os.path.join(_this_directory,"utils/omic_learn.ico")),
     layout="centered",
     initial_sidebar_state="auto",
 )
-icon = Image.open("./utils/omic_learn.png")
+icon = Image.open(os.path.join(_this_directory, "utils/omic_learn.png"))
 report = get_system_report()
 
 # This needs to be here as it needs to be after setting ithe initial_sidebar_state
