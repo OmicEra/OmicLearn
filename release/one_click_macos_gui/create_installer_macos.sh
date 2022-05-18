@@ -23,7 +23,7 @@ cd release/one_click_macos_gui
 pip install "../../dist/omiclearn-1.1.3-py3-none-any.whl"
 
 # Creating the stand-alone pyinstaller folder
-pip install pyinstaller==4.2
+pip install pyinstaller==4.10
 pyinstaller ../pyinstaller/omiclearn.spec -y
 conda deactivate
 

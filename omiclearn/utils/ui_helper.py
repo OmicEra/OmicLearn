@@ -29,6 +29,9 @@ def make_recording_widget(f, widget_values):
 
     return wrapper
 
+_this_file = os.path.abspath(__file__)
+_this_directory = os.path.dirname(_this_file)
+_parent_directory = os.path.dirname(_this_directory)
 
 # Object for dict
 class objdict(dict):
@@ -475,7 +478,10 @@ def main_text_and_data_upload(state, APP_TITLE):
                     Molecular Systems Biology, 16(6). doi: [10.15252/msb.20199356](http://doi.org/10.15252/msb.20199356)
                     """
                 )
-            state["df"] = pd.read_excel("data/" + state.sample_file + ".xlsx")
+
+            folder_to_load = os.path.join(_parent_directory, 'data')
+            file_to_load = os.path.join(folder_to_load, state.sample_file + ".xlsx")
+            state["df"] = pd.read_excel(file_to_load)
             st.markdown("Using the following dataset:")
             st.dataframe(state.df[state.df.columns[-20:]].head(max_df_length))
         elif 0 < dataframe_length < max_df_length:
