@@ -30,7 +30,7 @@ conda deactivate
 
 # Wrapping the pyinstaller folder in a .deb package
 mkdir -p dist/omiclearn_gui_installer_linux/usr/local/bin
-mv dist/omiclearn_gui dist/omiclearn_gui_installer_linux/usr/local/bin/omiclearn_gui
+mv dist/OmicLearn dist/omiclearn_gui_installer_linux/usr/local/bin/OmicLearn
 mkdir dist/omiclearn_gui_installer_linux/DEBIAN
 cp control dist/omiclearn_gui_installer_linux/DEBIAN
 dpkg-deb --build --root-owner-group dist/omiclearn_gui_installer_linux/
