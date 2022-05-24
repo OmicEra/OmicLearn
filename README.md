@@ -26,13 +26,13 @@ Transparent exploration of machine learning for biomarker discovery from proteom
 
 🟢  <a href="https://omiclearn.com" target="_blank"> OmicLearn.com </a>
 
-This is a online version hosted by streamlit using free cloud resources. Use the local installation to use your own hardware.
+This is an online version hosted by streamlit using free cloud resources, which might have limited performance. Use the local installation to run OmicLearn on your own hardware.
 
 ## Local Installation & Running
 
 ### One-click Installation
 
-You can use the one-click installer to locally install OmicLearn as an application.
+You can use the one-click installer to install OmicLearn as an application locally.
 Click on one of the links below to download the latest release for:
 
 [**Windows**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe), [**macOS**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg), [**Linux**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
@@ -49,9 +49,8 @@ Click on one of the links below to download the latest release for:
 
 - After a successful installation, type the following command to run OmicLearn:
 
-  `streamlit run omiclearn/omic_learn.py --browser.gatherUsageStats False`
+  `python -m omiclearn`
 
-  > `Running with Docker` option is also available. Please, check the installation instructions on **[the Wiki pages](https://github.com/OmicEra/OmicLearn/wiki/HOW-TO:-Installation-&-Running)**.
 
  - After starting the streamlit server, the OmicLearn page should be automatically opened in your browser (Default link: [`http://localhost:8501`](http://localhost:8501)
 
