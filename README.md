@@ -26,20 +26,30 @@ Transparent exploration of machine learning for biomarker discovery from proteom
 
 🟢  <a href="https://omiclearn.com" target="_blank"> OmicLearn.com </a>
 
+This is a online version hosted by streamlit using free cloud resources. Use the local installation to use your own hardware.
 
 ## Local Installation & Running
+
+### One-click Installation
+
+You can use the one-click installer to locally install OmicLearn as an application.
+Click on one of the links below to download the latest release for:
+
+[**Windows**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe), [**macOS**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg), [**Linux**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
+
 
 > More information about `Installation & Running` is available on our **[Wiki pages](https://github.com/OmicEra/OmicLearn/wiki/HOW-TO:-Installation-&-Running)**.
 
 - It is strongly recommended to install OmicLearn in its own environment using [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
   1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/OmicEra/OmicLearn`
-  2. Install the required packages with `conda env create --file environment.yml`
+  2. Create a new environment for OmicLearn: `conda create --name omic_learn python=3.9`
   3. Activate the environment with  `conda activate omic_learn`
+  4. Install OmicLearn with `pip install .`
 
 - After a successful installation, type the following command to run OmicLearn:
 
-  `streamlit run omic_learn.py --browser.gatherUsageStats False`
+  `streamlit run omiclearn/omic_learn.py --browser.gatherUsageStats False`
 
   > `Running with Docker` option is also available. Please, check the installation instructions on **[the Wiki pages](https://github.com/OmicEra/OmicLearn/wiki/HOW-TO:-Installation-&-Running)**.
 
