@@ -5,8 +5,7 @@ import plotly.figure_factory as ff
 from scipy.spatial.distance import pdist, squareform
 
 # ML funcs
-import omiclearn.ml_helper
-from omiclearn.ml_helper import calculate_cm
+from .ml_helper import calculate_cm
 
 # Others
 import numpy as np
