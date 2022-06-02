@@ -91,6 +91,8 @@ def main_components():
 
             /* Feature Importance Plotly Link Color */
             .js-plotly-plot .plotly svg a {color: #f84f57 !important}
+
+            .streamlit-expanderContent .css-qrbaxs {color: #035672 !important}
         </style>
     """
     st.markdown(main_external_css, unsafe_allow_html=True)
@@ -335,11 +337,29 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     return state
 
 
-# Create new list and dict for sessions
-@st.cache(allow_output_mutation=True)
-def get_sessions():
-    return [], {}
+def session_history(widget_values):
+    """
+    Helper function to save / show session history
+    """
 
+    widget_values['run'] = len(st.session_state.history)+1
+
+    st.session_state.history.append(widget_values)
+    sessions_df = pd.DataFrame(st.session_state.history)
+
+    new_column_names = {
+        k: v.replace(":", "").replace("Select", "")
+        for k, v in zip(sessions_df.columns, sessions_df.columns)
+    }
+    sessions_df = sessions_df.rename(columns=new_column_names)
+    
+    sessions_df = sessions_df.iloc[::-1]
+
+    st.write("## Session History")
+    st.dataframe(
+    sessions_df.style.format(precision=3)
+    )  #  Display only 3 decimal points in UI side
+    get_download_link(sessions_df, "session_history.csv")
 
 # Saving session info
 def save_sessions(widget_values, user_name):

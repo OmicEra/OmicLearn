@@ -11,8 +11,10 @@ warnings.simplefilter("ignore")
 
 import omiclearn.utils
 
-# Session state
-import omiclearn.utils.session_states as session_states
+# Session State
+
+if 'history' not in st.session_state:
+    st.session_state.history = []
 
 # ML functionalities
 from omiclearn.utils.ml_helper import perform_cross_validation, transform_dataset, calculate_cm
@@ -38,6 +40,7 @@ from omiclearn.utils.ui_helper import (
     get_download_link,
     generate_text,
     generate_footer_parts,
+    session_history,
 )
 
 _this_file = os.path.abspath(__file__)
@@ -515,11 +518,9 @@ def OmicLearn_Main():
             widget_values[_ + "_mean"] = state.summary.loc["mean"][_]
             widget_values[_ + "_std"] = state.summary.loc["std"][_]
 
-        user_name = str(random.randint(0, 10000)) + "OmicLearn"
-        session_state = session_states.get(user_name=user_name)
-        widget_values["user"] = session_state.user_name
         widget_values["top_features"] = state.top_features
-        save_sessions(widget_values, session_state.user_name)
+
+        session_history(widget_values)
 
         # Generate footer
         generate_footer_parts(report)
