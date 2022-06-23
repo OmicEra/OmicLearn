@@ -24,7 +24,7 @@ Transparent exploration of machine learning for biomarker discovery from proteom
 
 ## Online Access
 
-🟢  <a href="https://omiclearn.com" target="_blank"> OmicLearn.com </a>
+🟢  <a href="https://mannlabs-omiclearn-omiclearnomic-learn-edva17.streamlitapp.com/" target="_blank"> Streamlit share</a>
 
 This is an online version hosted by streamlit using free cloud resources, which might have limited performance. Use the local installation to run OmicLearn on your own hardware.
 
