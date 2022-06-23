@@ -128,7 +128,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         icon, use_column_width=True, caption="OmicLearn " + report["omic_learn_version"]
     )
     st.sidebar.markdown(
-        "# [Options](https://github.com/OmicEra/OmicLearn/wiki/METHODS)"
+        "# [Options](https://github.com/MannLabs/OmicLearn/wiki/METHODS)"
     )
 
     # Sidebar -- Random State
@@ -138,7 +138,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Preprocessing
     st.sidebar.markdown(
-        "## [Preprocessing](https://github.com/OmicEra/OmicLearn/wiki/METHODS-%7C-1.-Preprocessing)"
+        "## [Preprocessing](https://github.com/MannLabs/OmicLearn/wiki/METHODS-%7C-1.-Preprocessing)"
     )
     normalizations = [
         "None",
@@ -166,7 +166,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         ).lower()
     if state.n_missing > 0:
         st.sidebar.markdown(
-            "## [Missing value imputation](https://github.com/OmicEra/OmicLearn/wiki/METHODS-%7C-1.-Preprocessing#1-2-imputation-of-missing-values)"
+            "## [Missing value imputation](https://github.com/MannLabs/OmicLearn/wiki/METHODS-%7C-1.-Preprocessing#1-2-imputation-of-missing-values)"
         )
         missing_values = ["Zero", "Mean", "Median", "KNNImputer", "None"]
         state["missing_value"] = selectbox_("Missing value imputation", missing_values)
@@ -177,7 +177,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Feature Selection
     st.sidebar.markdown(
-        "## [Feature selection](https://github.com/OmicEra/OmicLearn/wiki/METHODS-%7C-2.-Feature-selection)"
+        "## [Feature selection](https://github.com/MannLabs/OmicLearn/wiki/METHODS-%7C-2.-Feature-selection)"
     )
     feature_methods = [
         "ExtraTrees",
@@ -205,7 +205,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Classification method selection
     st.sidebar.markdown(
-        "## [Classification](https://github.com/OmicEra/OmicLearn/wiki/METHODS-%7C-4.-Classification#3-classification)"
+        "## [Classification](https://github.com/MannLabs/OmicLearn/wiki/METHODS-%7C-4.-Classification#3-classification)"
     )
     classifiers = [
         "AdaBoost",
@@ -320,7 +320,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Cross-Validation
     st.sidebar.markdown(
-        "## [Cross-validation](https://github.com/OmicEra/OmicLearn/wiki/METHODS-%7C-5.-Validation#4-1-cross-validation)"
+        "## [Cross-validation](https://github.com/MannLabs/OmicLearn/wiki/METHODS-%7C-5.-Validation#4-1-cross-validation)"
     )
     state["cv_method"] = selectbox_(
         "Specify CV method:",
@@ -450,7 +450,7 @@ def main_text_and_data_upload(state, APP_TITLE):
         )
         st.markdown(
             """**Note:** By uploading a file, you agree to our
-                    [Apache License](https://github.com/OmicEra/OmicLearn/blob/master/LICENSE).
+                    [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE).
                     Data that is uploaded via the file uploader will not be saved by us;
                     it is only stored temporarily in RAM to perform the calculations."""
         )
@@ -492,7 +492,7 @@ def main_text_and_data_upload(state, APP_TITLE):
                 st.info(
                     """
                     **This dataset was retrieved from the following paper and the code for parsing is available at
-                    [GitHub](https://github.com/OmicEra/OmicLearn/blob/master/data/Alzheimer_paper.ipynb):**\n
+                    [GitHub](https://github.com/MannLabs/OmicLearn/blob/master/data/Alzheimer_paper.ipynb):**\n
                     Bader, J., Geyer, P., Müller, J., Strauss, M., Koch, M., & Leypoldt, F. et al. (2020).
                     Proteome profiling in cerebrospinal fluid reveals novel biomarkers of Alzheimer's disease.
                     Molecular Systems Biology, 16(6). doi: [10.15252/msb.20199356](http://doi.org/10.15252/msb.20199356)
@@ -700,7 +700,7 @@ def generate_footer_parts(report):
                     We appreciate all contributions. 👍 <br>
                     You can report bugs or request a feature using the link below or sending us an e-mail:
                     <br><br>
-                    <a class="download_link" href="https://github.com/OmicEra/OmicLearn/issues/new/choose" target="_blank">Report a bug via GitHub</a>
+                    <a class="download_link" href="https://github.com/MannLabs/OmicLearn/issues/new/choose" target="_blank">Report a bug via GitHub</a>
                     <a class="download_link" href="mailto:info@omicera.com">Report a bug via Email</a>
                 </p>
             </div> </div>

@@ -1,7 +1,7 @@
 <p align="center"> <img src="https://user-images.githubusercontent.com/49681382/101802266-48204a00-3b20-11eb-85ec-08c123fca79e.png" height="270" width="277" /> </p>
-<h2 align="center"> 📰 Manual and Documentation is available at: <a href="https://github.com/OmicEra/OmicLearn/wiki" target="_blank">OmicLearn Wiki Page </a> </h2>
+<h2 align="center"> 📰 Manual and Documentation is available at: <a href="https://github.com/MannLabs/OmicLearn/wiki" target="_blank">OmicLearn Wiki Page </a> </h2>
 
-![OmicLearn Tests](https://github.com/OmicEra/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
+![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
 ![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.8-blue)
 ![OmicLearn Version](https://img.shields.io/badge/Release-v1.1.3-orange)
 ![OmicLearn Release](https://img.shields.io/badge/Release%20Date-May%202022-green)
@@ -35,7 +35,7 @@ This is an online version hosted by streamlit using free cloud resources, which 
 You can use the one-click installer to install OmicLearn as an application locally.
 Click on one of the links below to download the latest release for:
 
-[**Windows**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe), [**macOS**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg), [**Linux**](https://github.com/OmicEra/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
+[**Windows**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe), [**macOS**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg), [**Linux**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
 
 ### Python Installation
 
@@ -44,7 +44,7 @@ Click on one of the links below to download the latest release for:
   1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/OmicEra/OmicLearn`
   2. Create a new environment for OmicLearn: `conda create --name omic_learn python=3.9`
   3. Activate the environment with  `conda activate omic_learn`
-  4. Install OmicLearn with `pip install .`
+  4. Install OmicLearn with `cd OmicLearn & pip install .`
 
 - After a successful installation, type the following command to run OmicLearn:
 
@@ -59,15 +59,15 @@ The following image displays the main steps of OmicLearn:
 
 ![OmicLearn Workflow](https://user-images.githubusercontent.com/49681382/91734594-cb421380-ebb3-11ea-91fa-8acc8826ae7b.png)
 
-Detailed instructions on how to get started with OmicLearn can be found **[here.](https://github.com/OmicEra/OmicLearn/wiki/HOW-TO:-Using)**
+Detailed instructions on how to get started with OmicLearn can be found **[here.](https://github.com/MannLabs/OmicLearn/wiki/HOW-TO:-Using)**
 
 On this page, you can click on the titles listed in the *Table of Contents*, which contain instructions for each section.
 
 ## Contributing
 All contributions are welcome. 👍
 
-📰 To get started, please check out our **[`CONTRIBUTING`](https://github.com/OmicEra/OmicLearn/blob/master/CONTRIBUTING.md)** guidelines.
+📰 To get started, please check out our **[`CONTRIBUTING`](https://github.com/MannLabs/OmicLearn/blob/master/CONTRIBUTING.md)** guidelines.
 
-When contributing to **OmicLearn**, please **[open a new issue](https://github.com/OmicEra/OmicLearn/issues/new/choose)** to report the bug or discuss the changes you plan before sending a PR (pull request).
+When contributing to **OmicLearn**, please **[open a new issue](https://github.com/MannLabs/OmicLearn/issues/new/choose)** to report the bug or discuss the changes you plan before sending a PR (pull request).
 
-We appreciate community contributions to the repository. By signing our **[`OmicEra Individual Contributor License Agreement`](https://github.com/OmicEra/OmicLearn/blob/master/CLA.md)**, we ensure that the community is free to use your contributions.  🤝
+We appreciate community contributions to the repository. By signing our **[`OmicEra Individual Contributor License Agreement`](https://github.com/MannLabs/OmicLearn/blob/master/CLA.md)**, we ensure that the community is free to use your contributions.  🤝
