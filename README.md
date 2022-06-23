@@ -10,7 +10,7 @@
 ---
 ## OmicLearn
 
-Transparent exploration of machine learning for biomarker discovery from proteomics and omics data.
+Transparent exploration of machine learning for biomarker discovery from proteomics and omics data. This is a maintained fork from https://github.com/OmicEra/OmicLearn.
 
 
 ## Manuscript
