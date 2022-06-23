@@ -41,7 +41,7 @@ Click on one of the links below to download the latest release for:
 
 - It is strongly recommended to install OmicLearn in its own environment using [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
-  1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/OmicEra/OmicLearn`
+  1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/MannLabs/OmicLearn`
   2. Create a new environment for OmicLearn: `conda create --name omic_learn python=3.9`
   3. Activate the environment with  `conda activate omic_learn`
   4. Install OmicLearn with `cd OmicLearn & pip install .`
@@ -70,4 +70,4 @@ All contributions are welcome. 👍
 
 When contributing to **OmicLearn**, please **[open a new issue](https://github.com/MannLabs/OmicLearn/issues/new/choose)** to report the bug or discuss the changes you plan before sending a PR (pull request).
 
-We appreciate community contributions to the repository. By signing our **[`OmicEra Individual Contributor License Agreement`](https://github.com/MannLabs/OmicLearn/blob/master/CLA.md)**, we ensure that the community is free to use your contributions.  🤝
+We appreciate community contributions to the repository., we ensure that the community is free to use your contributions.  🤝

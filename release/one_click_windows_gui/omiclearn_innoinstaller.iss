@@ -3,8 +3,8 @@
 
 #define MyAppName "OmicLearn"
 #define MyAppVersion "1.1.3"
-#define MyAppPublisher "OmicEra"
-#define MyAppURL "https://github.com/OmicEra/OmicLearn"
+#define MyAppPublisher "MannLabs"
+#define MyAppURL "https://github.com/MannLabs/OmicLearn"
 #define MyAppExeName "omiclearn_gui.exe"
 
 [Setup]

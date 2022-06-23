@@ -352,7 +352,7 @@ def session_history(widget_values):
         for k, v in zip(sessions_df.columns, sessions_df.columns)
     }
     sessions_df = sessions_df.rename(columns=new_column_names)
-    
+
     sessions_df = sessions_df.iloc[::-1]
 
     st.write("## Session History")
@@ -701,15 +701,11 @@ def generate_footer_parts(report):
                     You can report bugs or request a feature using the link below or sending us an e-mail:
                     <br><br>
                     <a class="download_link" href="https://github.com/MannLabs/OmicLearn/issues/new/choose" target="_blank">Report a bug via GitHub</a>
-                    <a class="download_link" href="mailto:info@omicera.com">Report a bug via Email</a>
+                    <a class="download_link" href="mailto:mstrauss@biochem.mpg.de">Report a bug via Email</a>
                 </p>
             </div> </div>
         </div>
 
-        <div class="footer">
-            <i> OmicLearn {} </i> <br> <img src="https://omicera.com/wp-content/uploads/2020/05/cropped-oe-favicon-32x32.jpg" alt="OmicEra Diagnostics GmbH">
-            <a href="https://omicera.com" target="_blank">OmicEra</a>.
-        </div>
         """.format(
         citations, report["omic_learn_version"]
     )

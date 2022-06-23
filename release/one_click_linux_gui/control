@@ -1,6 +1,6 @@
 Package: OmicLearn
 Version: 1.1.3
 Architecture: all
-Maintainer: OmicEra
+Maintainer: MannLabs
 Description: OmicLearn
   Transparent exploration of machine learning for biomarker discovery from proteomics and omics data.

@@ -5,9 +5,9 @@ __project__ = "omiclearn"
 __version__ = "1.1.3"
 __license__ = "Apache"
 __description__ = "Transparent exploration of machine learning for biomarker discovery from proteomics and omics data"
-__author__ = "OmicEra"
-__author_email__ = "omiclearn@omicera.com"
-__github__ = "https://github.com/OmicEra/OmicLearn"
+__author__ = "MannLabs"
+__author_email__ = "mstrauss@biochem.mpg.de"
+__github__ = "https://github.com/MannLabs/OmicLearn"
 __keywords__ = [
     "bioinformatics",
     "software",

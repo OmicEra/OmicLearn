@@ -1,6 +1,6 @@
 # Contributing
 
-Firstly, contributions are welcome and we appreciate all of them!. 
+Firstly, contributions are welcome and we appreciate all of them!.
 
 You can contribute **OmicLearn** in many ways:
 
@@ -26,7 +26,7 @@ If you might interested in fixing bugs, look through the [`GitHub issues`](https
 
 ### 3. Request Feature / Submit Feedback
 
-New feature requests are also welcome! 
+New feature requests are also welcome!
 You might have a look at our `Feature request` template on [`GitHub issues`](https://github.com/MannLabs/OmicLearn/issues).
 
 
@@ -34,7 +34,7 @@ You might have a look at our `Feature request` template on [`GitHub issues`](htt
 
 Implementing our [OmicLearn Wiki](https://github.com/MannLabs/OmicLearn/wiki) page would be great idea! You might add articles, detailed explanations or blog posts into the our pages.
 
---- 
+---
 
 ## 👇 Get Started!
 
@@ -43,7 +43,7 @@ Ready to contribute? Here's how to set up `omic_learn` for local development.
 1.  Fork the `omic_learn` repo on GitHub.
 2.  Clone your fork locally:
 
-    `git clone https://github.com/OmicEra/OmicLearn.git`
+    `git clone https://github.com/MannLabs/OmicLearn.git`
 
 3.  Follow the installation instructions in the [Installation & Running](https://github.com/MannLabs/OmicLearn/wiki/HOW-TO:-Installation-&-Running ) page for installing `omic_learn` own environment.
 
@@ -71,4 +71,3 @@ Before you submit a pull request, check that it meets these guidelines:
 2.  If the pull request adds functionality, the Wiki page should be updated.
 3.  The pull request should work for Python 3.8.
 4.  The functionality of project should be tested from the browser.
-
