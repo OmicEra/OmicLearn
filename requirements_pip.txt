@@ -8,3 +8,4 @@ kaleido==0.2.1
 XlsxWriter==3.0.1
 watchdog==2.1.7
 xgboost
+protobuf==3.20
