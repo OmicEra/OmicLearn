@@ -137,11 +137,3 @@ Each analysis run will be appended to the `Session History` so that you can inve
 ![session](session_history.png)
 
 _**Figure 14:** Session history table and download option_
-
-## Cite us & Report bugs
-
-At the end of the analysis, you find a footnote for reporting bugs. Also, there is information on how to cite OmicLearn in your work if you find it useful.
-
-![bug_report](bugs.png)
-
-_**Figure 15:** Tabs for Citation and Bug Reporting_

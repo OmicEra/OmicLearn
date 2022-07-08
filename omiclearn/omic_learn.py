@@ -54,7 +54,7 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="auto",
 )
-icon = Image.open(os.path.join(_this_directory, "utils/omic_learn.png"))
+icon = Image.open(os.path.join(_this_directory, "utils/omic_learn_black.png"))
 report = get_system_report()
 
 # This needs to be here as it needs to be after setting ithe initial_sidebar_state
@@ -531,6 +531,7 @@ def OmicLearn_Main():
 
 # Run the OmicLearn
 if __name__ == "__main__":
+
     try:
         OmicLearn_Main()
     except (ValueError, IndexError) as val_ind_error:

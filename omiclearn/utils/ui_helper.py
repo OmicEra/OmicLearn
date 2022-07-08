@@ -60,42 +60,6 @@ def main_components():
     """
     Expose external CSS and create & return widgets
     """
-    # External CSS
-    main_external_css = """
-        <style>
-            hr {margin: 15px 0px !important; background: #ff3a50}
-            .footer {position: absolute; height: 50px; bottom: -150px; width:100%; padding:10px; text-align:center; }
-            #MainMenu, .reportview-container .main footer {display: none;}
-            .btn-outline-secondary {background: #FFF !important}
-            .download_link {color: #f63366 !important; text-decoration: none !important; z-index: 99999 !important;
-                            cursor:pointer !important; margin: 15px 0px; border: 1px solid #f63366;
-                            text-align:center; padding: 8px !important; width: 200px;}
-            .download_link:hover {background: #f63366 !important; color: #FFF !important;}
-            h1, h2, h3, h4, h5, h6, a, a:visited, .css-9s5bis {color: #f84f57 !important}
-            label, stText, p, .caption {color: #035672}
-            .css-1adrfps {background: #035672 !important;}
-            .streamlit-expanderHeader {font-size: 16px !important;}
-            label, stText, .caption, .css-1b0udgb, .css-1inwz65 {color: #FFF !important}
-            .tickBarMin, .tickBarMax {color: #f84f57 !important}
-            .markdown-text-container p {color: #035672 !important}
-
-            /* Tabs */
-            .tabs { position: relative; min-height: 200px; clear: both; margin: 40px auto 0px auto; background: #efefef; box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3); }
-            .tab {float: left;}
-            .tab label { background: #f84f57; cursor: pointer; font-weight: bold; font-size: 18px; padding: 10px; color: #fff; transition: background 0.1s, color 0.1s; margin-left: -1px; position: relative; left: 1px; top: -29px; z-index: 2; }
-            .tab label:hover {background: #035672;}
-            .tab [type=radio] { display: none; }
-            .content { position: absolute; top: -1px; left: 0; background: #fff; right: 0; bottom: 0; padding: 30px 20px; transition: opacity .1s linear; opacity: 0; }
-            [type=radio]:checked ~ label { background: #035672; color: #fff;}
-            [type=radio]:checked ~ label ~ .content { z-index: 1; opacity: 1; }
-
-            /* Feature Importance Plotly Link Color */
-            .js-plotly-plot .plotly svg a {color: #f84f57 !important}
-
-            .streamlit-expanderContent .css-qrbaxs {color: #035672 !important}
-        </style>
-    """
-    st.markdown(main_external_css, unsafe_allow_html=True)
 
     # Fundemental elements
     widget_values = objdict()
@@ -683,32 +647,7 @@ def generate_text(state, report):
 
 # Generate footer
 def generate_footer_parts(report):
-
-    # Citations
-    citations = """
-        <br> <b>APA Format:</b> <br>
-        Torun FM, Virreira Winter S, Doll S, Riese FM, Vorobyev A, Mueller-Reif JB, Geyer PE, Strauss MT (2021).
-        Transparent exploration of machine learning for biomarker discovery from proteomics and omics data. doi: <a href="https://doi.org/10.1101/2021.03.05.434053" target="_blank">10.1101/2021.03.05.434053</a>.
-    """
-
-    # Put the footer with tabs
-    footer_parts_html = """
-        <div class="tabs">
-            <div class="tab"> <input type="radio" id="tab-1" name="tab-group-1" checked> <label for="tab-1">Citations</label> <div class="content"> <p> {} </p> </div> </div>
-            <div class="tab"> <input type="radio" id="tab-2" name="tab-group-1"> <label for="tab-2">Report bugs</label> <div class="content">
-                <p><br>
-                    We appreciate all contributions. 👍 <br>
-                    You can report bugs or request a feature using the link below or sending us an e-mail:
-                    <br><br>
-                    <a class="download_link" href="https://github.com/MannLabs/OmicLearn/issues/new/choose" target="_blank">Report a bug via GitHub</a>
-                    <a class="download_link" href="mailto:mstrauss@biochem.mpg.de">Report a bug via Email</a>
-                </p>
-            </div> </div>
-        </div>
-
-        """.format(
-        citations, report["omic_learn_version"]
-    )
-
-    st.write("## Cite us & Report bugs")
-    st.markdown(footer_parts_html, unsafe_allow_html=True)
+    st.write('---')
+    citation = "Transparent exploration of machine learning for biomarker discovery from proteomics and omics data\nFurkan M. Torun, Sebastian Virreira Winter, Sophia Doll, Felix M. Riese, Artem Vorobyev, Johannes B. Mueller-Reif, Philipp E. Geyer, Maximilian T. Strauss\nbioRxiv 2021.03.05.434053; doi: https://doi.org/10.1101/2021.03.05.434053"
+    st.write("[Bug Report (GitHub)](https://github.com/MannLabs/OmicLearn/issues/new/choose)")
+    st.write(citation)

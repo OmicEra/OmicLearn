@@ -4,7 +4,15 @@ A typical machine learning pipeline consists of `Preprocessing`, `Feature Select
 
 With OmicLearn, you have the possibility to choose from several different choices and explore their effect when analyzing your data.
 
-## 1. Preprocessing
+# 0. Data Preparation
+
+## MaxQuant
+
+## AlphaPept
+
+## DIA-NN
+
+# 1. Preprocessing
 
 A critical step in machine learning (ML) is data preprocessing. It is used to convert data that can have very different data ranges and exhibit outliers to be more uniform to be used with ML algorithms. Here, we can distinguish three separate aspects that are of particular interest when dealing with proteomics data:
 
@@ -14,7 +22,7 @@ A critical step in machine learning (ML) is data preprocessing. It is used to co
 
 This part is primarily based on the [Scikit-learn documentation about preprocessing](https://scikit-learn.org/stable/modules/preprocessing.html), where additional information can be found.
 
-### 1. 1. Standardization
+## 1. 1. Standardization
 
 A common requirement for machine learning estimators is that datasets are standardized. The rationale behind this requirement can be easily understood when considering an iterative optimization method, such as the `gradient descent`. Here, the probability of finding a global optimum within a certain number of iterations strongly depends on the step size in each iteration (learning rate). Arguably, when having values outside of a normal range, optimization with a default learning rate is less likely to succeed.
 
@@ -86,13 +94,13 @@ When selecting None, no missing value imputation is performed. If the dataset ex
 ## 1. 3. Data encoding
 Another step in ML is that data needs to be encoded. When having categorical data, they need to be transformed. For proteomics data, this is typically unnecessary as we already have the protein intensity, which is a discrete variable. Within OmicLearn, we also allow to use additional features that could be categorical. Whenever a column contains non-numerical values, we use the [label encoder](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html) from scikit-learn, which transforms categorical values numerical values (i.e., `male`|`female` will be `0`|`1`).
 
-## 2. Feature selection
+# 2. Feature selection
 
 Feature selection is a crucial part when building a machine learning pipeline. This refers to making only a subset of data available for the machine learning classifier, i.e., only taking ten proteins. For training, we would like to select only features that contribute to our prediction so that the classifier does not try to learn from unrelated features and ultimately will generalize well. This is especially important for a clinical proteomics setup as we can choose for a large number of features (protein signals) while often having only small sample numbers. Reducing the number of proteins will also help us identify core players contributing to a classification model. Within OmicLearn, several algorithms are implemented that allow reducing the number of features.
 
 > **Note:** Proteomics features can be highly correlated (Multicollinear). This leads to the problem that features importance can be somewhat ambiguous, i.e., removing a protein with high feature importance does not necessarily decrease the overall accuracy if the machine learning classifier can extract the information from linearly correlated protein signals.
 
-### [2. 1. ExtraTrees](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)
+## [2. 1. ExtraTrees](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)
 
 One way to reduce the number of features is by using a randomized decision trees (a.k.a. extra-trees) approach, where a classifier is trained to distinguish the classes, and the features with the highest importance are selected.  
 
@@ -100,53 +108,55 @@ One way to reduce the number of features is by using a randomized decision trees
 
 Another way for feature selection is by using the `SelectKBest` strategy. Here, features are selected based on the `k` highest scores. Here, we have the following options available: `chi2`, `f_classif`, `mutual_info_classif`.
 
-### [2. 2. k-best (chi2)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.chi2.html)
+## [2. 2. k-best (chi2)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.chi2.html)
 Here, the chi-squared stats between features and the class is used as the k-score.
 
-### [2. 3. k-best (mutual_info_classif)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.mutual_info_classif)
+## [2. 3. k-best (mutual_info_classif)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.mutual_info_classif)
 
 Here, an estimate for the mutual information of variables is used as the k-score.
 
-### [2. 4. k-best (f_classif)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif)
+## [2. 4. k-best (f_classif)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif)
 
 Here,  an estimate for the ANOVA (ANalysis Of VAriance) F-value is used as the k-score.
 
 
-## 3. Exploratory data analysis (EDA)
+# 3. Exploratory data analysis (EDA)
 
 Exploratory Data Analysis (EDA) is an important approach to get more insight into the dataset before building a model. It aids in pattern discovery and anomaly detection and allows verifying assumptions via graphical representations.
 
-### 3. 1. Hierarchical clustering
+## 3. 1. Hierarchical clustering
 
 Hierarchical clustering (also known as hierarchical cluster analysis) enables researchers to group similar features hierarchically and it displays the hierarchical relationships between the features with dendrograms. This allows users to visualize different sub-clusters, sets of features that strongly correlate and provide an overview of the dataset. We provide an interactive heatmap so that feature names can quickly be retrieved by hovering over the data point. This allows verifying whether a correlation might be expected or is random.
 
 
-### [3. 2. Principal component analysis](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
+## [3. 2. Principal component analysis](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
 
 Principal component analysis (PCA) is widely used for reducing the dimensionality of the data to make large datasets more interpretable. When creating a graphical representation of data, one is typically limited to 2D or 3D representations, which poses a practical problem when wanting to visualize datasets with much more features. With the help of PCA, it is possible to reduce the number of features while trying to conserve the information content. We employ PCA to reduce dimensionality to display the data in a 2D graph.
 
 One use case of PCA is to identify major sources of variations in a dataset as PCA will cluster similar data points together. Hence, by inspecting datapoints that cluster together, you can assess whether variations can be attributed to your experimental setup, special biological conditions, experimental or sample bias. A common example for this is difference in sample preparation, e.g., by a different laboratory assistant or institute.
 
 
-## 4. Classification
+# 4. Classification
 
 Classification refers to the task of correctly classifying the label of given data points. In the context of clinical proteomics, this refers to predicting a disease state based on protein signals. The core task of a classifier is to define a decision boundary in an n-dimensional space. Depending on the underlying mechanism of the classifier, different decision boundaries can be achieved. An excellent overview of the performance of different classifiers and their decision boundary can be found [here](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html).
 
 Within OmicLearn, you can choose from a wide range of classifiers. Understanding why a classifier performs better or worse on a dataset requires in-depth knowledge of the underlying mechanisms and careful tuning of their hyperparameters. Also, OmicLearn allows you to try different optimizers. Follow the links below to learn more about each option:
 
-### [4. 1. AdaBoost](https://scikit-learn.org/stable/modules/ensemble.html#adaboost)
+## [4. 1. AdaBoost](https://scikit-learn.org/stable/modules/ensemble.html#adaboost)
 
-### [4. 2. LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+## [4. 2. LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
 
-### [4. 3. RandomForest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
+## [4. 3. RandomForest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
 
-### [4. 4. XGBoost](https://xgboost.readthedocs.io/en/latest/)
+## [4. 4. XGBoost](https://xgboost.readthedocs.io/en/latest/)
 
-### [4. 5. DecisionTree](https://scikit-learn.org/stable/modules/tree.html)
+## [4. 5. DecisionTree](https://scikit-learn.org/stable/modules/tree.html)
 
-### [4. 6. KNeighborsClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
+## [4. 6. KNeighborsClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
 
-### [4. 7. LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html)
+## [4. 7. LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html)
+
+# 5. Validation
 
 ## [5. 1. Cross Validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 
