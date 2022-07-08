@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-> If you are using [`StreamlitShare`](https://mannlabs-omiclearn-omiclearnomic-learn-edva17.streamlitapp.com/), you can skip the following headline _`Describe your setup`_.
+> If you are using [`StreamlitShare`](https://mannlabs-omiclearn-omiclearnomic-learn-hr6cd1.streamlitapp.com/), you can skip the following headline _`Describe your setup`_.
 
 **Describe your setup:**
  - OS (Operating system) with version: `[e.g. Ubuntu 18.04 LTS]`
