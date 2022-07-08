@@ -1,4 +1,4 @@
-<p align="center"> <img src="https://user-images.githubusercontent.com/49681382/101802266-48204a00-3b20-11eb-85ec-08c123fca79e.png" height="270" width="277" /> </p>
+<p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
 <h2 align="center"> 📰 Manual and Documentation is available at: <a href="https://github.com/MannLabs/OmicLearn/wiki" target="_blank">OmicLearn Wiki Page </a> </h2>
 
 ![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
@@ -10,7 +10,7 @@
 ---
 ## OmicLearn
 
-Transparent exploration of machine learning for biomarker discovery from proteomics and omics data. This is a maintained fork from https://github.com/OmicEra/OmicLearn.
+Transparent exploration of machine learning for biomarker discovery from proteomics and omics data. This is a maintained fork from [OmicEra](https://github.com/OmicEra/OmicLearn).
 
 
 ## Manuscript
@@ -57,7 +57,7 @@ Click on one of the links below to download the latest release for:
 
 The following image displays the main steps of OmicLearn:
 
-![OmicLearn Workflow](https://user-images.githubusercontent.com/49681382/91734594-cb421380-ebb3-11ea-91fa-8acc8826ae7b.png)
+![OmicLearn Workflow](workflow.png)
 
 Detailed instructions on how to get started with OmicLearn can be found **[here.](https://github.com/MannLabs/OmicLearn/wiki/HOW-TO:-Using)**
 
@@ -70,4 +70,4 @@ All contributions are welcome. 👍
 
 When contributing to **OmicLearn**, please **[open a new issue](https://github.com/MannLabs/OmicLearn/issues/new/choose)** to report the bug or discuss the changes you plan before sending a PR (pull request).
 
-We appreciate community contributions to the repository., we ensure that the community is free to use your contributions.  🤝
+We appreciate community contributions to the repository.
