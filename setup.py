@@ -13,7 +13,7 @@ def get_long_description():
         long_description = readme_file.read()
     return long_description
 
-with open('requirements_pip.txt') as f:
+with open('reqs.txt') as f:
     required = f.read().splitlines()
 
 def create_pip_wheel():
