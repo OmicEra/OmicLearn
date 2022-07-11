@@ -9,3 +9,4 @@ XlsxWriter==3.0.3
 watchdog==2.1.9
 xgboost
 protobuf==3.20
+myst_parser
