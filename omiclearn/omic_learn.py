@@ -54,7 +54,7 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="auto",
 )
-icon = Image.open(os.path.join(_this_directory, "utils/omic_learn.png"))
+icon = Image.open(os.path.join(_this_directory, "utils/omic_learn_black.png"))
 report = get_system_report()
 
 # This needs to be here as it needs to be after setting ithe initial_sidebar_state
@@ -184,9 +184,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                         help="In large datasets, it is not possible to visaulize all the features.",
                     )
 
-                if (state.eda_method != "None") and (
-                    st.button("Generate plot", key="eda_run")
-                ):
+                if (state.eda_method != "None"):
                     with st.spinner(f"Performing {state.eda_method}.."):
                         p = perform_EDA(state)
                         st.plotly_chart(p, use_container_width=True)
@@ -318,6 +316,7 @@ def classify_and_plot(state):
                 get_download_link(feature_df_wo_links, "clf_feature_importances.csv")
 
                 top_features = feature_df.index.to_list()
+
             else:
                 st.info(
                     "All feature importance attribute are zero (0). The plot and table are not displayed."
@@ -531,6 +530,7 @@ def OmicLearn_Main():
 
 # Run the OmicLearn
 if __name__ == "__main__":
+
     try:
         OmicLearn_Main()
     except (ValueError, IndexError) as val_ind_error:
