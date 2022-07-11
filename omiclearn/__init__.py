@@ -12,11 +12,11 @@ __keywords__ = [
     "bioinformatics",
     "software",
 ]
-__python_version__ = ">=3.8,<3.10"
+__python_version__ = ">=3.7,<3.10"
 __classifiers__ = [
-    "Development Status :: 1 - Planning",
+    #"Development Status :: 1 - Planning",
     # "Development Status :: 2 - Pre-Alpha",
-    # "Development Status :: 3 - Alpha",
+     "Development Status :: 3 - Alpha",
     # "Development Status :: 4 - Beta",
     # "Development Status :: 5 - Production/Stable",
     # "Development Status :: 6 - Mature",
