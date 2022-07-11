@@ -32,7 +32,7 @@ You might have a look at our `Feature request` template on [`GitHub issues`](htt
 
 ### 4. Write Documentation
 
-Implementing our [OmicLearn Wiki](https://github.com/MannLabs/OmicLearn/wiki) page would be great idea! You might add articles, detailed explanations or blog posts into the our pages.
+Implementing our [OmicLearn Documentation](https://omiclearn.readthedocs.io/en/latest/) page would be great idea! You might add articles, detailed explanations or blog posts into the our pages.
 
 ---
 
@@ -45,7 +45,7 @@ Ready to contribute? Here's how to set up `omic_learn` for local development.
 
     `git clone https://github.com/MannLabs/OmicLearn.git`
 
-3.  Follow the installation instructions in the [Installation & Running](https://github.com/MannLabs/OmicLearn/wiki/HOW-TO:-Installation-&-Running ) page for installing `omic_learn` own environment.
+3.  Follow the installation instructions in the [Installation & Running](https://omiclearn.readthedocs.io/en/latest//HOW-TO:-Installation-&-Running ) page for installing `omic_learn` own environment.
 
 4.  Create a branch for local development:
 
@@ -68,6 +68,6 @@ Ready to contribute? Here's how to set up `omic_learn` for local development.
 Before you submit a pull request, check that it meets these guidelines:
 
 1.  You need to open a issue on Github issues page for discussing your changes.
-2.  If the pull request adds functionality, the Wiki page should be updated.
+2.  If the pull request adds functionality, the Docs should be updated.
 3.  The pull request should work for Python 3.8.
 4.  The functionality of project should be tested from the browser.

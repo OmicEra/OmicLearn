@@ -15,6 +15,7 @@ Load `proteinGroups.txt`. Copy the column with the identifier you want to use, e
 You should have a table where each row corresponds to a sample and the columns for each measured intensity. Next, rename the identifier field to `_experiment` so that you know which row corresponds to which measured condition.
 
 Your file should now look like this:
+
 ![Image](maxquant01.png)
 
 Next, you can add all additional metadata that you want to use for learning with an underscore `_`. This should be at least a field that you want to predict with machine learning. For the example, we added two columns, `_condition` and `_parameter` with respective values, like so:
@@ -22,6 +23,7 @@ Next, you can add all additional metadata that you want to use for learning with
 ![Image](maxquant02.png)
 
 Now, you can save the file as `*.xlsx` (Make sure there is only one sheet) and directly upload to OmicLearn, and the file should be correctly loaded:
+
 ![Image](maxquant03.png)
 
 Note: For MaxQuant, missing values can be represented as 0. If you want to try different methods for missinv flaue imputation, replace the 0 values with nothing.
@@ -34,6 +36,7 @@ Next, select all rows, copy them and paste them into another worksheet. Here, us
 You should have a table where each row corresponds to a sample and the columns for each measured intensity. Next, rename the identifier field to `_experiment` so that you know which row corresponds to which measured condition.
 
 Your file should now look like this:
+
 ![Image](alphapept01.png)
 
 Next, you can add all additional metadata that you want to use for learning with an underscore `_`. This should be at least a field that you want to predict with machine learning. For the example, we added two columns `_condition` and `_parameter` with respective values, like so:
@@ -41,6 +44,7 @@ Next, you can add all additional metadata that you want to use for learning with
 ![Image](alphapept02.png)
 
 Now, you can save the file as `*.xlsx` (Make sure there is only one sheet) and directly upload to OmicLearn, and the file should be correctly loaded:
+
 ![Image](alphapept03.png)
 
 ## DIA-NN
@@ -49,6 +53,7 @@ Load the file ending with `pg_matrix.tsv` in Excel. Copy the column with the ide
 You should have a table where each row corresponds to a sample and the columns for each measured intensity. Next, rename the first column, which carries the identifier to `_experiment` so that you know which row corresponds to which measured condition.
 
 Your file should now look like this:
+
 ![Image](diann01.png)
 
 Next, you can add all additional metadata that you want to use for learning with an underscore `_`. This should be at least a field that you want to predict with machine learning. For the example, we added two columns `_condition` and `_parameter` with respective values, like so:
@@ -56,6 +61,7 @@ Next, you can add all additional metadata that you want to use for learning with
 ![Image](diann02.png)
 
 Now, you can save the file as `*.xlsx` (Make sure there is only one sheet) and directly upload to OmicLearn, and the file should be correctly loaded:
+
 ![Image](diann03.png)
 
 ## Troubleshooting
@@ -66,9 +72,8 @@ make sure that you do not copy the entire worksheet but select all rows instead.
 
 ### Formatting issues
 Several issues can arise when formatting, e.g. when using `Genes`. As an example, Excel sometimes confuses Gene names with Dates and Genes like `SEPHS1` could end up being detected as Dates. Within OmicLearn, you might see the following warning when loading the file:
+
 ![Image](warning01.png)
-
-
 
 
 # 1. Preprocessing

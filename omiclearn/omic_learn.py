@@ -159,7 +159,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                     """
                     Use exploratory data anlysis on your dateset to identify potential correlations and biases.
                     For more information, please visit
-                    [the dedicated Wiki page](https://github.com/MannLabs/OmicLearn/wiki/METHODS-%7C-3.-Exploratory-data-analysis).
+                    [the dedicated ReadTheDocs page](https://omiclearn.readthedocs.io/en/latest/METHODS.html#exploratory-data-analysis-eda).
                     """
                 )
                 state["df_sub_y"] = state.df_sub[state.target_column].isin(

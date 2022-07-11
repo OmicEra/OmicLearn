@@ -10,7 +10,7 @@ Welcome to OmicLearn's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   README.rst
+   README.md
    USING.md
    METHODS.md
    VERSION-HISTORY.md
