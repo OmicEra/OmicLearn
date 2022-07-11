@@ -393,31 +393,33 @@ def load_data(file_buffer, delimiter):
 def main_text_and_data_upload(state, APP_TITLE):
     st.title(APP_TITLE)
 
-    st.info(
-        """
-    **Note:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
-    While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-    """
-    )
+    with st.expander("Disclaimer", expanded=False):
 
-    with st.expander("Upload or select sample dataset (*Required)", expanded=True):
-        st.info(
+        st.markdown(
             """
-            - Upload your excel / csv / tsv file here. Maximum size is 200 Mb.
-            - Each row corresponds to a sample, each column to a feature.
-            - 'Features' such as protein IDs, gene names, lipids or miRNA IDs should be uppercase.
-            - Additional features should be marked with a leading '_'.
+        **Note:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
+        While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, it is not meant to substitute throughout data exploration but rather add a machine learning layer.
         """
         )
-        file_buffer = st.file_uploader(
-            "Upload your dataset below", type=["csv", "xlsx", "xls", "tsv"]
-        )
+
         st.markdown(
             """**Note:** By uploading a file, you agree to our
-                    [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE).
-                    Data that is uploaded via the file uploader will not be saved by us;
-                    it is only stored temporarily in RAM to perform the calculations."""
+                    [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
+                    Uploaded data will not be saved."""
         )
+
+        citation = "**Reference:** Transparent exploration of machine learning for biomarker discovery from proteomics and omics data\nFurkan M. Torun, Sebastian Virreira Winter, Sophia Doll, Felix M. Riese, Artem Vorobyev, Johannes B. Mueller-Reif, Philipp E. Geyer, Maximilian T. Strauss\nbioRxiv 2021.03.05.434053; doi: https://doi.org/10.1101/2021.03.05.434053"
+
+        st.markdown(citation)
+
+
+    with st.expander("Upload or select sample dataset (*Required)", expanded=True):
+
+        file_buffer = st.file_uploader(
+            "", type=["csv", "xlsx", "xls", "tsv"]
+        )
+
+        st.markdown("Maximum size 200 MB. One row per sample, one column per feature. 'Features' (Proteins, Genes, ..) should be uppercase, all additional features with a leading '_'.")
 
         if file_buffer is not None:
             if file_buffer.name.endswith(".xlsx") or file_buffer.name.endswith(".xls"):
@@ -437,7 +439,7 @@ def main_text_and_data_upload(state, APP_TITLE):
             state["df"] = df
 
         st.markdown("<hr>", unsafe_allow_html=True)
-        st.markdown("Or select sample file here:")
+
         state["sample_file"] = st.selectbox(
             "Or select sample file here:", ["None", "Alzheimer", "Sample"]
         )
@@ -468,7 +470,7 @@ def main_text_and_data_upload(state, APP_TITLE):
             state["df"] = pd.read_excel(file_to_load)
             st.markdown("Using the following dataset:")
             st.dataframe(state.df[state.df.columns[-20:]].head(max_df_length))
-        elif 0 < dataframe_length < max_df_length:
+        elif 0 < dataframe_length <= max_df_length:
             st.markdown("Using the following dataset:")
             st.dataframe(state.df)
         elif dataframe_length > max_df_length:
@@ -648,6 +650,4 @@ def generate_text(state, report):
 # Generate footer
 def generate_footer_parts(report):
     st.write('---')
-    citation = "Transparent exploration of machine learning for biomarker discovery from proteomics and omics data\nFurkan M. Torun, Sebastian Virreira Winter, Sophia Doll, Felix M. Riese, Artem Vorobyev, Johannes B. Mueller-Reif, Philipp E. Geyer, Maximilian T. Strauss\nbioRxiv 2021.03.05.434053; doi: https://doi.org/10.1101/2021.03.05.434053"
     st.write("[Bug Report (GitHub)](https://github.com/MannLabs/OmicLearn/issues/new/choose)")
-    st.write(citation)

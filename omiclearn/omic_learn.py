@@ -184,9 +184,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                         help="In large datasets, it is not possible to visaulize all the features.",
                     )
 
-                if (state.eda_method != "None") and (
-                    st.button("Generate plot", key="eda_run")
-                ):
+                if (state.eda_method != "None"):
                     with st.spinner(f"Performing {state.eda_method}.."):
                         p = perform_EDA(state)
                         st.plotly_chart(p, use_container_width=True)
@@ -318,6 +316,7 @@ def classify_and_plot(state):
                 get_download_link(feature_df_wo_links, "clf_feature_importances.csv")
 
                 top_features = feature_df.index.to_list()
+
             else:
                 st.info(
                     "All feature importance attribute are zero (0). The plot and table are not displayed."

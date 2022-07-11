@@ -14,11 +14,3 @@ Welcome to OmicLearn's documentation!
    USING.md
    METHODS.md
    VERSION-HISTORY.md
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
