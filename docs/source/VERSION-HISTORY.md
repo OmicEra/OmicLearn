@@ -2,6 +2,19 @@
 
 On this page, you might find the list of the previous releases of **OmicLearn** and the notes and significant changes made within the versions.
 
+### - `v1.2`
+
+> 📅  July 2022
+>
+> This is the latest release of **OmicLearn**.
+>
+> **Updates in this release:**
+>
+> - [x] Several packages are upgraded to their latest version!
+> - [x] Added Documentation to read files from MaxQuant, DiaNN and AlphaPept. Moved the documentation to ReadTheDocs
+>
+
+
 ### - `v1.1.3`
 
 > 📅  June 2022

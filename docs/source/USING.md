@@ -96,7 +96,7 @@ _**Figure 8:** Selections on the dataset_
 
 The option `Cohort comparison` allows comparing results over different cohorts (i.e., train on one cohort and predict on another)
 
-![dataselections](selection.png)
+![dataselections](cohort.png)
 
 _**Figure 9:** Selections on the dataset_
 
