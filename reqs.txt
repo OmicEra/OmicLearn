@@ -1,7 +1,7 @@
 streamlit==1.10.0
 pandas
 numpy
-scikit-learn==1.1.1
+scikit-learn
 openpyxl==3.0.10
 plotly==5.9.0
 kaleido==0.2.1
