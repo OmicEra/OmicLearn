@@ -491,7 +491,7 @@ def get_system_report():
     Returns the package versions
     """
     report = {}
-    report["omic_learn_version"] = "v1.1.3"
+    report["omic_learn_version"] = "v1.2"
     report["python_version"] = sys.version[:5]
     report["pandas_version"] = pd.__version__
     report["numpy_version"] = np.version.version
