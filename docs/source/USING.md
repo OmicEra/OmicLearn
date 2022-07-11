@@ -56,7 +56,7 @@ Here is the list of sample datasets available:
 
 ## Sidebar: Selecting Parameters
 
-OmicLearn has a large variety of options to choose from which are detailed in the [methods wiki](https://github.com/MannLabs/OmicLearn/wiki/METHODS).  The parameters can be selected in the sidebar.
+OmicLearn has a large variety of options to choose from which are detailed in the [methods](METHODS.md).  The parameters can be selected in the sidebar.
 
 Moreover, after changing the parameters, you are asked to re-run the analysis. Each analysis result will be stored in the [`Session History` section](#checking-the-session-history).
 
