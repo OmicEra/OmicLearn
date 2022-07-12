@@ -112,17 +112,17 @@ Another option to scale data is to transform it according to their minimum and m
 
 > X_scaled = X_std * (max - min) + min
 
-Note that, similar to the MinMaxScaler StandardScaler is very susceptible to outliers as they would define the minimum / maximum.
+Note that, similar to the StandardScaler, [MinMaxScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html) is very susceptible to outliers as they would define the minimum / maximum.
 
 ### [1. 1. 3. RobustScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html)
-To achieve a more robust scaling, we can employ the `RobustScaler`. Here, the data is scaled on percentiles and hence not easily influenced by some outliers. More precisely, the median and the `IQR (Interquartile Range) = Q3 (75th Quantile) - Q1 (25th Quantile) ` are used.
+To achieve a more robust scaling, we can employ the [`RobustScaler`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html). Here, the data is scaled on percentiles and hence not easily influenced by some outliers. More precisely, the median and the `IQR (Interquartile Range) = Q3 (75th Quantile) - Q1 (25th Quantile) ` are used.
 
 ### [1. 1. 4. PowerTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PowerTransformer.html)
 
-`PowerTransformer`, can apply a power transformation for each feature in the dataset to make it more Gaussian-like and is useful when dealing with skewed datasets. Here, two options are available: `Yeo-Johnson`, which can work with negative data, and `Box-Cox`, that is limited to positive data.
+[`PowerTransformer`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PowerTransformer.html), can apply a power transformation for each feature in the dataset to make it more Gaussian-like and is useful when dealing with skewed datasets. Here, two options are available: `Yeo-Johnson`, which can work with negative data, and `Box-Cox`, that is limited to positive data.
 
 ### [1. 1. 5. QuantileTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.QuantileTransformer.html)
-`QuantileTransformer` provided by `scikit-learn` uses quantile information to transform features to follow a gaussian distribution (Option `Gaussian output` or a uniform output (Option 'Uniform output`).
+[`QuantileTransformer`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.QuantileTransformer.html) provided by `scikit-learn` uses quantile information to transform features to follow a gaussian distribution (Option `Gaussian output` or a uniform output (Option 'Uniform output`).
 
 ### 1. 1. 6. Additional Notes
 
@@ -149,7 +149,7 @@ Using `Mean` for imputation, missing protein values are replaced with the `mean`
 Using `Median` for imputation, missing protein values are replaced with the `median` of the same protein.
 
 ### 1. 2. 4. [KNNImputer](https://scikit-learn.org/stable/modules/generated/sklearn.impute.KNNImputer.html#sklearn.impute.KNNImputer)
-The `KNNImputer` is trying to estimate missing values from existing values. Here, this is done by using a `k-Nearest Neighbors` approach. In brief, a Euclidean distance metric is used to find out the nearest neighbors, and the missing value is estimated by taking the mean of the neighbors.
+The [`KNNImputer`](https://scikit-learn.org/stable/modules/generated/sklearn.impute.KNNImputer.html#sklearn.impute.KNNImputer) is trying to estimate missing values from existing values. Here, this is done by using a `k-Nearest Neighbors` approach. In brief, a Euclidean distance metric is used to find out the nearest neighbors, and the missing value is estimated by taking the mean of the neighbors.
 
 ### 1. 2. 5. None
 When selecting None, no missing value imputation is performed. If the dataset exists, only some classifiers that can handle missing values, such as `xgboost` will be selectable.
@@ -166,22 +166,22 @@ Feature selection is a crucial part when building a machine learning pipeline. T
 
 ## [2. 1. ExtraTrees](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)
 
-One way to reduce the number of features is by using a randomized decision trees (a.k.a. extra-trees) approach, where a classifier is trained to distinguish the classes, and the features with the highest importance are selected.  
+One way to reduce the number of features is by using a randomized decision trees (a.k.a. [extra-trees](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)) approach, where a classifier is trained to distinguish the classes, and the features with the highest importance are selected.  
 
 ---
 
 Another way for feature selection is by using the `SelectKBest` strategy. Here, features are selected based on the `k` highest scores. Here, we have the following options available: `chi2`, `f_classif`, `mutual_info_classif`.
 
 ## [2. 2. k-best (chi2)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.chi2.html)
-Here, the chi-squared stats between features and the class is used as the k-score.
+Here, the chi-squared stats between features and the class is used as the [k-score](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.chi2.html).
 
 ## [2. 3. k-best (mutual_info_classif)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.mutual_info_classif)
 
-Here, an estimate for the mutual information of variables is used as the k-score.
+[Here](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.mutual_info_classif), an estimate for the mutual information of variables is used as the k-score.
 
 ## [2. 4. k-best (f_classif)](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif)
 
-Here,  an estimate for the ANOVA (ANalysis Of VAriance) F-value is used as the k-score.
+[Here](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif),  an estimate for the ANOVA (ANalysis Of VAriance) F-value is used as the k-score.
 
 
 # 3. Exploratory data analysis (EDA)
@@ -195,7 +195,7 @@ Hierarchical clustering (also known as hierarchical cluster analysis) enables re
 
 ## [3. 2. Principal component analysis](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
 
-Principal component analysis (PCA) is widely used for reducing the dimensionality of the data to make large datasets more interpretable. When creating a graphical representation of data, one is typically limited to 2D or 3D representations, which poses a practical problem when wanting to visualize datasets with much more features. With the help of PCA, it is possible to reduce the number of features while trying to conserve the information content. We employ PCA to reduce dimensionality to display the data in a 2D graph.
+Principal component analysis ([PCA](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)) is widely used for reducing the dimensionality of the data to make large datasets more interpretable. When creating a graphical representation of data, one is typically limited to 2D or 3D representations, which poses a practical problem when wanting to visualize datasets with much more features. With the help of PCA, it is possible to reduce the number of features while trying to conserve the information content. We employ PCA to reduce dimensionality to display the data in a 2D graph.
 
 One use case of PCA is to identify major sources of variations in a dataset as PCA will cluster similar data points together. Hence, by inspecting datapoints that cluster together, you can assess whether variations can be attributed to your experimental setup, special biological conditions, experimental or sample bias. A common example for this is difference in sample preparation, e.g., by a different laboratory assistant or institute.
 
@@ -207,18 +207,25 @@ Classification refers to the task of correctly classifying the label of given da
 Within OmicLearn, you can choose from a wide range of classifiers. Understanding why a classifier performs better or worse on a dataset requires in-depth knowledge of the underlying mechanisms and careful tuning of their hyperparameters. Also, OmicLearn allows you to try different optimizers. Follow the links below to learn more about each option:
 
 ## [4. 1. AdaBoost](https://scikit-learn.org/stable/modules/ensemble.html#adaboost)
+[AdaBoost](https://scikit-learn.org/stable/modules/ensemble.html#adaboost)
 
 ## [4. 2. LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+[LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
 
 ## [4. 3. RandomForest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
+[RandomForest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
 
 ## [4. 4. XGBoost](https://xgboost.readthedocs.io/en/latest/)
+[XGBoost](https://xgboost.readthedocs.io/en/latest/)
 
 ## [4. 5. DecisionTree](https://scikit-learn.org/stable/modules/tree.html)
+[DecisionTree](https://scikit-learn.org/stable/modules/tree.html)
 
 ## [4. 6. KNeighborsClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
+[KNeighborsClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
 
 ## [4. 7. LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html)
+[LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html)
 
 # 5. Validation
 
@@ -228,7 +235,7 @@ In order to evaluate the performance of a Machine Learning (ML) model, we can em
 
 For a typical approach, one would split all available data into train, validation, and test (holdout) set. Here, the train and validation sets are used to optimize a Machine Learning method, and the test set is used for a final test on unseen data. As OmicLearn is intended to be an exploratory tool to assess the performance of algorithms when applying to specific data rather than having a classification model for production, no holdout set is used and the performance metrics have to be interpreted accordingly. This is also so that repeated analysis of the same dataset and choosing the same holdout set could lead to an unconscious selection bias and false confidence assessment.
 
-One way to get an estimate on how a model would generalize while still trying to use all available data is Cross-Validation (CV). Here, data is repeatedly split into train and validation sets. Note that the missing value imputation and feature selection will be applied to each split of the dataset during the cross-vacation phase and not on all data in the beginning. This is to avoid potential information leakage and overfitting the dataset.
+One way to get an estimate on how a model would generalize while still trying to use all available data is [Cross-Validation (CV)](https://scikit-learn.org/stable/modules/cross_validation.html). Here, data is repeatedly split into train and validation sets. Note that the missing value imputation and feature selection will be applied to each split of the dataset during the cross-vacation phase and not on all data in the beginning. This is to avoid potential information leakage and overfitting the dataset.
 
 OmicLearn is using a stratified-k-fold split, meaning that the original class ratio will be preserved for the splits.
 Also, it is possible to shuffle the data and repeatedly shuffle the data and splitting it. The average of multiple splits gives a more robust estimate of the model performance.  The number of splits and the number of repeats can be changed with `cv_splits` and `cv_repeats`.
@@ -239,12 +246,12 @@ Also, within OmicLearn, [StratifiedKFold](https://scikit-learn.org/stable/module
 In ML, there are several metrics to be employed for measuring the performance of the model, and for evaluating the quality of predictions.
 
 ### [5. 2. 1. ROC AUC Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score)
-This score reflects the computation of Area Under the Curve (`AUC`) of Receiver Operating Characteristics (`ROC`). It is also known as Area Under the Receiver Operating Characteristics (AUROC).
+This score reflects the computation of Area Under the Curve (`AUC`) of Receiver Operating Characteristics (`ROC`). It is also known as Area Under the Receiver Operating Characteristics ([AUROC](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score)).
 
 A good brief introduction for understanding the `ROC` can be found [here](https://www.datasciencecentral.com/profiles/blogs/roc-curve-explained-in-one-picture).
 
 ### [5. 2. 2. PR AUC Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_curve.html)
-This `Precision-Recall Curve` (or `PR Curve`) is a plot of the `precision` on the y-axis and the `recall` on the x-axis at different thresholds.
+This [`Precision-Recall Curve`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_curve.html) (or `PR Curve`) is a plot of the `precision` on the y-axis and the `recall` on the x-axis at different thresholds.
 
 Also, the `PR AUC Score` is the calculation of Area Under the Curve (`AUC`) of `Precision-Recall Curve` (`PR Curve`).
 
@@ -254,16 +261,16 @@ A detailed explanation for `PR Curve` can be found [here](https://acutecaretesti
 
 ### [5. 2. 3. Precision Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score)
 
-Precision refers to a ratio of correctly classified positive samples to the total classified positive samples.
+[Precision](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score) refers to a ratio of correctly classified positive samples to the total classified positive samples.
 
 ### [5. 2. 5. Recall Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score)
-`Recall` score is also known as `Sensitivity`.  This metric computes the fraction of true positive results out of all positively predicted results.
+[`Recall`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score) score is also known as `Sensitivity`.  This metric computes the fraction of true positive results out of all positively predicted results.
 
 ### [5. 2. 5. F1 Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score)
-`F1 Score` is the weighted average of both `Precision` and `Recall`.
+[`F1 Score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) is the weighted average of both `Precision` and `Recall`.
 
 ### [5. 2. 6. Balanced Accuracy Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html#sklearn.metrics.balanced_accuracy_score)
-The balanced accuracy calculates the average `Recall` for each class.
+The [balanced accuracy](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html#sklearn.metrics.balanced_accuracy_score) calculates the average `Recall` for each class.
 
 ### 5. 2. 7. Confusion Matrix
 `Confusion matrix` is a table with 4 different combinations of predicted and actual values.
