@@ -11,6 +11,7 @@ Welcome to OmicLearn's documentation!
    :caption: Contents:
 
    README.md
+   ONE_CLICK.md
    USING.md
    METHODS.md
    VERSION-HISTORY.md
