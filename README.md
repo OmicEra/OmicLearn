@@ -14,6 +14,8 @@
 
 Transparent exploration of machine learning for biomarker discovery from proteomics and omics data. This is a maintained fork from [OmicEra](https://github.com/OmicEra/OmicLearn).
 
+## Quickstart
+A three minute quickstart video to showcase OmicLearn can be found [here](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_quickstart.mp4).
 
 ## Manuscript
 📰 <a href="https://doi.org/10.1101/2021.03.05.434053" target="_blank">Open-access article: **Transparent exploration of machine learning for biomarker discovery from proteomics and omics data**</a>
@@ -38,6 +40,8 @@ You can use the one-click installer to install OmicLearn as an application local
 Click on one of the links below to download the latest release for:
 
 [**Windows**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe), [**macOS**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg), [**Linux**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
+
+For detailed installation instructions of the one-click installers refer to the [documentation](https://omiclearn.readthedocs.io/en/latest/ONE_CLICK.html).
 
 ### Python Installation
 

@@ -1,6 +1,6 @@
 # One-Click Installation
 
-## Mac OS
+## macOS
 Download the latest release from the release page:
 [**macOS**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg)
 
