@@ -102,7 +102,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Preprocessing
     st.sidebar.markdown(
-        "## [Preprocessing](https://omiclearn.readthedocs.io/en/latest//METHODS-%7C-1.-Preprocessing)"
+        "## [Preprocessing](https://omiclearn.readthedocs.io/en/latest/METHODS.html#preprocessing)"
     )
     normalizations = [
         "None",
@@ -130,7 +130,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         ).lower()
     if state.n_missing > 0:
         st.sidebar.markdown(
-            "## [Missing value imputation](https://omiclearn.readthedocs.io/en/latest//METHODS-%7C-1.-Preprocessing#1-2-imputation-of-missing-values)"
+            "## [Missing value imputation](https://omiclearn.readthedocs.io/en/latest/METHODS.html#imputation-of-missing-values)"
         )
         missing_values = ["Zero", "Mean", "Median", "KNNImputer", "None"]
         state["missing_value"] = selectbox_("Missing value imputation", missing_values)
@@ -141,7 +141,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Feature Selection
     st.sidebar.markdown(
-        "## [Feature selection](https://omiclearn.readthedocs.io/en/latest//METHODS-%7C-2.-Feature-selection)"
+        "## [Feature selection](https://omiclearn.readthedocs.io/en/latest/METHODS.html#feature-selection)"
     )
     feature_methods = [
         "ExtraTrees",
@@ -169,7 +169,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Classification method selection
     st.sidebar.markdown(
-        "## [Classification](https://omiclearn.readthedocs.io/en/latest//METHODS-%7C-4.-Classification#3-classification)"
+        "## [Classification](https://omiclearn.readthedocs.io/en/latest/METHODS.html#classification)"
     )
     classifiers = [
         "AdaBoost",
@@ -284,7 +284,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Cross-Validation
     st.sidebar.markdown(
-        "## [Cross-validation](https://omiclearn.readthedocs.io/en/latest//METHODS-%7C-5.-Validation#4-1-cross-validation)"
+        "## [Cross-validation](https://omiclearn.readthedocs.io/en/latest/METHODS.html#validation)"
     )
     state["cv_method"] = selectbox_(
         "Specify CV method:",
