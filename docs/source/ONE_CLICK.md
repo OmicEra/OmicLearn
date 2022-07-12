@@ -35,13 +35,24 @@ After a short time, your browser should start with the OmicLearn application. If
 
 ## Linux
 Download the latest release from the release page:
-[**Linux**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
+[**Linux**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb). Linux might ask you to `Keep` the file after downloading.
+
+Install via `sudo dpkg -i omiclearn_gui_installer_linux.deb`.
+
+![Image](one_click_linux_01.png)
+
+After installation, you can launch omiclearn via typing `OmicLearn` in the Terminal:
+
+![Image](one_click_linux_02.png)
+
+After a short time, your browser should start with the OmicLearn application. If not, type in the IP address from the terminal window into the browser of your choice.
+
 
 ## Windows
 Download the latest release from the release page:
 [**Windows**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe)
 
-When downloading, you might need to select that you want to keep this file. Double click on the installer, a warning from Windows will appear that it protected your PC. Click on `More info` so that the `Run anyway`-Button will appear.
+When downloading, you might need to select that you want to keep this file. Double click on the installer and a warning from Windows will appear that it protected your PC. Click on `More info` so that the `Run anyway`-Button will appear.
 
 ![Image](one_click_win_01.png)
 
@@ -49,7 +60,7 @@ The installation wizard will appear.
 
 ![Image](one_click_win_02.png)
 
-Select your preffered installation method and continue with the wizard. The installation on a Windows 10 Pro system with a Intel i9 took approximately one minute. Once the wizard is complete, you can select the checkbox to directly launch OmicLearn.
+Select your preferred installation method and continue with the wizard. The installation on a Windows 10 Pro system with an Intel i9 took approximately one minute. Once the wizard is complete, you can select the checkbox to launch OmicLearn directly.
 
 ![Image](one_click_win_03.png)
 
