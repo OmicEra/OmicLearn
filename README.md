@@ -1,5 +1,5 @@
 <p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
-<h2 align="center">Online version: <a href="https://mannlabs-omiclearn-omiclearnomic-learn-hr6cd1.streamlitapp.com/" target="_blank">OmicLearn</a> </h2>
+<h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/omiclearn/omic_learn.py" target="_blank">OmicLearn</a> </h2>
 
 <h2 align="center"> 📰 Manual and Documentation is available at: <a href="https://omiclearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs Page </a> </h2>
 
@@ -28,7 +28,7 @@ A three minute quickstart video to showcase OmicLearn can be found [here](https:
 
 ## Online Access
 
-🟢  <a href="https://mannlabs-omiclearn-omiclearnomic-learn-hr6cd1.streamlitapp.com/" target="_blank"> Streamlit share</a>
+🟢  <a href="https://share.streamlit.io/MannLabs/OmicLearn/omiclearn/omic_learn.py" target="_blank"> Streamlit share</a>
 
 This is an online version hosted by streamlit using free cloud resources, which might have limited performance. Use the local installation to run OmicLearn on your own hardware.
 
