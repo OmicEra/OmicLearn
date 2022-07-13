@@ -1,12 +1,12 @@
 <p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
 <h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/omiclearn/omic_learn.py" target="_blank">OmicLearn</a> </h2>
 
-<h2 align="center"> 📰 Manual and Documentation is available at: <a href="https://omiclearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs Page </a> </h2>
+<h2 align="center"> 📰 Manual and Documentation: <a href="https://omiclearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
 
 ![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
 ![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.8-blue)
 ![OmicLearn Version](https://img.shields.io/badge/Release-v1.2-orange)
-![OmicLearn Release](https://img.shields.io/badge/Release%20Date-June%202022-green)
+![OmicLearn Release](https://img.shields.io/badge/Release%20Date-July%202022-green)
 ![OmicLearn License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
 ---
