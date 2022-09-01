@@ -65,7 +65,7 @@ The following image displays the main steps of OmicLearn:
 
 ![OmicLearn Workflow](workflow.png)
 
-Detailed instructions on how to get started with OmicLearn can be found **[here.](https://omiclearn.readthedocs.io/en/latest//HOW-TO:-Using)**
+Detailed instructions on how to get started with OmicLearn can be found **[here.](https://omiclearn.readthedocs.io/en/latest/USING.html)**
 
 On this page, you can click on the titles listed in the *Table of Contents*, which contain instructions for each section.
 
