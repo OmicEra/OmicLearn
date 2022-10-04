@@ -50,7 +50,7 @@ For detailed installation instructions of the one-click installers refer to the 
   1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/MannLabs/OmicLearn`
   2. Create a new environment for OmicLearn: `conda create --name omic_learn python=3.9`
   3. Activate the environment with  `conda activate omic_learn`
-  4. Install OmicLearn with `cd OmicLearn & pip install .`
+  4. Change to the OmicLearn directory with `cd OmicLearn` and install OmicLearn with `pip install .`
 
 - After a successful installation, type the following command to run OmicLearn:
 
