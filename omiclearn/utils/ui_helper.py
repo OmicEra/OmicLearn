@@ -397,8 +397,9 @@ def main_text_and_data_upload(state, APP_TITLE):
 
         st.markdown(
             """
-        **Note:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
+        **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
         While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, it is not meant to substitute throughout data exploration but rather add a machine learning layer.
+        Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations) - page for potential pitfalls and interpret performance metrics accordingly.
         """
         )
 
@@ -491,7 +492,7 @@ def get_system_report():
     Returns the package versions
     """
     report = {}
-    report["omic_learn_version"] = "v1.2"
+    report["omic_learn_version"] = "v1.3"
     report["python_version"] = sys.version[:5]
     report["pandas_version"] = pd.__version__
     report["numpy_version"] = np.version.version
