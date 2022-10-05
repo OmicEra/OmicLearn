@@ -30,5 +30,5 @@ To provide a perspective on the utility of OmicLearn, check out the following st
 - [High-resolution serum proteome trajectories in COVID-19 reveal patient-specific seroconversion](https://www.embopress.org/doi/full/10.15252/emmm.202114167)
 - [Proteome profiling of cerebrospinal fluid reveals biomarker candidates for Parkinson’s disease](https://doi.org/10.1016/j.xcrm.2022.100661)
 
-
+## 
 Feel free to extend this list by suggesting additional recommendations.
