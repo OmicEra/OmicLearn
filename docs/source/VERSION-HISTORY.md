@@ -15,7 +15,7 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 >
 
 
-### - `v1.3`
+### - `v1.2`
 
 > 📅  July 2022
 >
@@ -41,7 +41,7 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 > - [x] One-click installers
 >
 
-### - `v1.1.3`
+### - `v1.1.2`
 
 > 📅  February 2022
 >

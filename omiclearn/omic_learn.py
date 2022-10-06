@@ -238,7 +238,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                 st.markdown(
                     "Manually select a subset of features. If only these features should be used, additionally set the "
                     "`Feature selection` method to `None`. Otherwise, feature selection will be applied, and only a subset of the manually selected features is used."
-                    " Be aware of potential overfitting when manually selecting features and check [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations) - page for potential pitfalls."
+                    " Be aware of potential overfitting when manually selecting features and check [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) - page for potential pitfalls."
                 )
                 manual_users_features = multiselect(
                     "Select your features manually:", state.proteins, default=None
@@ -501,7 +501,7 @@ def OmicLearn_Main():
             - Using classifier **`{state.classifier}`**.
             - Using a total of  **`{len(state.features)}`** features.
             - ⚠️ Warning: OmicLearn is intended to be an exploratory tool to assess the performance of algorithms,
-                rather than providing a classification model for production. Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations) - page for potential pitfalls and interpret performance metrics accordingly.
+                rather than providing a classification model for production. Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) - page for potential pitfalls and interpret performance metrics accordingly.
         """
         )
 

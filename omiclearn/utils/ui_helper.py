@@ -399,7 +399,7 @@ def main_text_and_data_upload(state, APP_TITLE):
             """
         **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
         While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-        Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations) - page for potential pitfalls and interpret performance metrics accordingly.
+        Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) - page for potential pitfalls and interpret performance metrics accordingly.
         """
         )
 
