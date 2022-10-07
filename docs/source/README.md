@@ -1,11 +1,11 @@
-<p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
+<p align="center"> <img src="https://raw.githubusercontent.com/MannLabs/OmicLearn/master/omiclearn/utils/omic_learn_black.png" height="270" width="277" /> </p>
 <h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/omiclearn/omic_learn.py" target="_blank">OmicLearn</a> </h2>
 
 <h2 align="center"> 📰 Manual and Documentation: <a href="https://omiclearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
 
 ![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
 ![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.8-blue)
-![OmicLearn Version](https://img.shields.io/badge/Release-v1.2-orange)
+![OmicLearn Version](https://img.shields.io/badge/Release-v1.3-orange)
 ![OmicLearn Release](https://img.shields.io/badge/Release%20Date-July%202022-green)
 ![OmicLearn License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
@@ -50,7 +50,7 @@ For detailed installation instructions of the one-click installers refer to the 
   1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/MannLabs/OmicLearn`
   2. Create a new environment for OmicLearn: `conda create --name omic_learn python=3.9`
   3. Activate the environment with  `conda activate omic_learn`
-  4. Install OmicLearn with `cd OmicLearn & pip install .`
+  4. Change to the OmicLearn directory with `cd OmicLearn` and install OmicLearn with `pip install .`
 
 - After a successful installation, type the following command to run OmicLearn:
 
@@ -65,7 +65,7 @@ The following image displays the main steps of OmicLearn:
 
 ![OmicLearn Workflow](workflow.png)
 
-Detailed instructions on how to get started with OmicLearn can be found **[here.](https://omiclearn.readthedocs.io/en/latest//HOW-TO:-Using)**
+Detailed instructions on how to get started with OmicLearn can be found **[here.](https://omiclearn.readthedocs.io/en/latest/USING.html)**
 
 On this page, you can click on the titles listed in the *Table of Contents*, which contain instructions for each section.
 

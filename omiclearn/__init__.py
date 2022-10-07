@@ -2,7 +2,7 @@
 
 
 __project__ = "omiclearn"
-__version__ = "1.2"
+__version__ = "1.3"
 __license__ = "Apache"
 __description__ = "Transparent exploration of machine learning for biomarker discovery from proteomics and omics data"
 __author__ = "MannLabs"

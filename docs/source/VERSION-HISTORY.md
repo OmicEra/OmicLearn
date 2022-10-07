@@ -2,6 +2,19 @@
 
 On this page, you might find the list of the previous releases of **OmicLearn** and the notes and significant changes made within the versions.
 
+### - `v1.3`
+
+> 📅  October 2022
+>
+> This is the latest release of **OmicLearn**.
+>
+> **Updates in this release:**
+>
+> - [x] Added warnings
+> - [x] Added Documentation about recommendations and studies that used OmicLearn
+>
+
+
 ### - `v1.2`
 
 > 📅  July 2022

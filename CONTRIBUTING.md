@@ -45,7 +45,7 @@ Ready to contribute? Here's how to set up `omic_learn` for local development.
 
     `git clone https://github.com/MannLabs/OmicLearn.git`
 
-3.  Follow the installation instructions in the [Installation & Running](https://omiclearn.readthedocs.io/en/latest//HOW-TO:-Installation-&-Running ) page for installing `omic_learn` own environment.
+3.  Follow the installation instructions in the [Installation & Running](https://omiclearn.readthedocs.io/en/latest//HOW-TO:-Installation-&-Running) page for installing `omic_learn` own environment.
 
 4.  Create a branch for local development:
 
