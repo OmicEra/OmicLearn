@@ -19,7 +19,6 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 
 > 📅  July 2022
 >
-> This is the latest release of **OmicLearn**.
 >
 > **Updates in this release:**
 >
@@ -32,7 +31,6 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 
 > 📅  June 2022
 >
-> This is the latest release of **OmicLearn**.
 >
 > **Updates in this release:**
 >
