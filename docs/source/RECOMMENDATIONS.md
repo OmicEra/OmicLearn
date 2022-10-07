@@ -30,9 +30,10 @@ To provide a perspective on the utility of OmicLearn, check out the following st
 ### Proteomics
 - [High-resolution serum proteome trajectories in COVID-19 reveal patient-specific seroconversion](https://www.embopress.org/doi/full/10.15252/emmm.202114167)
 - [Proteome profiling of cerebrospinal fluid reveals biomarker candidates for Parkinson’s disease](https://doi.org/10.1016/j.xcrm.2022.100661)
+- [Convergent cerebrospinal fluid proteomes and metabolic ontologies in humans and animal models of Rett syndrome](https://doi.org/10.1016/j.isci.2022.104966)
 
 ### Transcriptomics
-- [Convergent cerebrospinal fluid proteomes and metabolic ontologies in humans and animal models of Rett syndrome](https://doi.org/10.1016/j.isci.2022.104966)
+- [A 10-gene biosignature of tuberculosis treatment monitoring and treatment outcome prediction](https://doi.org/10.1016/j.tube.2021.102138)
 
 
 ## 
