@@ -15,4 +15,4 @@ Welcome to OmicLearn's documentation!
    USING.md
    METHODS.md
    VERSION-HISTORY.md
-   RECOMMENDATIONS.md
+   recommendations.md
