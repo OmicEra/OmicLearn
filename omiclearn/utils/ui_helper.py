@@ -92,7 +92,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         icon, use_column_width=True, caption="OmicLearn " + report["omic_learn_version"]
     )
     st.sidebar.markdown(
-        "# [Options](https://omiclearn.readthedocs.io/en/latest//METHODS)"
+        "# [Options](https://omiclearn.readthedocs.io/en/latest//METHODS.html)"
     )
 
     # Sidebar -- Random State
@@ -409,7 +409,7 @@ def main_text_and_data_upload(state, APP_TITLE):
                     Uploaded data will not be saved."""
         )
 
-        citation = "**Reference:** Transparent exploration of machine learning for biomarker discovery from proteomics and omics data\nFurkan M. Torun, Sebastian Virreira Winter, Sophia Doll, Felix M. Riese, Artem Vorobyev, Johannes B. Mueller-Reif, Philipp E. Geyer, Maximilian T. Strauss\nbioRxiv 2021.03.05.434053; doi: https://doi.org/10.1101/2021.03.05.434053"
+        citation = "**Reference:** Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).\nTransparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.\nJournal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"
 
         st.markdown(citation)
 
