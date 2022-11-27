@@ -1,0 +1,66 @@
+cff-version: 1.2.0
+message: If you use OmicLearn, please cite the article from preferred-citation.
+title: OmicLearn
+type: software
+license: Apache-2.0
+repository-code: 'https://github.com/MannLabs/OmicLearn/'
+url: 'http://omiclearn.org'
+version: 1.3
+preferred-citation:
+  title: "Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data"
+  type: article
+  authors:
+    - given-names: Furkan M.
+      family-names: Torun
+      email: furkanmtorun@gmail.com
+    - given-names: Sebastian
+      family-names: Virreira Winter
+    - given-names: Sophia
+      family-names: Doll
+    - given-names: Felix M.
+      family-names: Riese
+    - given-names: Artem
+      family-names: Vorobyev
+    - given-names: Johannes B.
+      family-names: Mueller-Reif
+    - given-names: Philipp E.
+      family-names: Geyer
+    - given-names: Maximilian T.
+      family-names: Strauss
+      email: maximilian.strauss@cpr.ku.dk
+  year: 2022
+  doi: "10.1021/acs.jproteome.2c00473"
+  journal: "Journal of Proteome Research"
+  url: https://pubs.acs.org/doi/10.1021/acs.jproteome.2c00473
+abstract: >-
+  Biomarkers are of central importance for assessing
+  the health state and to guide medical interventions
+  and their efficacy; still, they are lacking for
+  most diseases. Mass spectrometry (MS)-based
+  proteomics is a powerful technology for biomarker
+  discovery but requires sophisticated bioinformatics
+  to identify robust patterns. Machine learning (ML)
+  has become a promising tool for this purpose.
+  However, it is sometimes applied in an opaque
+  manner and generally requires specialized
+  knowledge. To enable easy access to ML for
+  biomarker discovery without any programming or
+  bioinformatics skills, we developed “OmicLearn”
+  (http://OmicLearn.org), an open-source
+  browser-based ML tool using the latest advances in
+  the Python ML ecosystem. Data matrices from omics
+  experiments are easily uploaded to an online or a
+  locally installed web server. OmicLearn enables
+  rapid exploration of the suitability of various ML
+  algorithms for the experimental data sets. It
+  fosters open science via transparent assessment of
+  state-of-the-art algorithms in a standardized
+  format for proteomics and other omics sciences.
+keywords:
+  - machine learning
+  - mass spectrometry
+  - diagnostics
+  - omics
+  - proteome
+  - metabolome
+  - transcriptome
