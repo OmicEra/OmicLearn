@@ -18,12 +18,12 @@ Transparent exploration of machine learning for biomarker discovery from proteom
 A three minute quickstart video to showcase OmicLearn can be found [here](https://youtu.be/VE9pj1G89io).
 
 ## Manuscript
-📰 <a href="https://doi.org/10.1101/2021.03.05.434053" target="_blank">Open-access article: **Transparent exploration of machine learning for biomarker discovery from proteomics and omics data**</a>
+📰 <a href="https://doi.org/10.1021/acs.jproteome.2c00473" target="_blank">Open-access article: **Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data**</a>
 
 > **Citation:** <br>
-> Transparent exploration of machine learning for biomarker discovery from proteomics and omics data <br>
-> Furkan M Torun, Sebastian Virreira Winter, Sophia Doll, Felix M Riese, Artem Vorobyev, Johannes B Müller-Reif, Philipp E Geyer, Maximilian T Strauss <br>
-> bioRxiv 2021.03.05.434053; doi: https://doi.org/10.1101/2021.03.05.434053
+> Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022). <br>
+> Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data. <br>
+> Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473 <br>
 
 
 ## Online Access
