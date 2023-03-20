@@ -4,7 +4,7 @@
 <h2 align="center"> 📰 Manual and Documentation: <a href="https://omiclearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
 
 ![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
-![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.8-blue)
+![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.9-blue)
 ![OmicLearn Version](https://img.shields.io/badge/Release-v1.3-orange)
 ![OmicLearn Release](https://img.shields.io/badge/Release%20Date-October%202022-green)
 ![OmicLearn License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
@@ -48,8 +48,8 @@ For detailed installation instructions of the one-click installers refer to the 
 - It is strongly recommended to install OmicLearn in its own environment using [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
   1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/MannLabs/OmicLearn`
-  2. Create a new environment for OmicLearn: `conda create --name omic_learn python=3.9`
-  3. Activate the environment with  `conda activate omic_learn`
+  2. Create a new environment for OmicLearn: `conda create --name omiclearn python=3.9`
+  3. Activate the environment with  `conda activate omiclearn`
   4. Change to the OmicLearn directory with `cd OmicLearn` and install OmicLearn with `pip install .`
 
 - After a successful installation, type the following command to run OmicLearn:
