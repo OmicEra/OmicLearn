@@ -97,7 +97,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     st.sidebar.image(
         icon,
         use_column_width=True,
-        caption="OmicLearn " + report["omic_learn_version"],
+        caption="OmicLearn " + report["OmicLearn_version"],
     )
     st.sidebar.markdown(
         "# [Options](https://omiclearn.readthedocs.io/en/latest//METHODS.html)"
@@ -515,7 +515,7 @@ def get_system_report():
     Returns the package versions
     """
     report = {}
-    report["omic_learn_version"] = "v1.3"
+    report["OmicLearn_version"] = "v1.3"
     report["python_version"] = sys.version[:5]
     report["pandas_version"] = pd.__version__
     report["numpy_version"] = np.version.version
@@ -578,7 +578,7 @@ def generate_text(state, report):
     text = ""
     # Packages
     packages_plain_text = """
-        OmicLearn ({omic_learn_version}) was utilized for performing data analysis, model execution, and creation of plots and charts.
+        OmicLearn ({OmicLearn_version}) was utilized for performing data analysis, model execution, and creation of plots and charts.
         Machine learning was done in Python ({python_version}). 
         Feature tables were imported via the Pandas package ({pandas_version}) and manipulated using the Numpy package ({numpy_version}).
         The machine learning pipeline was employed using the scikit-learn package ({sklearn_version}).

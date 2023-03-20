@@ -53,11 +53,11 @@ _this_directory = os.path.dirname(_this_file)
 APP_TITLE = "OmicLearn — ML platform for omics datasets"
 st.set_page_config(
     page_title=APP_TITLE,
-    page_icon=Image.open(os.path.join(_this_directory, "utils/omic_learn.ico")),
+    page_icon=Image.open(os.path.join(_this_directory, "utils/OmicLearn.ico")),
     layout="centered",
     initial_sidebar_state="auto",
 )
-icon = Image.open(os.path.join(_this_directory, "utils/omic_learn_black.png"))
+icon = Image.open(os.path.join(_this_directory, "utils/OmicLearn_black.png"))
 report = get_system_report()
 
 # This needs to be here as it needs to be after setting ithe initial_sidebar_state

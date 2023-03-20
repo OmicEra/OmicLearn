@@ -8,7 +8,7 @@ def run():
     _this_file = os.path.abspath(__file__)
     _this_directory = os.path.dirname(_this_file)
 
-    file_path = os.path.join(_this_directory, "omic_learn.py")
+    file_path = os.path.join(_this_directory, "omiclearn.py")
 
     HOME = os.path.expanduser("~")
     ST_PATH = os.path.join(HOME, ".streamlit")
