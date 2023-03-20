@@ -1,45 +1,48 @@
 """OmicLearn main file."""
+import os
 import random
 import warnings
-import pandas as pd
-from PIL import Image
-import streamlit as st
 from datetime import datetime
-import os
+
+import pandas as pd
+import streamlit as st
+from PIL import Image
 
 warnings.simplefilter("ignore")
 
-import omiclearn.utils
-
 # Session State
 
-if 'history' not in st.session_state:
+if "history" not in st.session_state:
     st.session_state.history = []
 
 # ML functionalities
-from omiclearn.utils.ml_helper import perform_cross_validation, transform_dataset, calculate_cm
+from omiclearn.utils.ml_helper import (
+    calculate_cm,
+    perform_cross_validation,
+    transform_dataset,
+)
 
 # Plotting
 from omiclearn.utils.plot_helper import (
+    perform_EDA,
     plot_confusion_matrices,
     plot_feature_importance,
     plot_pr_curve_cv,
     plot_roc_curve_cv,
-    perform_EDA,
 )
 
 # UI components and others func.
 from omiclearn.utils.ui_helper import (
-    main_components,
+    generate_footer_parts,
+    generate_sidebar_elements,
+    generate_text,
+    get_download_link,
     get_system_report,
-    save_sessions,
     load_data,
+    main_components,
     main_text_and_data_upload,
     objdict,
-    generate_sidebar_elements,
-    get_download_link,
-    generate_text,
-    generate_footer_parts,
+    save_sessions,
     session_history,
 )
 
@@ -50,7 +53,7 @@ _this_directory = os.path.dirname(_this_file)
 APP_TITLE = "OmicLearn — ML platform for omics datasets"
 st.set_page_config(
     page_title=APP_TITLE,
-    page_icon=Image.open(os.path.join(_this_directory,"utils/omic_learn.ico")),
+    page_icon=Image.open(os.path.join(_this_directory, "utils/omic_learn.ico")),
     layout="centered",
     initial_sidebar_state="auto",
 )
@@ -97,7 +100,9 @@ def checkpoint_for_data_upload(state, record_widgets):
                     state.df[state.subset_column].value_counts().index.tolist()
                 )
                 subset_class = multiselect(
-                    "Select values to keep:", subset_options, default=subset_options
+                    "Select values to keep:",
+                    subset_options,
+                    default=subset_options,
                 )
                 state["df_sub"] = state.df[
                     state.df[state.subset_column].isin(subset_class)
@@ -152,7 +157,6 @@ def checkpoint_for_data_upload(state, record_widgets):
 
         # Once both classes are defined
         if state.class_0 and state.class_1:
-
             # EDA Part
             with st.expander("EDA — Exploratory data analysis (^Recommended)"):
                 st.markdown(
@@ -166,7 +170,8 @@ def checkpoint_for_data_upload(state, record_widgets):
                     state.class_0
                 )
                 state["eda_method"] = st.selectbox(
-                    "Select an EDA method:", ["None", "PCA", "Hierarchical clustering"]
+                    "Select an EDA method:",
+                    ["None", "PCA", "Hierarchical clustering"],
                 )
 
                 if (state.eda_method == "PCA") and (len(state.proteins) < 6):
@@ -184,7 +189,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                         help="In large datasets, it is not possible to visaulize all the features.",
                     )
 
-                if (state.eda_method != "None"):
+                if state.eda_method != "None":
                     with st.spinner(f"Performing {state.eda_method}.."):
                         p = perform_EDA(state)
                         st.plotly_chart(p, use_container_width=True)
@@ -230,7 +235,9 @@ def checkpoint_for_data_upload(state, record_widgets):
                     )
                 else:
                     state["exclude_features"] = multiselect(
-                        "Select features to be excluded:", state.proteins, default=[]
+                        "Select features to be excluded:",
+                        state.proteins,
+                        default=[],
                     )
 
             # Manual feature selection
@@ -241,7 +248,9 @@ def checkpoint_for_data_upload(state, record_widgets):
                     " Be aware of potential overfitting when manually selecting features and check [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) - page for potential pitfalls."
                 )
                 manual_users_features = multiselect(
-                    "Select your features manually:", state.proteins, default=None
+                    "Select your features manually:",
+                    state.proteins,
+                    default=None,
                 )
             if manual_users_features:
                 state.proteins = manual_users_features
@@ -253,7 +262,8 @@ def checkpoint_for_data_upload(state, record_widgets):
             if state.target_column != "":
                 not_proteins_excluded_target_option.remove(state.target_column)
             state["cohort_column"] = st.selectbox(
-                "Select cohort column:", [None] + not_proteins_excluded_target_option
+                "Select cohort column:",
+                [None] + not_proteins_excluded_target_option,
             )
             if state["cohort_column"] == None:
                 state["cohort_checkbox"] = None
@@ -272,7 +282,6 @@ def checkpoint_for_data_upload(state, record_widgets):
 
 # Display results and plots
 def classify_and_plot(state):
-
     state.bar = st.progress(0)
     # Cross-Validation
     st.markdown("Performing analysis and Running cross-validation")
@@ -294,7 +303,6 @@ def classify_and_plot(state):
             )
 
         if cv_curves["feature_importances_"] is not None:
-
             # Check whether all feature importance attributes are 0 or not
             if (
                 pd.DataFrame(cv_curves["feature_importances_"]).isin([0]).all().all()
@@ -451,7 +459,6 @@ def classify_and_plot(state):
 
 # Main Function
 def OmicLearn_Main():
-
     # Define state
     state = objdict()
     state["df"] = pd.DataFrame()
@@ -531,7 +538,6 @@ def OmicLearn_Main():
 
 # Run the OmicLearn
 if __name__ == "__main__":
-
     try:
         OmicLearn_Main()
     except (ValueError, IndexError) as val_ind_error:

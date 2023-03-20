@@ -1,9 +1,11 @@
-import plotly
-import os, sys
 import base64
-import sklearn
+import os
+import sys
+
 import numpy as np
 import pandas as pd
+import plotly
+import sklearn
 import streamlit as st
 
 # Checkpoint for XGBoost
@@ -15,6 +17,8 @@ try:
     xgboost_installed = True
 except ModuleNotFoundError:
     pass
+
+
 # Widget for recording
 def make_recording_widget(f, widget_values):
     """
@@ -29,9 +33,11 @@ def make_recording_widget(f, widget_values):
 
     return wrapper
 
+
 _this_file = os.path.abspath(__file__)
 _this_directory = os.path.dirname(_this_file)
 _parent_directory = os.path.dirname(_this_directory)
+
 
 # Object for dict
 class objdict(dict):
@@ -89,7 +95,9 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Image/Title
     st.sidebar.image(
-        icon, use_column_width=True, caption="OmicLearn " + report["omic_learn_version"]
+        icon,
+        use_column_width=True,
+        caption="OmicLearn " + report["omic_learn_version"],
     )
     st.sidebar.markdown(
         "# [Options](https://omiclearn.readthedocs.io/en/latest//METHODS.html)"
@@ -162,7 +170,10 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     if state.feature_method == "ExtraTrees":
         state["n_trees"] = number_input_(
-            "Number of trees in the forest:", value=100, min_value=1, max_value=2000
+            "Number of trees in the forest:",
+            value=100,
+            min_value=1,
+            max_value=2000,
         )
     else:
         state["n_trees"] = 0
@@ -212,14 +223,18 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     elif state.classifier == "LogisticRegression":
         classifier_params["penalty"] = selectbox_(
-            "Specify norm in the penalization:", ["l2", "l1", "ElasticNet", "None"]
+            "Specify norm in the penalization:",
+            ["l2", "l1", "ElasticNet", "None"],
         ).lower()
         classifier_params["solver"] = selectbox_(
             "Select the algorithm for optimization:",
             ["lbfgs", "newton-cg", "liblinear", "sag", "saga"],
         )
         classifier_params["max_iter"] = number_input_(
-            "Maximum number of iteration:", value=100, min_value=1, max_value=2000
+            "Maximum number of iteration:",
+            value=100,
+            min_value=1,
+            max_value=2000,
         )
         classifier_params["C"] = number_input_(
             "C parameter:", value=1, min_value=1, max_value=100
@@ -288,7 +303,11 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     )
     state["cv_method"] = selectbox_(
         "Specify CV method:",
-        ["RepeatedStratifiedKFold", "StratifiedKFold", "StratifiedShuffleSplit"],
+        [
+            "RepeatedStratifiedKFold",
+            "StratifiedKFold",
+            "StratifiedShuffleSplit",
+        ],
     )
     state["cv_splits"] = number_input_("CV Splits:", min_value=2, max_value=10, value=5)
 
@@ -306,7 +325,7 @@ def session_history(widget_values):
     Helper function to save / show session history
     """
 
-    widget_values['run'] = len(st.session_state.history)+1
+    widget_values["run"] = len(st.session_state.history) + 1
 
     st.session_state.history.append(widget_values)
     sessions_df = pd.DataFrame(st.session_state.history)
@@ -321,13 +340,13 @@ def session_history(widget_values):
 
     st.write("## Session History")
     st.dataframe(
-    sessions_df.style.format(precision=3)
+        sessions_df.style.format(precision=3)
     )  #  Display only 3 decimal points in UI side
     get_download_link(sessions_df, "session_history.csv")
 
+
 # Saving session info
 def save_sessions(widget_values, user_name):
-
     session_no, session_dict = get_sessions()
     session_no.append(len(session_no) + 1)
     session_dict[session_no[-1]] = widget_values
@@ -394,7 +413,6 @@ def main_text_and_data_upload(state, APP_TITLE):
     st.title(APP_TITLE)
 
     with st.expander("Disclaimer", expanded=False):
-
         st.markdown(
             """
         **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
@@ -413,14 +431,12 @@ def main_text_and_data_upload(state, APP_TITLE):
 
         st.markdown(citation)
 
-
     with st.expander("Upload or select sample dataset (*Required)", expanded=True):
+        file_buffer = st.file_uploader("", type=["csv", "xlsx", "xls", "tsv"])
 
-        file_buffer = st.file_uploader(
-            "", type=["csv", "xlsx", "xls", "tsv"]
+        st.markdown(
+            "Maximum size 200 MB. One row per sample, one column per feature. 'Features' (Proteins, Genes, ..) should be uppercase, all additional features with a leading '_'."
         )
-
-        st.markdown("Maximum size 200 MB. One row per sample, one column per feature. 'Features' (Proteins, Genes, ..) should be uppercase, all additional features with a leading '_'.")
 
         if file_buffer is not None:
             if file_buffer.name.endswith(".xlsx") or file_buffer.name.endswith(".xls"):
@@ -466,7 +482,7 @@ def main_text_and_data_upload(state, APP_TITLE):
                     """
                 )
 
-            folder_to_load = os.path.join(_parent_directory, 'data')
+            folder_to_load = os.path.join(_parent_directory, "data")
             file_to_load = os.path.join(folder_to_load, state.sample_file + ".xlsx")
             state["df"] = pd.read_excel(file_to_load)
             st.markdown("Using the following dataset:")
@@ -552,7 +568,6 @@ def get_download_link(exported_object, name):
 
 # Generate summary text
 def generate_text(state, report):
-
     text = ""
     # Packages
     packages_plain_text = """
@@ -566,7 +581,11 @@ def generate_text(state, report):
     # Normalization
     if state.normalization == "None":
         text += "No normalization on the data was performed. "
-    elif state.normalization in ["StandardScaler", "MinMaxScaler", "RobustScaler"]:
+    elif state.normalization in [
+        "StandardScaler",
+        "MinMaxScaler",
+        "RobustScaler",
+    ]:
         text += f"Data was normalized in each using a {state.normalization} approach. "
     else:
         params = [f"{k} = {v}" for k, v in state.normalization_params.items()]
@@ -636,10 +655,14 @@ def generate_text(state, report):
         )
         for i, cohort_combo in enumerate(state.cohort_combos):
             text += "{:.2f} when training on {} and predicting on {} ".format(
-                state.cohort_results["roc_auc"][i], cohort_combo[0], cohort_combo[1]
+                state.cohort_results["roc_auc"][i],
+                cohort_combo[0],
+                cohort_combo[1],
             )
             text += ", and {:.2f} for PR Curve when training on {} and predicting on {}. ".format(
-                state.cohort_results["pr_auc"][i], cohort_combo[0], cohort_combo[1]
+                state.cohort_results["pr_auc"][i],
+                cohort_combo[0],
+                cohort_combo[1],
             )
 
     # Print the all text
@@ -650,5 +673,7 @@ def generate_text(state, report):
 
 # Generate footer
 def generate_footer_parts(report):
-    st.write('---')
-    st.write("[Bug Report (GitHub)](https://github.com/MannLabs/OmicLearn/issues/new/choose)")
+    st.write("---")
+    st.write(
+        "[Bug Report (GitHub)](https://github.com/MannLabs/OmicLearn/issues/new/choose)"
+    )

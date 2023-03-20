@@ -1,23 +1,24 @@
 # Plotly Graphs
-import plotly.express as px
-import plotly.graph_objects as go
-import plotly.figure_factory as ff
-from scipy.spatial.distance import pdist, squareform
-
-# ML funcs
-from .ml_helper import calculate_cm
+from itertools import chain
 
 # Others
 import numpy as np
 import pandas as pd
-from itertools import chain
-from sklearn.metrics import auc
+import plotly.express as px
+import plotly.figure_factory as ff
+import plotly.graph_objects as go
+from scipy.spatial.distance import pdist, squareform
 from sklearn.decomposition import PCA
+from sklearn.metrics import auc
+
+# ML funcs
+from .ml_helper import calculate_cm
 
 # Define common colors
 blue_color = "#035672"
 red_color = "#f84f57"
 gray_color = "#ccc"
+
 
 # Prepare feature importance chart
 def plot_feature_importance(feature_importance):
@@ -195,7 +196,10 @@ def plot_confusion_matrices(class_0, class_1, results, names):
     # Add slider
     sliders = [
         dict(
-            currentvalue={"prefix": "CV Split: "}, pad={"t": 72}, active=0, steps=steps
+            currentvalue={"prefix": "CV Split: "},
+            pad={"t": 72},
+            active=0,
+            steps=steps,
         )
     ]
     p.layout.update(sliders=sliders)
@@ -302,7 +306,10 @@ def plot_roc_curve_cv(roc_curve_results, cohort_combos=None):
     else:
         p.add_trace(
             go.Scatter(
-                x=[0, 1], y=[0, 1], line=dict(color="black", dash="dash"), name="Chance"
+                x=[0, 1],
+                y=[0, 1],
+                line=dict(color="black", dash="dash"),
+                name="Chance",
             )
         )
 
@@ -616,14 +623,23 @@ def perform_EDA(state):
         }
         labels["color"] = state.target_column
         p = px.scatter(
-            components, x=0, y=1, color=pca_color, labels=labels, hover_name=data.index
+            components,
+            x=0,
+            y=1,
+            color=pca_color,
+            labels=labels,
+            hover_name=data.index,
         )
 
         # Show feature lines
         if hasattr(state, "pca_show_features") and (state.pca_show_features == True):
             for i, feature in enumerate(data.columns):
                 p.add_shape(
-                    type="line", x0=0, y0=0, x1=loadings[i, 0], y1=loadings[i, 1]
+                    type="line",
+                    x0=0,
+                    y0=0,
+                    x1=loadings[i, 0],
+                    y1=loadings[i, 1],
                 )
                 p.add_annotation(
                     x=loadings[i, 0],
