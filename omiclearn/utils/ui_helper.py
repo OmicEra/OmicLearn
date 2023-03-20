@@ -416,18 +416,23 @@ def main_text_and_data_upload(state, APP_TITLE):
         st.markdown(
             """
         **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
-        While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-        Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) - page for potential pitfalls and interpret performance metrics accordingly.
+        While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
+        it is not meant to substitute throughout data exploration but rather add a machine learning layer.
+        Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) 
+        page for potential pitfalls and interpret performance metrics accordingly.
         """
         )
 
         st.markdown(
             """**Note:** By uploading a file, you agree to our
-                    [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
-                    Uploaded data will not be saved."""
+            [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
+            **Uploaded data will not be saved.**"""
         )
 
-        citation = "**Reference:** Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).\nTransparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.\nJournal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"
+        citation = """**Reference:** 
+        Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).
+        Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
+        Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
 
         st.markdown(citation)
 
@@ -435,7 +440,9 @@ def main_text_and_data_upload(state, APP_TITLE):
         file_buffer = st.file_uploader("", type=["csv", "xlsx", "xls", "tsv"])
 
         st.markdown(
-            "Maximum size 200 MB. One row per sample, one column per feature. 'Features' (Proteins, Genes, ..) should be uppercase, all additional features with a leading '_'."
+            """Maximum size 200 MB. One row per sample, one column per feature. 
+            \nFeatures (proteins, genes, etc.) should be uppercase, all other additional features with a leading '_'.
+            """
         )
 
         if file_buffer is not None:
@@ -572,7 +579,8 @@ def generate_text(state, report):
     # Packages
     packages_plain_text = """
         OmicLearn ({omic_learn_version}) was utilized for performing data analysis, model execution, and creation of plots and charts.
-        Machine learning was done in Python ({python_version}). Feature tables were imported via the Pandas package ({pandas_version}) and manipulated using the Numpy package ({numpy_version}).
+        Machine learning was done in Python ({python_version}). 
+        Feature tables were imported via the Pandas package ({pandas_version}) and manipulated using the Numpy package ({numpy_version}).
         The machine learning pipeline was employed using the scikit-learn package ({sklearn_version}).
         The Plotly ({plotly_version}) library was used for plotting.
     """
