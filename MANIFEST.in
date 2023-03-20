@@ -2,5 +2,5 @@ include LICENSE.txt
 include CONTRIBUTING.md
 include CLA.md
 include README.md
-recursive-include omiclearn *
+recursive-include OmicLearn *
 recursive-exclude * __pycache__

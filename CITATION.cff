@@ -4,7 +4,7 @@ title: OmicLearn
 type: software
 license: Apache-2.0
 repository-code: 'https://github.com/MannLabs/OmicLearn/'
-url: 'http://omiclearn.org'
+url: 'http://OmicLearn.org'
 version: 1.3
 preferred-citation:
   title: "Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data"

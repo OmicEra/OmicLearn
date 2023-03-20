@@ -16,14 +16,14 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 # ML functionalities
-from omiclearn.utils.ml_helper import (
+from OmicLearn.utils.ml_helper import (
     calculate_cm,
     perform_cross_validation,
     transform_dataset,
 )
 
 # Plotting
-from omiclearn.utils.plot_helper import (
+from OmicLearn.utils.plot_helper import (
     perform_EDA,
     plot_confusion_matrices,
     plot_feature_importance,
@@ -32,7 +32,7 @@ from omiclearn.utils.plot_helper import (
 )
 
 # UI components and others func.
-from omiclearn.utils.ui_helper import (
+from OmicLearn.utils.ui_helper import (
     generate_footer_parts,
     generate_sidebar_elements,
     generate_text,
@@ -163,7 +163,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                     """
                     Use exploratory data anlysis on your dateset to identify potential correlations and biases.
                     For more information, please visit
-                    [the dedicated ReadTheDocs page](https://omiclearn.readthedocs.io/en/latest/METHODS.html#exploratory-data-analysis-eda).
+                    [the dedicated ReadTheDocs page](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#exploratory-data-analysis-eda).
                     """
                 )
                 state["df_sub_y"] = state.df_sub[state.target_column].isin(
@@ -247,7 +247,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                     "`Feature selection` method to `None`. "
                     "Otherwise, feature selection will be applied, and only a subset of the manually selected features is used. "
                     "Be aware of potential overfitting when manually selecting features and "
-                    "check [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) page for potential pitfalls."
+                    "check [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) page for potential pitfalls."
                 )
                 manual_users_features = multiselect(
                     "Select your features manually:",
@@ -511,7 +511,7 @@ def OmicLearn_Main():
             - Using a total of **{len(state.features)}** features.
             - ⚠️ **Warning:** OmicLearn is intended to be an exploratory tool to assess the performance of algorithms,
                 rather than providing a classification model for production. 
-                Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html)
+                Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html)
                 page for potential pitfalls and interpret performance metrics accordingly.
         """
         )
