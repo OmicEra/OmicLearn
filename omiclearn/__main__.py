@@ -2,8 +2,8 @@
 
 
 def main():
-
     import omiclearn.gui
+
     omiclearn.gui.run()
 
 

@@ -1,31 +1,38 @@
 # Main
 import numpy as np
 import pandas as pd
-import streamlit as st
 
 # Sklearn
 import sklearn
 import sklearn.metrics as metrics
-from sklearn.impute import SimpleImputer, KNNImputer
-from sklearn import svm, tree, linear_model, neighbors, ensemble
-from sklearn.metrics import roc_curve, precision_recall_curve, auc
-from sklearn.feature_selection import chi2, mutual_info_classif, f_classif, SelectKBest
+import streamlit as st
+from sklearn import ensemble, linear_model, neighbors, svm, tree
+from sklearn.feature_selection import SelectKBest, chi2, f_classif, mutual_info_classif
+from sklearn.impute import KNNImputer, SimpleImputer
+from sklearn.metrics import auc, precision_recall_curve, roc_curve
 from sklearn.model_selection import (
     RepeatedStratifiedKFold,
     StratifiedKFold,
     StratifiedShuffleSplit,
 )
 from sklearn.preprocessing import (
-    StandardScaler,
-    MinMaxScaler,
-    RobustScaler,
     LabelEncoder,
-    QuantileTransformer,
+    MinMaxScaler,
     PowerTransformer,
+    QuantileTransformer,
+    RobustScaler,
+    StandardScaler,
 )
 
 # Define base metrics to be used
-scores = ["accuracy", "roc_auc", "precision", "recall", "f1", "balanced_accuracy"]
+scores = [
+    "accuracy",
+    "roc_auc",
+    "precision",
+    "recall",
+    "f1",
+    "balanced_accuracy",
+]
 scorer_dict = {}
 scorer_dict = {metric: metric + "_score" for metric in scores}
 scorer_dict = {key: getattr(metrics, metric) for key, metric in scorer_dict.items()}
@@ -104,7 +111,10 @@ def normalize_dataset(X, normalization, normalization_params):
         )
 
     scaler.fit(X)
-    return pd.DataFrame(scaler.transform(X), columns=X.columns, index=X.index), scaler
+    return (
+        pd.DataFrame(scaler.transform(X), columns=X.columns, index=X.index),
+        scaler,
+    )
 
 
 def select_features(feature_method, X, y, max_features, n_trees, random_state):
@@ -193,7 +203,11 @@ def return_classifier(classifier, classifier_params):
     """
     # Max Features parameter for RandomForest and DecisionTree
     cp = classifier_params.copy()
-    if classifier in ["LogisticRegression", "KNeighborsClassifier", "RandomForest"]:
+    if classifier in [
+        "LogisticRegression",
+        "KNeighborsClassifier",
+        "RandomForest",
+    ]:
         cp["n_jobs"] = -1
 
     if classifier == "LinearSVC":
@@ -238,7 +252,9 @@ def perform_cross_validation(state, cohort_column=None):
         )
     elif state.cv_method == "StratifiedKFold":
         cv_alg = StratifiedKFold(
-            n_splits=state.cv_splits, shuffle=True, random_state=state.random_state
+            n_splits=state.cv_splits,
+            shuffle=True,
+            random_state=state.random_state,
         )
     elif state.cv_method == "StratifiedShuffleSplit":
         cv_alg = StratifiedShuffleSplit(
@@ -282,7 +298,10 @@ def perform_cross_validation(state, cohort_column=None):
             for c_2 in cohorts:
                 if c_1 != c_2:
                     cohort_combos.append(
-                        (indexer[state.X_cohort == c_1], indexer[state.X_cohort == c_2])
+                        (
+                            indexer[state.X_cohort == c_1],
+                            indexer[state.X_cohort == c_2],
+                        )
                     )
                     cohort_combo_names.append((c_1, c_2))
 
