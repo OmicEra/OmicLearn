@@ -1,18 +1,22 @@
 <p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
-<h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank">OmicLearn</a> </h2>
+<h2 align="center" style="border-bottom: none;">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank">OmicLearn</a> </h2>
 
 <h2 align="center"> 📰 Manual and Documentation: <a href="https://OmicLearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
 
-![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
-![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.9-blue)
-![OmicLearn Version](https://img.shields.io/badge/Release-v1.3-orange)
-![OmicLearn Release](https://img.shields.io/badge/Release%20Date-October%202022-green)
-![OmicLearn License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
+<div align="center">
+  <img alt="OmicLearn Test" src="https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg">
+  <img alt="OmicLearn Python Badges" src="https://img.shields.io/badge/Tested_with_Python-3.9-blue.svg">
+  <img alt="OmicLearn Version" src="https://img.shields.io/badge/Release-v1.3-orange">
+  <img alt="OmicLearn Release" src="https://img.shields.io/badge/Release%20Date-March%202023-green">
+  <img alt="OmicLearn License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg">
+</div>
 
 ---
-# OmicLearn
+
+<h1 style="border-bottom: none !important;"> OmicLearn </h1>
 
 Transparent exploration of machine learning for biomarker discovery from proteomics and omics data. This is a maintained fork from [OmicEra](https://github.com/OmicEra/OmicLearn).
+
 
 ## Quickstart
 A three minute quickstart video to showcase OmicLearn can be found [here](https://youtu.be/VE9pj1G89io).
@@ -39,7 +43,9 @@ This is an online version hosted by streamlit using free cloud resources, which 
 You can use the one-click installer to install OmicLearn as an application locally.
 Click on one of the links below to download the latest release for:
 
-[**Windows**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe), [**macOS**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg), [**Linux**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
+- [**Windows**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe)
+- [**macOS**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg) 
+- [**Linux**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
 
 For detailed installation instructions of the one-click installers refer to the [documentation](https://OmicLearn.readthedocs.io/en/latest/ONE_CLICK.html).
 
@@ -47,14 +53,28 @@ For detailed installation instructions of the one-click installers refer to the 
 
 - It is strongly recommended to install OmicLearn in its own environment using [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
-  1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/MannLabs/OmicLearn`
-  2. Create a new environment for OmicLearn: `conda create --name OmicLearn python=3.9`
-  3. Activate the environment with  `conda activate OmicLearn`
-  4. Change to the OmicLearn directory with `cd OmicLearn` and install OmicLearn with `pip install .`
+  1. Redirect to the folder of choice and clone the repository: 
+    ```bash
+    git clone https://github.com/MannLabs/OmicLearn
+    ```
+    
+  2. Create a new environment for OmicLearn: 
+    ```bash
+    conda create --name OmicLearn python=3.9
+    ```
+  3. Activate the environment:
+    ```bash
+    conda activate OmicLearn
+    ```
+  4. Change to the OmicLearn directory and install OmicLearn:
+    ```bash
+    cd OmicLearn
+    pip install .
+    ```
 
 - After a successful installation, type the following command to run OmicLearn:
 
-  `python -m OmicLearn`
+  `python -m omiclearn`
 
  - After starting the streamlit server, the OmicLearn page should be automatically opened in your browser (Default link: [`http://localhost:8501`](http://localhost:8501)
 
