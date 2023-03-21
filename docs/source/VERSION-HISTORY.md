@@ -2,11 +2,24 @@
 
 On this page, you might find the list of the previous releases of **OmicLearn** and the notes and significant changes made within the versions.
 
+
+### - `v1.4`
+
+> 📅  April 2023
+>
+> This is the latest release of **OmicLearn**.
+>
+> **Updates in this release:**
+>
+> - [X] The Streamlit and other packages/libraries are upgraded to their new versions.
+> - [x] Several improvements on UI side have been made.
+>
+
+
 ### - `v1.3`
 
 > 📅  October 2022
 >
-> This is the latest release of **OmicLearn**.
 >
 > **Updates in this release:**
 >

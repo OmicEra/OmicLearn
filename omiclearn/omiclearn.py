@@ -295,7 +295,6 @@ def classify_and_plot(state):
     top_features = []
     # Feature importances from the classifier
     with st.expander("Feature importances from the classifier"):
-        st.subheader("Feature importances from the classifier")
         if state.cv_method == "RepeatedStratifiedKFold":
             st.markdown(
                 f"This is the average feature importance from all {state.cv_splits*state.cv_repeats} cross validation runs."
@@ -320,7 +319,6 @@ def classify_and_plot(state):
                     get_download_link(p, "clf_feature_importance.svg")
 
                 # Display `feature_df` with NCBI links
-                st.subheader("Feature importances from classifier table")
                 st.write(
                     feature_df.to_html(escape=False, index=False),
                     unsafe_allow_html=True,
@@ -342,7 +340,6 @@ def classify_and_plot(state):
     with st.expander(
         "Receiver operating characteristic Curve and Precision-Recall Curve"
     ):
-        st.subheader("Receiver operating characteristic")
         p = plot_roc_curve_cv(cv_curves["roc_curves_"])
         st.plotly_chart(p, use_container_width=True)
         if p:
@@ -350,7 +347,6 @@ def classify_and_plot(state):
             get_download_link(p, "roc_curve.svg")
 
         # Precision-Recall Curve
-        st.subheader("Precision-Recall Curve")
         st.markdown(
             "Precision-Recall (PR) Curve might be used for imbalanced datasets."
         )
@@ -408,7 +404,6 @@ def classify_and_plot(state):
             "Receiver operating characteristic Curve and Precision-Recall Curve"
         ):
             # ROC-AUC for Cohorts
-            st.subheader("Receiver operating characteristic")
             p = plot_roc_curve_cv(
                 cohort_curves["roc_curves_"], cohort_curves["cohort_combos"]
             )
@@ -418,7 +413,6 @@ def classify_and_plot(state):
                 get_download_link(p, "roc_curve_cohort.svg")
 
             # PR Curve for Cohorts
-            st.subheader("Precision-Recall Curve")
             st.markdown(
                 "Precision-Recall (PR) Curve might be used for imbalanced datasets."
             )
@@ -434,7 +428,6 @@ def classify_and_plot(state):
 
         # Confusion Matrix (CM) for Cohorts
         with st.expander("Confusion matrix"):
-            st.subheader("Confusion matrix")
             names = [
                 "Train on {}, Test on {}".format(_[0], _[1])
                 for _ in cohort_curves["cohort_combos"]

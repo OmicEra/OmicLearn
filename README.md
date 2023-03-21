@@ -6,7 +6,7 @@
 <div align="center">
   <img alt="OmicLearn Test" src="https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg">
   <img alt="OmicLearn Python Badges" src="https://img.shields.io/badge/Tested_with_Python-3.9-blue.svg">
-  <img alt="OmicLearn Version" src="https://img.shields.io/badge/Release-v1.3-orange">
+  <img alt="OmicLearn Version" src="https://img.shields.io/badge/Release-v1.4-orange">
   <img alt="OmicLearn Release" src="https://img.shields.io/badge/Release%20Date-March%202023-green">
   <img alt="OmicLearn License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg">
 </div>
