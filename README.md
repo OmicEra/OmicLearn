@@ -1,7 +1,7 @@
-<p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
-<h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/omiclearn/omic_learn.py" target="_blank">OmicLearn</a> </h2>
+<p align="center"> <img src="OmicLearn.png" height="270" width="277" /> </p>
+<h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank">OmicLearn</a> </h2>
 
-<h2 align="center"> 📰 Manual and Documentation: <a href="https://omiclearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
+<h2 align="center"> 📰 Manual and Documentation: <a href="https://OmicLearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
 
 ![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
 ![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.9-blue)
@@ -28,7 +28,7 @@ A three minute quickstart video to showcase OmicLearn can be found [here](https:
 
 ## Online Access
 
-🟢  <a href="https://share.streamlit.io/MannLabs/OmicLearn/omiclearn/omic_learn.py" target="_blank"> Streamlit share</a>
+🟢  <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank"> Streamlit share</a>
 
 This is an online version hosted by streamlit using free cloud resources, which might have limited performance. Use the local installation to run OmicLearn on your own hardware.
 
@@ -41,20 +41,20 @@ Click on one of the links below to download the latest release for:
 
 [**Windows**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_windows.exe), [**macOS**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_macos.pkg), [**Linux**](https://github.com/MannLabs/OmicLearn/releases/latest/download/omiclearn_gui_installer_linux.deb)
 
-For detailed installation instructions of the one-click installers refer to the [documentation](https://omiclearn.readthedocs.io/en/latest/ONE_CLICK.html).
+For detailed installation instructions of the one-click installers refer to the [documentation](https://OmicLearn.readthedocs.io/en/latest/ONE_CLICK.html).
 
 ### Python Installation
 
 - It is strongly recommended to install OmicLearn in its own environment using [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
   1. Redirect to the folder of choice and clone the repository: `git clone https://github.com/MannLabs/OmicLearn`
-  2. Create a new environment for OmicLearn: `conda create --name omiclearn python=3.9`
-  3. Activate the environment with  `conda activate omiclearn`
+  2. Create a new environment for OmicLearn: `conda create --name OmicLearn python=3.9`
+  3. Activate the environment with  `conda activate OmicLearn`
   4. Change to the OmicLearn directory with `cd OmicLearn` and install OmicLearn with `pip install .`
 
 - After a successful installation, type the following command to run OmicLearn:
 
-  `python -m omiclearn`
+  `python -m OmicLearn`
 
  - After starting the streamlit server, the OmicLearn page should be automatically opened in your browser (Default link: [`http://localhost:8501`](http://localhost:8501)
 
@@ -65,7 +65,7 @@ The following image displays the main steps of OmicLearn:
 
 ![OmicLearn Workflow](workflow.png)
 
-Detailed instructions on how to get started with OmicLearn can be found **[here.](https://omiclearn.readthedocs.io/en/latest/USING.html)**
+Detailed instructions on how to get started with OmicLearn can be found **[here.](https://OmicLearn.readthedocs.io/en/latest/USING.html)**
 
 On this page, you can click on the titles listed in the *Table of Contents*, which contain instructions for each section.
 

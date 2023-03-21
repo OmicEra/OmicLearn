@@ -41,7 +41,7 @@ Install via `sudo dpkg -i omiclearn_gui_installer_linux.deb`.
 
 ![Image](one_click_linux_01.png)
 
-After installation, you can launch omiclearn via typing `OmicLearn` in the Terminal:
+After installation, you can launch OmicLearn via typing `OmicLearn` in the Terminal:
 
 ![Image](one_click_linux_02.png)
 

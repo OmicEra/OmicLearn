@@ -97,10 +97,10 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     st.sidebar.image(
         icon,
         use_column_width=True,
-        caption="OmicLearn " + report["omic_learn_version"],
+        caption="OmicLearn " + report["OmicLearn_version"],
     )
     st.sidebar.markdown(
-        "# [Options](https://omiclearn.readthedocs.io/en/latest//METHODS.html)"
+        "# [Options](https://OmicLearn.readthedocs.io/en/latest//METHODS.html)"
     )
 
     # Sidebar -- Random State
@@ -110,7 +110,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Preprocessing
     st.sidebar.markdown(
-        "## [Preprocessing](https://omiclearn.readthedocs.io/en/latest/METHODS.html#preprocessing)"
+        "## [Preprocessing](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#preprocessing)"
     )
     normalizations = [
         "None",
@@ -138,7 +138,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         ).lower()
     if state.n_missing > 0:
         st.sidebar.markdown(
-            "## [Missing value imputation](https://omiclearn.readthedocs.io/en/latest/METHODS.html#imputation-of-missing-values)"
+            "## [Missing value imputation](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#imputation-of-missing-values)"
         )
         missing_values = ["Zero", "Mean", "Median", "KNNImputer", "None"]
         state["missing_value"] = selectbox_("Missing value imputation", missing_values)
@@ -149,7 +149,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Feature Selection
     st.sidebar.markdown(
-        "## [Feature selection](https://omiclearn.readthedocs.io/en/latest/METHODS.html#feature-selection)"
+        "## [Feature selection](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#feature-selection)"
     )
     feature_methods = [
         "ExtraTrees",
@@ -180,7 +180,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Classification method selection
     st.sidebar.markdown(
-        "## [Classification](https://omiclearn.readthedocs.io/en/latest/METHODS.html#classification)"
+        "## [Classification](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#classification)"
     )
     classifiers = [
         "AdaBoost",
@@ -299,7 +299,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
 
     # Sidebar -- Cross-Validation
     st.sidebar.markdown(
-        "## [Cross-validation](https://omiclearn.readthedocs.io/en/latest/METHODS.html#validation)"
+        "## [Cross-validation](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#validation)"
     )
     state["cv_method"] = selectbox_(
         "Specify CV method:",
@@ -418,7 +418,7 @@ def main_text_and_data_upload(state, APP_TITLE):
         **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
         While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
         it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-        Please check our [recommendations](https://omiclearn.readthedocs.io/en/latest/recommendations.html) 
+        Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
         page for potential pitfalls and interpret performance metrics accordingly.
         """
         )
@@ -515,7 +515,7 @@ def get_system_report():
     Returns the package versions
     """
     report = {}
-    report["omic_learn_version"] = "v1.3"
+    report["OmicLearn_version"] = "v1.3"
     report["python_version"] = sys.version[:5]
     report["pandas_version"] = pd.__version__
     report["numpy_version"] = np.version.version
@@ -578,7 +578,7 @@ def generate_text(state, report):
     text = ""
     # Packages
     packages_plain_text = """
-        OmicLearn ({omic_learn_version}) was utilized for performing data analysis, model execution, and creation of plots and charts.
+        OmicLearn ({OmicLearn_version}) was utilized for performing data analysis, model execution, and creation of plots and charts.
         Machine learning was done in Python ({python_version}). 
         Feature tables were imported via the Pandas package ({pandas_version}) and manipulated using the Numpy package ({numpy_version}).
         The machine learning pipeline was employed using the scikit-learn package ({sklearn_version}).

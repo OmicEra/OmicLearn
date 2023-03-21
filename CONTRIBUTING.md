@@ -31,7 +31,7 @@ You might have a look at our `Feature request` template on [`GitHub issues`](htt
 
 ### 4. Write Documentation
 
-Implementing our [OmicLearn Documentation](https://omiclearn.readthedocs.io/en/latest/) page would be great idea! You might add articles, detailed explanations or blog posts into the our pages.
+Implementing our [OmicLearn Documentation](https://OmicLearn.readthedocs.io/en/latest/) page would be great idea! You might add articles, detailed explanations or blog posts into the our pages.
 
 ---
 
@@ -46,7 +46,7 @@ Ready to contribute? Here's how to set up `OmicLearn` for local development.
     git clone https://github.com/MannLabs/OmicLearn.git
     ```
 
-3.  Follow the installation instructions in the [Installation & Running](https://omiclearn.readthedocs.io/en/latest//HOW-TO:-Installation-&-Running) page for installing `OmicLearn` own environment.
+3.  Follow the installation instructions in the [Python Installation](https://OmicLearn.readthedocs.io/en/latest/README.html#python-installation) page for installing `OmicLearn` own environment.
 
 4.  Create a branch for local development:
 

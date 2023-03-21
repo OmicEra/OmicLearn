@@ -17,15 +17,15 @@ python setup.py sdist bdist_wheel
 # Setting up the local package
 cd release/one_click_windows_gui
 # Make sure you include the required extra packages and always use the stable or very-stable options!
-pip install "../../dist/omiclearn-1.3-py3-none-any.whl"
+pip install "../../dist/OmicLearn-1.3-py3-none-any.whl"
 
 # Creating the stand-alone pyinstaller folder
 pip install pyinstaller==4.10
-pyinstaller ../pyinstaller/omiclearn.spec -y
+pyinstaller ../pyinstaller/OmicLearn.spec -y
 conda deactivate
 
 # If needed, include additional source such as e.g.:
-# cp ../../omiclearn/data/*.fasta dist/omiclearn/data
+# cp ../../OmicLearn/data/*.fasta dist/OmicLearn/data
 
 # Wrapping the pyinstaller folder in a .exe package
 "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" omiclearn_innoinstaller.iss

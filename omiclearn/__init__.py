@@ -1,7 +1,7 @@
 #!python
 
 
-__project__ = "omiclearn"
+__project__ = "OmicLearn"
 __version__ = "1.3"
 __license__ = "Apache"
 __description__ = "Transparent exploration of machine learning for biomarker discovery from proteomics and omics data"
@@ -28,7 +28,7 @@ __classifiers__ = [
     "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
 __console_scripts__ = [
-    "omiclearn=omiclearn.gui:run",
+    "OmicLearn=OmicLearn.gui:run",
 ]
 __urls__ = {
     "GitHub": __github__,
