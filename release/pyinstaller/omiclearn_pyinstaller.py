@@ -1,7 +1,7 @@
 if __name__ == "__main__":
     import multiprocessing
 
-    import OmicLearn.gui
+    import omiclearn.gui
 
     multiprocessing.freeze_support()
-    OmicLearn.gui.run()
+    omiclearn.gui.run()

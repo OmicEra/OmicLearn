@@ -3,7 +3,7 @@
 import setuptools
 
 # local
-import OmicLearn as package2install
+import omiclearn as package2install
 
 
 def get_long_description():
