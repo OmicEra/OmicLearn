@@ -1,6 +1,5 @@
 """OmicLearn main file."""
 import os
-import random
 import warnings
 from datetime import datetime
 
@@ -16,14 +15,14 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 # ML functionalities
-from OmicLearn.utils.ml_helper import (
+from omiclearn.utils.ml_helper import (
     calculate_cm,
     perform_cross_validation,
     transform_dataset,
 )
 
 # Plotting
-from OmicLearn.utils.plot_helper import (
+from omiclearn.utils.plot_helper import (
     perform_EDA,
     plot_confusion_matrices,
     plot_feature_importance,
@@ -32,7 +31,7 @@ from OmicLearn.utils.plot_helper import (
 )
 
 # UI components and others func.
-from OmicLearn.utils.ui_helper import (
+from omiclearn.utils.ui_helper import (
     generate_footer_parts,
     generate_sidebar_elements,
     generate_text,
@@ -53,11 +52,11 @@ _this_directory = os.path.dirname(_this_file)
 APP_TITLE = "OmicLearn — ML platform for omics datasets"
 st.set_page_config(
     page_title=APP_TITLE,
-    page_icon=Image.open(os.path.join(_this_directory, "utils/OmicLearn.ico")),
+    page_icon=Image.open(os.path.join(_this_directory, "utils/omiclearn.ico")),
     layout="centered",
     initial_sidebar_state="auto",
 )
-icon = Image.open(os.path.join(_this_directory, "utils/OmicLearn_black.png"))
+icon = Image.open(os.path.join(_this_directory, "utils/omiclearn_black.png"))
 report = get_system_report()
 
 # This needs to be here as it needs to be after setting ithe initial_sidebar_state

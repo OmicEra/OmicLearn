@@ -2,9 +2,9 @@
 
 
 def main():
-    import OmicLearn.gui
+    import omiclearn.gui
 
-    OmicLearn.gui.run()
+    omiclearn.gui.run()
 
 
 if __name__ == "__main__":

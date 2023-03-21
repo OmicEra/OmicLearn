@@ -28,7 +28,7 @@ __classifiers__ = [
     "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
 __console_scripts__ = [
-    "OmicLearn=OmicLearn.gui:run",
+    "omiclearn=omiclearn.gui:run",
 ]
 __urls__ = {
     "GitHub": __github__,

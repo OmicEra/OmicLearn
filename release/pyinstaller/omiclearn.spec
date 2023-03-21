@@ -7,7 +7,7 @@ from PyInstaller.building.build_main import Analysis, PYZ, EXE, COLLECT, BUNDLE,
 import PyInstaller.utils.hooks
 import pkg_resources
 import importlib.metadata
-import OmicLearn
+import omiclearn
 
 
 ##################### User definitions
@@ -19,9 +19,9 @@ else:
 	icon = '../logos/omiclearn_logo.ico'
 block_cipher = None
 location = os.getcwd()
-project = "OmicLearn"
+project = "omiclearn"
 remove_tests = True
-bundle_name = "OmicLearn"
+bundle_name = "omiclearn"
 #####################
 
 
