@@ -413,7 +413,9 @@ def main_text_and_data_upload(state, APP_TITLE):
     st.title(APP_TITLE)
 
     with st.expander(f"Disclaimer and Citation"):
-        disc_tab, citation_tab = st.tabs(["Disclaimer", "Citation"])
+        disc_tab, citation_tab, bug_tab = st.tabs(
+            ["Disclaimer", "Citation", "Bug report"]
+        )
 
         with disc_tab:
             st.markdown(
@@ -438,6 +440,12 @@ def main_text_and_data_upload(state, APP_TITLE):
                 Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
                 Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
             st.markdown(citation)
+
+        with bug_tab:
+            st.write(
+                """We appreciate community contributions to the repository.
+                Here, you can [report a bug on GitHub](https://github.com/MannLabs/OmicLearn/issues/new/choose)."""
+            )
 
     with st.expander("Upload or select sample dataset (*Required)", expanded=True):
         file_buffer = st.file_uploader("", type=["csv", "xlsx", "xls", "tsv"])
@@ -535,6 +543,7 @@ def get_download_link(exported_object, name):
     """
     os.makedirs("downloads/", exist_ok=True)
     extension = name.split(".")[-1]
+    download_button_css_class = "css-1x8cf1d edgvbvh10"
 
     if extension == "svg":
         exported_object.write_image("downloads/" + name, height=700, width=700, scale=1)
@@ -542,10 +551,9 @@ def get_download_link(exported_object, name):
             svg = f.read()
         b64 = base64.b64encode(svg.encode()).decode()
         href = (
-            f'<a class="download_link" href="data:image/svg+xml;base64,%s" download="%s" >Download as *.svg</a>'
+            f'<a class="{download_button_css_class}" href="data:image/svg+xml;base64,%s" download="%s" >Download as *.svg</a>'
             % (b64, name)
         )
-        st.markdown("")
         st.markdown(href, unsafe_allow_html=True)
 
     elif extension == "pdf":
@@ -554,7 +562,7 @@ def get_download_link(exported_object, name):
             pdf = f.read()
         b64 = base64.encodebytes(pdf).decode()
         href = (
-            f'<a class="download_link" href="data:application/pdf;base64,%s" download="%s" >Download as *.pdf</a>'
+            f'<a class="{download_button_css_class}" href="data:application/pdf;base64,%s" download="%s" >Download as *.pdf</a>'
             % (b64, name)
         )
         st.markdown("")
@@ -566,10 +574,22 @@ def get_download_link(exported_object, name):
             csv = f.read()
         b64 = base64.b64encode(csv).decode()
         href = (
-            f'<a class="download_link" href="data:file/csv;base64,%s" download="%s" >Download as *.csv</a>'
+            f'<a class="{download_button_css_class}" href="data:file/csv;base64,%s" download="%s" >Download as *.csv</a>'
             % (b64, name)
         )
         st.markdown("")
+        st.markdown(href, unsafe_allow_html=True)
+
+    elif extension == "txt":
+        with open("downloads/" + name, "w") as f:
+            f.write(exported_object.replace("  ", ""))
+        with open("downloads/" + name, "rb") as f:
+            txt = f.read()
+        b64 = base64.b64encode(txt).decode()
+        href = (
+            f'<a class="{download_button_css_class}" href="data:text/plain;base64,%s" download="%s" >Download as *.txt</a>'
+            % (b64, name)
+        )
         st.markdown(href, unsafe_allow_html=True)
 
     else:
@@ -680,11 +700,4 @@ def generate_text(state, report):
     st.header("Summary")
     with st.expander("Summary text"):
         st.info(text)
-
-
-# Generate footer
-def generate_footer_parts(report):
-    st.write("---")
-    st.write(
-        "[Bug Report (GitHub)](https://github.com/MannLabs/OmicLearn/issues/new/choose)"
-    )
+        get_download_link(text, "summary_text.txt")

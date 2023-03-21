@@ -32,7 +32,6 @@ from omiclearn.utils.plot_helper import (
 
 # UI components and others func.
 from omiclearn.utils.ui_helper import (
-    generate_footer_parts,
     generate_sidebar_elements,
     generate_text,
     get_download_link,
@@ -337,16 +336,15 @@ def classify_and_plot(state):
             )
     state["top_features"] = top_features
     # ROC-AUC
-    with st.expander(
-        "Receiver operating characteristic Curve and Precision-Recall Curve"
-    ):
+    with st.expander("Receiver operating characteristic Curve"):
         p = plot_roc_curve_cv(cv_curves["roc_curves_"])
         st.plotly_chart(p, use_container_width=True)
         if p:
             get_download_link(p, "roc_curve.pdf")
             get_download_link(p, "roc_curve.svg")
 
-        # Precision-Recall Curve
+    # Precision-Recall Curve
+    with st.expander("Precision-Recall Curve"):
         st.markdown(
             "Precision-Recall (PR) Curve might be used for imbalanced datasets."
         )
@@ -526,9 +524,6 @@ def OmicLearn_Main():
         widget_values["top_features"] = state.top_features
 
         session_history(widget_values)
-
-        # Generate footer
-        generate_footer_parts(report)
 
     else:
         pass
