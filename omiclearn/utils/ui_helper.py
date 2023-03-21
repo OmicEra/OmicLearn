@@ -370,7 +370,7 @@ def save_sessions(widget_values, user_name):
 
 
 # Load data
-@st.cache(persist=True, show_spinner=True)
+@st.cache_data(persist=True, show_spinner=True)
 def load_data(file_buffer, delimiter):
     """
     Load data to pandas dataframe
@@ -412,29 +412,32 @@ def load_data(file_buffer, delimiter):
 def main_text_and_data_upload(state, APP_TITLE):
     st.title(APP_TITLE)
 
-    with st.expander("Disclaimer", expanded=False):
-        st.markdown(
+    with st.expander(f"Disclaimer and Citation"):
+        disc_tab, citation_tab = st.tabs(["Disclaimer", "Citation"])
+
+        with disc_tab:
+            st.markdown(
+                """
+            **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
+            While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
+            it is not meant to substitute throughout data exploration but rather add a machine learning layer.
+            Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
+            page for potential pitfalls and interpret performance metrics accordingly.
             """
-        **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
-        While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
-        it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-        Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
-        page for potential pitfalls and interpret performance metrics accordingly.
-        """
-        )
+            )
 
-        st.markdown(
-            """**Note:** By uploading a file, you agree to our
-            [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
-            **Uploaded data will not be saved.**"""
-        )
+            st.markdown(
+                """**Note:** By uploading a file, you agree to our
+                [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
+                **Uploaded data will not be saved.**"""
+            )
 
-        citation = """**Reference:** 
-        Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).
-        Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
-        Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
-
-        st.markdown(citation)
+        with citation_tab:
+            citation = """**Reference:** 
+            Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).
+                Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
+                Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
+            st.markdown(citation)
 
     with st.expander("Upload or select sample dataset (*Required)", expanded=True):
         file_buffer = st.file_uploader("", type=["csv", "xlsx", "xls", "tsv"])

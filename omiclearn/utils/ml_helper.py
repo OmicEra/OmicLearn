@@ -38,7 +38,7 @@ scorer_dict = {metric: metric + "_score" for metric in scores}
 scorer_dict = {key: getattr(metrics, metric) for key, metric in scorer_dict.items()}
 
 
-@st.cache(persist=True)
+@st.cache_data(persist=True)
 def transform_dataset(subset, additional_features, proteins):
     """
     Transforms data with label encoder

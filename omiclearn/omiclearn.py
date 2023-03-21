@@ -77,7 +77,7 @@ def checkpoint_for_data_upload(state, record_widgets):
         if state.n_missing > 0:
             st.info(
                 f"**INFO:** Found {state.n_missing} missing values. "
-                "Use missing value imputation or `xgboost` classifier."
+                "Use missing value imputation or **XGBoost** classifier."
             )
         # Distinguish the features from others
         state["proteins"] = [_ for _ in state.df.columns.to_list() if _[0] != "_"]
@@ -91,7 +91,8 @@ def checkpoint_for_data_upload(state, record_widgets):
                         Hence, you can exclude data that should not be used at all."""
             )
             state["subset_column"] = st.selectbox(
-                "Select subset column:", ["None"] + state.not_proteins
+                "Select subset column:",
+                ["None"] + state.not_proteins,
             )
 
             if state.subset_column != "None":
@@ -128,9 +129,9 @@ def checkpoint_for_data_upload(state, record_widgets):
             if state.target_column == "":
                 unique_elements_lst = []
             else:
-                st.markdown(f"Unique elements in `{state.target_column}` column:")
+                st.markdown(f"Unique elements in **`{state.target_column}`** column:")
                 unique_elements = state.df_sub[state.target_column].value_counts()
-                st.write(unique_elements)
+                st.dataframe(unique_elements)
                 unique_elements_lst = unique_elements.index.tolist()
 
         # Dataset -- Class definitions
@@ -175,7 +176,8 @@ def checkpoint_for_data_upload(state, record_widgets):
 
                 if (state.eda_method == "PCA") and (len(state.proteins) < 6):
                     state["pca_show_features"] = st.checkbox(
-                        "Show the feature attributes on the graph", value=False
+                        "Show the feature attributes on the graph",
+                        value=False,
                     )
 
                 if state.eda_method == "Hierarchical clustering":

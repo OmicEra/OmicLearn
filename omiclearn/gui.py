@@ -1,7 +1,7 @@
 import os
 import sys
 
-from streamlit import cli as stcli
+from streamlit.web import cli as stcli
 
 
 def run():
