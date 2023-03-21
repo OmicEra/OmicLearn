@@ -1,5 +1,5 @@
 <p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
-<h2 align="center" style="border-bottom: none;">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank">OmicLearn</a> </h2>
+<h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank">OmicLearn</a> </h2>
 
 <h2 align="center"> 📰 Manual and Documentation: <a href="https://OmicLearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
 
@@ -13,10 +13,8 @@
 
 ---
 
-<h1 style="border-bottom: none !important;"> OmicLearn </h1>
-
+# OmicLearn
 Transparent exploration of machine learning for biomarker discovery from proteomics and omics data. This is a maintained fork from [OmicEra](https://github.com/OmicEra/OmicLearn).
-
 
 ## Quickstart
 A three minute quickstart video to showcase OmicLearn can be found [here](https://youtu.be/VE9pj1G89io).
@@ -74,7 +72,9 @@ For detailed installation instructions of the one-click installers refer to the 
 
 - After a successful installation, type the following command to run OmicLearn:
 
-  `python -m omiclearn`
+  ```bash
+  python -m omiclearn
+  ```
 
  - After starting the streamlit server, the OmicLearn page should be automatically opened in your browser (Default link: [`http://localhost:8501`](http://localhost:8501)
 
