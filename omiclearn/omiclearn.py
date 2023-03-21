@@ -139,7 +139,7 @@ def checkpoint_for_data_upload(state, record_widgets):
             st.markdown(
                 f"""
                 For a binary classification task, one needs to define two classes based on the
-                unique values in the `{state.target_column}` task column.
+                unique values in the **`{state.target_column}`** task column.
                 It is possible to assign multiple values for each class.
             """
             )
@@ -386,12 +386,12 @@ def classify_and_plot(state):
 
     # Results table
     with st.expander("Table for run results"):
-        st.subheader(f"Run results for `{state.classifier}`")
+        st.markdown(f"**Run results for `{state.classifier}` model:**")
         state["summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
         st.write(state.summary)
         st.info(
             """
-            **Info:** `Mean precision` and `Mean recall` values provided in the table above
+            **Info:** "Mean precision" and "Mean recall" values provided in the table above
             are calculated as the mean of all individual splits shown in the confusion matrix,
             not the "Sum of all splits" matrix.
             """
