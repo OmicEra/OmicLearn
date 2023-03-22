@@ -338,31 +338,7 @@ def session_history(widget_values):
 
     sessions_df = sessions_df.iloc[::-1]
 
-    st.write("## Session History")
-    st.dataframe(
-        sessions_df.style.format(precision=3)
-    )  #  Display only 3 decimal points in UI side
-    get_download_link(sessions_df, "session_history.csv")
-
-
-# Saving session info
-def save_sessions(widget_values, user_name):
-    session_no, session_dict = get_sessions()
-    session_no.append(len(session_no) + 1)
-    session_dict[session_no[-1]] = widget_values
-    sessions_df = pd.DataFrame(session_dict)
-    sessions_df = sessions_df.T
-    sessions_df = sessions_df.drop(
-        sessions_df[sessions_df["user"] != user_name].index
-    ).reset_index(drop=True)
-    new_column_names = {
-        k: v.replace(":", "").replace("Select", "")
-        for k, v in zip(sessions_df.columns, sessions_df.columns)
-    }
-    sessions_df = sessions_df.rename(columns=new_column_names)
-    sessions_df = sessions_df.drop("user", axis=1)
-
-    st.write("## Session History")
+    st.header("Session History")
     st.dataframe(
         sessions_df.style.format(precision=3)
     )  #  Display only 3 decimal points in UI side
