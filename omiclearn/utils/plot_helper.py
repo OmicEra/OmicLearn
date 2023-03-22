@@ -15,9 +15,12 @@ from sklearn.metrics import auc
 from .ml_helper import calculate_cm
 
 # Define common colors
-blue_color = "#035672"
-red_color = "#f84f57"
-gray_color = "#ccc"
+BLUE_COLOR = "#035672"
+RED_COLOR = "#f84f57"
+GRAY_COLOR = "#ccc"
+
+# Define common Plotly show configs
+PLOTLY_CONFIGS = {"displayModeBar": False}
 
 
 # Prepare feature importance chart
@@ -71,7 +74,7 @@ def plot_feature_importance(feature_importance):
         if not x.startswith("_") and x != "Remainder"
         else x
     )
-    marker_color = red_color
+    marker_color = RED_COLOR
     title = "Top features from the classifier"
     labels = {
         "Feature_importance": "Feature importances from the classifier",
@@ -245,7 +248,7 @@ def plot_roc_curve_cv(roc_curve_results, cohort_combos=None):
             )
         else:
             pass
-            # p.add_trace(go.Scatter(x=fpr, y=tpr, hoverinfo='skip', mode='lines', line=dict(color=blue_color), showlegend=False,  opacity=0.1))
+            # p.add_trace(go.Scatter(x=fpr, y=tpr, hoverinfo='skip', mode='lines', line=dict(color=BLUE_COLOR), showlegend=False,  opacity=0.1))
         tpr = np.interp(base_fpr, fpr, tpr)
         tpr[0] = 0.0
         tprs.append(tpr)
@@ -299,7 +302,7 @@ def plot_roc_curve_cv(roc_curve_results, cohort_combos=None):
             go.Scatter(
                 x=[0, 1],
                 y=[0, 1],
-                line=dict(color=red_color, dash="dash"),
+                line=dict(color=RED_COLOR, dash="dash"),
                 name="Chance",
             )
         )
@@ -381,7 +384,7 @@ def plot_pr_curve_cv(pr_curve_results, class_ratio_test, cohort_combos=None):
             )
         else:
             pass
-            # p.add_trace(go.Scatter(x=recall, y=precision, hoverinfo='skip', mode='lines', line=dict(color=blue_color'), showlegend=False,  opacity=0.1))
+            # p.add_trace(go.Scatter(x=recall, y=precision, hoverinfo='skip', mode='lines', line=dict(color=BLUE_COLOR'), showlegend=False,  opacity=0.1))
         precision = np.interp(base_recall, recall, precision, period=100)
         precision[0] = 1.0
         precisions.append(precision)
@@ -438,7 +441,7 @@ def plot_pr_curve_cv(pr_curve_results, class_ratio_test, cohort_combos=None):
             go.Scatter(
                 x=[0, 1],
                 y=[no_skill, no_skill],
-                line=dict(color=red_color, dash="dash"),
+                line=dict(color=RED_COLOR, dash="dash"),
                 name="Chance",
             )
         )
@@ -495,14 +498,14 @@ def generate_dendrogram(
         matrix,
         orientation="bottom",
         labels=labels,
-        colorscale=[gray_color] * 8,
+        colorscale=[GRAY_COLOR] * 8,
     )
     for i in range(len(fig["data"])):
         fig["data"][i]["yaxis"] = "y2"
 
     # Create side dendrogram
     dendro_side = ff.create_dendrogram(
-        matrix, orientation="right", colorscale=[gray_color] * 8
+        matrix, orientation="right", colorscale=[GRAY_COLOR] * 8
     )
     for i in range(len(dendro_side["data"])):
         dendro_side["data"][i]["xaxis"] = "x2"
@@ -532,9 +535,9 @@ def generate_dendrogram(
             y=dendro_leaves,
             z=heat_data,
             colorscale=[
-                [0.0, blue_color],
+                [0.0, BLUE_COLOR],
                 [0.5, "#ffffff"],
-                [1.0, red_color],
+                [1.0, RED_COLOR],
             ],
             colorbar={"title": colorbar_title},
             hovertemplate=(
