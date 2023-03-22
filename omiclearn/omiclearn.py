@@ -222,7 +222,7 @@ def checkpoint_for_data_upload(state, record_widgets):
                     type=["csv"],
                 )
                 exclusion_df, exc_df_warnings = load_data(
-                    exclusion_file_buffer, "Comma (,)"
+                    exclusion_file_buffer, "Comma (,)", header=False
                 )
                 for warning in exc_df_warnings:
                     st.warning(warning)

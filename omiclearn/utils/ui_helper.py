@@ -347,7 +347,7 @@ def session_history(widget_values):
 
 # Load data
 @st.cache_data(persist=True, show_spinner=True)
-def load_data(file_buffer, delimiter):
+def load_data(file_buffer, delimiter, header=True):
     """
     Load data to pandas dataframe
     """
@@ -376,7 +376,7 @@ def load_data(file_buffer, delimiter):
                 df = df[valid_columns]
 
         elif delimiter == "Comma (,)":
-            df = pd.read_csv(file_buffer, sep=",")
+            df = pd.read_csv(file_buffer, sep=",", header=header)
         elif delimiter == "Semicolon (;)":
             df = pd.read_csv(file_buffer, sep=";")
         elif delimiter == "Tab (\\t) for TSV":
