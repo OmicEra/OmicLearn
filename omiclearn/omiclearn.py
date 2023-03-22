@@ -40,7 +40,6 @@ from omiclearn.utils.ui_helper import (
     main_components,
     main_text_and_data_upload,
     objdict,
-    save_sessions,
     session_history,
 )
 
@@ -130,7 +129,7 @@ def checkpoint_for_data_upload(state, record_widgets):
             else:
                 st.markdown(f"Unique elements in **`{state.target_column}`** column:")
                 unique_elements = state.df_sub[state.target_column].value_counts()
-                st.dataframe(unique_elements)
+                st.table(unique_elements)
                 unique_elements_lst = unique_elements.index.tolist()
 
         # Dataset -- Class definitions
@@ -143,12 +142,16 @@ def checkpoint_for_data_upload(state, record_widgets):
             """
             )
             state["class_0"] = multiselect(
-                "Select Class 0:", unique_elements_lst, default=None
+                "Select Positive Class (e.g., Diseased/Cancer):",
+                unique_elements_lst,
+                default=None,
+                help="Select the experiment group like cancer, diseased or drug-applied group.",
             )
             state["class_1"] = multiselect(
-                "Select Class 1:",
+                "Select Negative Class (e.g., Control/Healthy):",
                 [_ for _ in unique_elements_lst if _ not in state.class_0],
                 default=None,
+                help="Select the control/healthy group.",
             )
             state["remainder"] = [
                 _ for _ in state.not_proteins if _ is not state.target_column
@@ -226,7 +229,7 @@ def checkpoint_for_data_upload(state, record_widgets):
 
                 if len(exclusion_df) > 0:
                     st.markdown("The following features will be excluded:")
-                    st.write(exclusion_df)
+                    st.table(exclusion_df)
                     exclusion_df_list = list(exclusion_df.iloc[:, 0].unique())
                     state["exclude_features"] = multiselect(
                         "Select features to be excluded:",
@@ -367,22 +370,19 @@ def classify_and_plot(state):
             get_download_link(p, "cm.svg")
 
         cm_results = [calculate_cm(*_)[1] for _ in cv_curves["y_hats_"]]
-
         cm_results = pd.DataFrame(cm_results, columns=["TPR", "FPR", "TNR", "FNR"])
-        # (tpr, fpr, tnr, fnr)
         cm_results_ = cm_results.mean().to_frame()
         cm_results_.columns = ["Mean"]
-
         cm_results_["Std"] = cm_results.std()
 
-        st.write("Average peformance for all splits:")
-        st.write(cm_results_)
+        st.markdown("**Average peformance for all splits:**")
+        st.table(cm_results_)
 
     # Results table
     with st.expander("Table for run results"):
         st.markdown(f"**Run results for `{state.classifier}` model:**")
         state["summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
-        st.write(state.summary)
+        st.table(state.summary)
         st.info(
             """
             **Info:** "Mean precision" and "Mean recall" values provided in the table above
@@ -398,10 +398,8 @@ def classify_and_plot(state):
             state, state.cohort_column
         )
 
-        with st.expander(
-            "Receiver operating characteristic Curve and Precision-Recall Curve"
-        ):
-            # ROC-AUC for Cohorts
+        # ROC-AUC for Cohorts
+        with st.expander("Receiver operating characteristic Curve"):
             p = plot_roc_curve_cv(
                 cohort_curves["roc_curves_"], cohort_curves["cohort_combos"]
             )
@@ -410,7 +408,8 @@ def classify_and_plot(state):
                 get_download_link(p, "roc_curve_cohort.pdf")
                 get_download_link(p, "roc_curve_cohort.svg")
 
-            # PR Curve for Cohorts
+        # PR Curve for Cohorts
+        with st.expander("Precision-Recall Curve"):
             st.markdown(
                 "Precision-Recall (PR) Curve might be used for imbalanced datasets."
             )
@@ -442,7 +441,7 @@ def classify_and_plot(state):
 
         with st.expander("Table for run results"):
             state["cohort_summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
-            st.write(state.cohort_summary)
+            st.table(state.cohort_summary)
             get_download_link(state.cohort_summary, "run_results_cohort.csv")
 
         state["cohort_combos"] = cohort_curves["cohort_combos"]
@@ -498,7 +497,7 @@ def OmicLearn_Main():
         st.info(
             f"""
             **Running info:**
-            - Using **Class 0: {state.class_0}** and **Class 1: {state.class_1}** targets.
+            - Using **Positive Class: {state.class_0}** and **Negative Class: {state.class_1}** targets.
             - Using **{state.classifier}** classifier.
             - Using a total of **{len(state.features)}** features.
             - ⚠️ **Warning:** OmicLearn is intended to be an exploratory tool to assess the performance of algorithms,
