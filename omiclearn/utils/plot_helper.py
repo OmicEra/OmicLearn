@@ -19,9 +19,6 @@ BLUE_COLOR = "#035672"
 RED_COLOR = "#f84f57"
 GRAY_COLOR = "#ccc"
 
-# Define common Plotly show configs
-PLOTLY_CONFIGS = {"displayModeBar": False}
-
 
 # Prepare feature importance chart
 def plot_feature_importance(feature_importance):
@@ -206,7 +203,7 @@ def plot_confusion_matrices(class_0, class_1, results, names):
         )
     ]
     p.layout.update(sliders=sliders)
-    p.update_layout(autosize=False, width=700, height=700)
+    p.update_layout(autosize=False, width=685, height=685)
 
     return p
 
@@ -321,8 +318,8 @@ def plot_roc_curve_cv(roc_curve_results, cohort_combos=None):
     p.update_yaxes(showline=True, linewidth=1, linecolor="black")
     p.update_layout(
         autosize=True,
-        width=700,
-        height=700,
+        width=685,
+        height=685,
         xaxis_title="False Positive Rate",
         yaxis_title="True Positive Rate",
         xaxis_showgrid=False,
@@ -461,8 +458,8 @@ def plot_pr_curve_cv(pr_curve_results, class_ratio_test, cohort_combos=None):
     p.update_yaxes(showline=True, linewidth=1, range=[0, 1], linecolor="black")
     p.update_layout(
         autosize=True,
-        width=700,
-        height=700,
+        width=685,
+        height=685,
         xaxis_title="Recall",
         yaxis_title="Precision",
         xaxis_showgrid=False,
@@ -659,7 +656,7 @@ def perform_EDA(state):
         p.update_yaxes(showline=True, linewidth=1, linecolor="black")
         p.update_layout(
             autosize=True,
-            width=700,
+            width=685,
             height=500,
             xaxis_title="PCA 1",
             yaxis_title="PCA 2",

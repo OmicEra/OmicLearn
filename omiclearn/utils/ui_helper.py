@@ -418,7 +418,7 @@ def main_text_and_data_upload(state, APP_TITLE):
             st.markdown(citation)
 
         with bug_tab:
-            st.write(
+            st.markdown(
                 """We appreciate community contributions to the repository.
                 Here, you can [report a bug on GitHub](https://github.com/MannLabs/OmicLearn/issues/new/choose)."""
             )
