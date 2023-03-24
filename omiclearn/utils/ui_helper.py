@@ -9,13 +9,20 @@ import plotly
 import sklearn
 import streamlit as st
 
+from .plot_helper import perform_EDA
 from .ui_texts import (
     ALZHEIMER_CITATION_TEXT,
     BUG_REPORT_TEXT,
     CITATION_TEXT,
+    CLASSIFICATION_TARGET_TEXT,
+    DEFINE_CLASS_TEXT,
     DISCLAIMER_TEXT,
+    EDA_TEXT,
+    EXCLUDE_FEATURES_TEXT,
     FILE_UPLOAD_TEXT,
+    MANUALLY_SELECT_FEATURES_TEXT,
     PACKAGES_PLAIN_TEXT,
+    SUBSET_TEXT,
 )
 
 # Checkpoint for XGBoost
@@ -502,6 +509,223 @@ def main_text_and_data_upload(state, APP_TITLE):
             st.dataframe(state.df.head(max_df_length))
         else:
             st.warning("**WARNING:** No dataset uploaded or selected.")
+
+    return state
+
+
+def _generate_subset_section(state, multiselect):
+    with st.expander("Create subset"):
+        st.markdown(SUBSET_TEXT)
+        state["subset_column"] = st.selectbox(
+            "Select subset column:",
+            ["None"] + state.not_proteins,
+        )
+
+        if state.subset_column != "None":
+            subset_options = state.df[state.subset_column].value_counts().index.tolist()
+            subset_class = multiselect(
+                "Select values to keep:",
+                subset_options,
+                default=subset_options,
+            )
+            state["df_sub"] = state.df[
+                state.df[state.subset_column].isin(subset_class)
+            ].copy()
+        elif state.subset_column == "None":
+            state["df_sub"] = state.df.copy()
+            state["subset_column"] = "None"
+
+
+def _generate_classification_target_section(state):
+    with st.expander("Classification target (*Required)"):
+        st.markdown(CLASSIFICATION_TARGET_TEXT)
+        state["target_column"] = st.selectbox(
+            "Select target column:",
+            [""] + state.not_proteins,
+            format_func=lambda x: "Select a classification target" if x == "" else x,
+        )
+        if state.target_column == "":
+            unique_elements_list = []
+        else:
+            st.markdown(f"Unique elements in **`{state.target_column}`** column:")
+            unique_elements = state.df_sub[state.target_column].value_counts()
+            st.table(unique_elements)
+            unique_elements_list = unique_elements.index.tolist()
+        return unique_elements_list
+
+
+def _generate_class_selections(state, multiselect, unique_elements_list):
+    with st.expander("Define classes (*Required)"):
+        st.markdown(DEFINE_CLASS_TEXT.format(STATE_TARGET_COLUMN=state.target_column))
+        state["class_0"] = multiselect(
+            "Select Positive Class:",
+            unique_elements_list,
+            default=None,
+            help="Select the experiment group like cancer, diseased or drug-applied group as positive class.",
+        )
+        state["class_1"] = multiselect(
+            "Select Negative Class:",
+            [_ for _ in unique_elements_list if _ not in state.class_0],
+            default=None,
+            help="Select the control/healthy group as negative class.",
+        )
+        state["remainder"] = [
+            _ for _ in state.not_proteins if _ is not state.target_column
+        ]
+
+
+def _generate_eda_section(state):
+    with st.expander("EDA — Exploratory data analysis (^Recommended)"):
+        st.markdown(EDA_TEXT)
+        state["df_sub_y"] = state.df_sub[state.target_column].isin(state.class_0)
+        state["eda_method"] = st.selectbox(
+            "Select an EDA method:",
+            ["None", "PCA", "Hierarchical clustering"],
+        )
+
+        if (state.eda_method == "PCA") and (len(state.proteins) < 6):
+            state["pca_show_features"] = st.checkbox(
+                "Show the feature attributes on the graph",
+                value=False,
+            )
+
+        if state.eda_method == "Hierarchical clustering":
+            state["data_range"] = st.slider(
+                "Data range to be visualized",
+                0,
+                len(state.proteins),
+                (0, round(len(state.proteins) / 2)),
+                step=3,
+                help="In large datasets, it is not possible to visaulize all the features.",
+            )
+
+        if state.eda_method != "None":
+            with st.spinner(f"Performing {state.eda_method}.."):
+                p = perform_EDA(state)
+                st.plotly_chart(p, use_container_width=True)
+                get_download_link(p, f"{state.eda_method}.pdf")
+                get_download_link(p, f"{state.eda_method}.svg")
+
+
+def _generate_additional_feature_selection_section(state, multiselect):
+    with st.expander("Additional features"):
+        st.markdown(
+            "Select additional features. All non numerical values will be encoded (e.g. M/F -> 0,1)"
+        )
+        state["additional_features"] = multiselect(
+            "Select additional features for trainig:",
+            state.remainder,
+            default=None,
+        )
+
+
+def _generate_exclude_features_section(state, multiselect):
+    with st.expander("Exclude features"):
+        state["exclude_features"] = []
+        st.markdown(EXCLUDE_FEATURES_TEXT)
+        # File uploading target_column for exclusion
+        exclusion_file_buffer = st.file_uploader(
+            "Upload your CSV (comma(,) seperated) file here in which each row corresponds to a feature to be excluded.",
+            type=["csv"],
+        )
+        exclusion_df, exc_df_warnings = load_data(
+            exclusion_file_buffer, "Comma (,)", header=False
+        )
+        for warning in exc_df_warnings:
+            st.warning(warning)
+
+        if len(exclusion_df) > 0:
+            st.markdown("The following features will be excluded:")
+            st.table(exclusion_df)
+            exclusion_df_list = list(exclusion_df.iloc[:, 0].unique())
+            state["exclude_features"] = multiselect(
+                "Select features to be excluded:",
+                state.proteins,
+                default=exclusion_df_list,
+            )
+        else:
+            state["exclude_features"] = multiselect(
+                "Select features to be excluded:",
+                state.proteins,
+                default=[],
+            )
+
+
+def _manual_feature_selection_section(state, multiselect):
+    with st.expander("Manually select features"):
+        st.markdown(MANUALLY_SELECT_FEATURES_TEXT)
+        manual_users_features = multiselect(
+            "Select your features manually:",
+            state.proteins,
+            default=None,
+        )
+    if manual_users_features:
+        state.proteins = manual_users_features
+
+
+def _generate_cohort_comparison_section(state):
+    with st.expander("Cohort comparison"):
+        st.markdown("Select cohort column to train on one and predict on another:")
+        not_proteins_excluded_target_option = state.not_proteins
+        if state.target_column != "":
+            not_proteins_excluded_target_option.remove(state.target_column)
+        state["cohort_column"] = st.selectbox(
+            "Select cohort column:",
+            [None] + not_proteins_excluded_target_option,
+        )
+        if state["cohort_column"] == None:
+            state["cohort_checkbox"] = None
+        else:
+            state["cohort_checkbox"] = "Yes"
+
+
+# Dataset handling all parts
+def dataset_handling(state, record_widgets):
+    multiselect = record_widgets.multiselect
+    state["n_missing"] = state.df.isnull().sum().sum()
+
+    if len(state.df) > 0:
+        if state.n_missing > 0:
+            st.info(
+                f"**INFO:** Found {state.n_missing} missing values. "
+                "Use missing value imputation or **XGBoost** classifier."
+            )
+        # Distinguish the features from others
+        state["proteins"] = [_ for _ in state.df.columns.to_list() if _[0] != "_"]
+        state["not_proteins"] = [_ for _ in state.df.columns.to_list() if _[0] == "_"]
+
+        # Create subset section
+        _generate_subset_section(state, multiselect)
+
+        # Classification target selection section
+        unique_elements_list = _generate_classification_target_section(state)
+
+        # Class definitions section
+        _generate_class_selections(state, multiselect, unique_elements_list)
+
+        # Once both classes are defined
+        if state.class_0 and state.class_1:
+            # EDA section
+            _generate_eda_section(state)
+
+            # Additional features selection section
+            _generate_additional_feature_selection_section(state, multiselect)
+
+            # Exclude features section
+            _generate_exclude_features_section(state, multiselect)
+
+            # Manual feature selection section
+            _manual_feature_selection_section(state, multiselect)
+
+            # Cohort comparison section
+            _generate_cohort_comparison_section(state)
+
+        # Define excluded features and proteins list
+        if "exclude_features" not in state:
+            state["exclude_features"] = []
+        state["proteins"] = [
+            _ for _ in state.proteins if _ not in state.exclude_features
+        ]
 
     return state
 
