@@ -338,31 +338,7 @@ def session_history(widget_values):
 
     sessions_df = sessions_df.iloc[::-1]
 
-    st.write("## Session History")
-    st.dataframe(
-        sessions_df.style.format(precision=3)
-    )  #  Display only 3 decimal points in UI side
-    get_download_link(sessions_df, "session_history.csv")
-
-
-# Saving session info
-def save_sessions(widget_values, user_name):
-    session_no, session_dict = get_sessions()
-    session_no.append(len(session_no) + 1)
-    session_dict[session_no[-1]] = widget_values
-    sessions_df = pd.DataFrame(session_dict)
-    sessions_df = sessions_df.T
-    sessions_df = sessions_df.drop(
-        sessions_df[sessions_df["user"] != user_name].index
-    ).reset_index(drop=True)
-    new_column_names = {
-        k: v.replace(":", "").replace("Select", "")
-        for k, v in zip(sessions_df.columns, sessions_df.columns)
-    }
-    sessions_df = sessions_df.rename(columns=new_column_names)
-    sessions_df = sessions_df.drop("user", axis=1)
-
-    st.write("## Session History")
+    st.header("Session History")
     st.dataframe(
         sessions_df.style.format(precision=3)
     )  #  Display only 3 decimal points in UI side
@@ -370,8 +346,8 @@ def save_sessions(widget_values, user_name):
 
 
 # Load data
-@st.cache(persist=True, show_spinner=True)
-def load_data(file_buffer, delimiter):
+@st.cache_data(persist=True, show_spinner=True)
+def load_data(file_buffer, delimiter, header=True):
     """
     Load data to pandas dataframe
     """
@@ -400,7 +376,7 @@ def load_data(file_buffer, delimiter):
                 df = df[valid_columns]
 
         elif delimiter == "Comma (,)":
-            df = pd.read_csv(file_buffer, sep=",")
+            df = pd.read_csv(file_buffer, sep=",", header=header)
         elif delimiter == "Semicolon (;)":
             df = pd.read_csv(file_buffer, sep=";")
         elif delimiter == "Tab (\\t) for TSV":
@@ -412,29 +388,40 @@ def load_data(file_buffer, delimiter):
 def main_text_and_data_upload(state, APP_TITLE):
     st.title(APP_TITLE)
 
-    with st.expander("Disclaimer", expanded=False):
-        st.markdown(
+    with st.expander(f"Disclaimer and Citation"):
+        disc_tab, citation_tab, bug_tab = st.tabs(
+            ["Disclaimer", "Citation", "Bug report"]
+        )
+
+        with disc_tab:
+            st.markdown(
+                """
+            **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
+            While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
+            it is not meant to substitute throughout data exploration but rather add a machine learning layer.
+            Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
+            page for potential pitfalls and interpret performance metrics accordingly.
             """
-        **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
-        While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
-        it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-        Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
-        page for potential pitfalls and interpret performance metrics accordingly.
-        """
-        )
+            )
 
-        st.markdown(
-            """**Note:** By uploading a file, you agree to our
-            [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
-            **Uploaded data will not be saved.**"""
-        )
+            st.markdown(
+                """**Note:** By uploading a file, you agree to our
+                [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
+                **Uploaded data will not be saved.**"""
+            )
 
-        citation = """**Reference:** 
-        Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).
-        Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
-        Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
+        with citation_tab:
+            citation = """**Reference:** 
+            Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).
+                Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
+                Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
+            st.markdown(citation)
 
-        st.markdown(citation)
+        with bug_tab:
+            st.markdown(
+                """We appreciate community contributions to the repository.
+                Here, you can [report a bug on GitHub](https://github.com/MannLabs/OmicLearn/issues/new/choose)."""
+            )
 
     with st.expander("Upload or select sample dataset (*Required)", expanded=True):
         file_buffer = st.file_uploader("", type=["csv", "xlsx", "xls", "tsv"])
@@ -515,7 +502,7 @@ def get_system_report():
     Returns the package versions
     """
     report = {}
-    report["OmicLearn_version"] = "v1.3"
+    report["OmicLearn_version"] = "v1.4"
     report["python_version"] = sys.version[:5]
     report["pandas_version"] = pd.__version__
     report["numpy_version"] = np.version.version
@@ -532,6 +519,7 @@ def get_download_link(exported_object, name):
     """
     os.makedirs("downloads/", exist_ok=True)
     extension = name.split(".")[-1]
+    download_button_css_class = "css-1x8cf1d edgvbvh10"
 
     if extension == "svg":
         exported_object.write_image("downloads/" + name, height=700, width=700, scale=1)
@@ -539,10 +527,9 @@ def get_download_link(exported_object, name):
             svg = f.read()
         b64 = base64.b64encode(svg.encode()).decode()
         href = (
-            f'<a class="download_link" href="data:image/svg+xml;base64,%s" download="%s" >Download as *.svg</a>'
+            f'<a class="{download_button_css_class}" href="data:image/svg+xml;base64,%s" download="%s" >Download as *.svg</a>'
             % (b64, name)
         )
-        st.markdown("")
         st.markdown(href, unsafe_allow_html=True)
 
     elif extension == "pdf":
@@ -551,7 +538,7 @@ def get_download_link(exported_object, name):
             pdf = f.read()
         b64 = base64.encodebytes(pdf).decode()
         href = (
-            f'<a class="download_link" href="data:application/pdf;base64,%s" download="%s" >Download as *.pdf</a>'
+            f'<a class="{download_button_css_class}" href="data:application/pdf;base64,%s" download="%s" >Download as *.pdf</a>'
             % (b64, name)
         )
         st.markdown("")
@@ -563,10 +550,22 @@ def get_download_link(exported_object, name):
             csv = f.read()
         b64 = base64.b64encode(csv).decode()
         href = (
-            f'<a class="download_link" href="data:file/csv;base64,%s" download="%s" >Download as *.csv</a>'
+            f'<a class="{download_button_css_class}" href="data:file/csv;base64,%s" download="%s" >Download as *.csv</a>'
             % (b64, name)
         )
         st.markdown("")
+        st.markdown(href, unsafe_allow_html=True)
+
+    elif extension == "txt":
+        with open("downloads/" + name, "w") as f:
+            f.write(exported_object.replace("  ", ""))
+        with open("downloads/" + name, "rb") as f:
+            txt = f.read()
+        b64 = base64.b64encode(txt).decode()
+        href = (
+            f'<a class="{download_button_css_class}" href="data:text/plain;base64,%s" download="%s" >Download as *.txt</a>'
+            % (b64, name)
+        )
         st.markdown(href, unsafe_allow_html=True)
 
     else:
@@ -677,11 +676,4 @@ def generate_text(state, report):
     st.header("Summary")
     with st.expander("Summary text"):
         st.info(text)
-
-
-# Generate footer
-def generate_footer_parts(report):
-    st.write("---")
-    st.write(
-        "[Bug Report (GitHub)](https://github.com/MannLabs/OmicLearn/issues/new/choose)"
-    )
+        get_download_link(text, "summary_text.txt")

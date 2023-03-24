@@ -32,7 +32,6 @@ from omiclearn.utils.plot_helper import (
 
 # UI components and others func.
 from omiclearn.utils.ui_helper import (
-    generate_footer_parts,
     generate_sidebar_elements,
     generate_text,
     get_download_link,
@@ -41,7 +40,6 @@ from omiclearn.utils.ui_helper import (
     main_components,
     main_text_and_data_upload,
     objdict,
-    save_sessions,
     session_history,
 )
 
@@ -77,7 +75,7 @@ def checkpoint_for_data_upload(state, record_widgets):
         if state.n_missing > 0:
             st.info(
                 f"**INFO:** Found {state.n_missing} missing values. "
-                "Use missing value imputation or `xgboost` classifier."
+                "Use missing value imputation or **XGBoost** classifier."
             )
         # Distinguish the features from others
         state["proteins"] = [_ for _ in state.df.columns.to_list() if _[0] != "_"]
@@ -91,7 +89,8 @@ def checkpoint_for_data_upload(state, record_widgets):
                         Hence, you can exclude data that should not be used at all."""
             )
             state["subset_column"] = st.selectbox(
-                "Select subset column:", ["None"] + state.not_proteins
+                "Select subset column:",
+                ["None"] + state.not_proteins,
             )
 
             if state.subset_column != "None":
@@ -128,9 +127,9 @@ def checkpoint_for_data_upload(state, record_widgets):
             if state.target_column == "":
                 unique_elements_lst = []
             else:
-                st.markdown(f"Unique elements in `{state.target_column}` column:")
+                st.markdown(f"Unique elements in **`{state.target_column}`** column:")
                 unique_elements = state.df_sub[state.target_column].value_counts()
-                st.write(unique_elements)
+                st.table(unique_elements)
                 unique_elements_lst = unique_elements.index.tolist()
 
         # Dataset -- Class definitions
@@ -138,17 +137,21 @@ def checkpoint_for_data_upload(state, record_widgets):
             st.markdown(
                 f"""
                 For a binary classification task, one needs to define two classes based on the
-                unique values in the `{state.target_column}` task column.
+                unique values in the **`{state.target_column}`** task column.
                 It is possible to assign multiple values for each class.
             """
             )
             state["class_0"] = multiselect(
-                "Select Class 0:", unique_elements_lst, default=None
+                "Select Positive Class (e.g., Diseased/Cancer):",
+                unique_elements_lst,
+                default=None,
+                help="Select the experiment group like cancer, diseased or drug-applied group.",
             )
             state["class_1"] = multiselect(
-                "Select Class 1:",
+                "Select Negative Class (e.g., Control/Healthy):",
                 [_ for _ in unique_elements_lst if _ not in state.class_0],
                 default=None,
+                help="Select the control/healthy group.",
             )
             state["remainder"] = [
                 _ for _ in state.not_proteins if _ is not state.target_column
@@ -175,7 +178,8 @@ def checkpoint_for_data_upload(state, record_widgets):
 
                 if (state.eda_method == "PCA") and (len(state.proteins) < 6):
                     state["pca_show_features"] = st.checkbox(
-                        "Show the feature attributes on the graph", value=False
+                        "Show the feature attributes on the graph",
+                        value=False,
                     )
 
                 if state.eda_method == "Hierarchical clustering":
@@ -218,14 +222,14 @@ def checkpoint_for_data_upload(state, record_widgets):
                     type=["csv"],
                 )
                 exclusion_df, exc_df_warnings = load_data(
-                    exclusion_file_buffer, "Comma (,)"
+                    exclusion_file_buffer, "Comma (,)", header=False
                 )
                 for warning in exc_df_warnings:
                     st.warning(warning)
 
                 if len(exclusion_df) > 0:
                     st.markdown("The following features will be excluded:")
-                    st.write(exclusion_df)
+                    st.table(exclusion_df)
                     exclusion_df_list = list(exclusion_df.iloc[:, 0].unique())
                     state["exclude_features"] = multiselect(
                         "Select features to be excluded:",
@@ -293,7 +297,6 @@ def classify_and_plot(state):
     top_features = []
     # Feature importances from the classifier
     with st.expander("Feature importances from the classifier"):
-        st.subheader("Feature importances from the classifier")
         if state.cv_method == "RepeatedStratifiedKFold":
             st.markdown(
                 f"This is the average feature importance from all {state.cv_splits*state.cv_repeats} cross validation runs."
@@ -318,7 +321,6 @@ def classify_and_plot(state):
                     get_download_link(p, "clf_feature_importance.svg")
 
                 # Display `feature_df` with NCBI links
-                st.subheader("Feature importances from classifier table")
                 st.write(
                     feature_df.to_html(escape=False, index=False),
                     unsafe_allow_html=True,
@@ -337,18 +339,15 @@ def classify_and_plot(state):
             )
     state["top_features"] = top_features
     # ROC-AUC
-    with st.expander(
-        "Receiver operating characteristic Curve and Precision-Recall Curve"
-    ):
-        st.subheader("Receiver operating characteristic")
+    with st.expander("Receiver operating characteristic Curve"):
         p = plot_roc_curve_cv(cv_curves["roc_curves_"])
         st.plotly_chart(p, use_container_width=True)
         if p:
             get_download_link(p, "roc_curve.pdf")
             get_download_link(p, "roc_curve.svg")
 
-        # Precision-Recall Curve
-        st.subheader("Precision-Recall Curve")
+    # Precision-Recall Curve
+    with st.expander("Precision-Recall Curve"):
         st.markdown(
             "Precision-Recall (PR) Curve might be used for imbalanced datasets."
         )
@@ -371,25 +370,22 @@ def classify_and_plot(state):
             get_download_link(p, "cm.svg")
 
         cm_results = [calculate_cm(*_)[1] for _ in cv_curves["y_hats_"]]
-
         cm_results = pd.DataFrame(cm_results, columns=["TPR", "FPR", "TNR", "FNR"])
-        # (tpr, fpr, tnr, fnr)
         cm_results_ = cm_results.mean().to_frame()
         cm_results_.columns = ["Mean"]
-
         cm_results_["Std"] = cm_results.std()
 
-        st.write("Average peformance for all splits:")
-        st.write(cm_results_)
+        st.markdown("**Average peformance for all splits:**")
+        st.table(cm_results_)
 
     # Results table
     with st.expander("Table for run results"):
-        st.subheader(f"Run results for `{state.classifier}`")
+        st.markdown(f"**Run results for `{state.classifier}` model:**")
         state["summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
-        st.write(state.summary)
+        st.table(state.summary)
         st.info(
             """
-            **Info:** `Mean precision` and `Mean recall` values provided in the table above
+            **Info:** "Mean precision" and "Mean recall" values provided in the table above
             are calculated as the mean of all individual splits shown in the confusion matrix,
             not the "Sum of all splits" matrix.
             """
@@ -402,11 +398,8 @@ def classify_and_plot(state):
             state, state.cohort_column
         )
 
-        with st.expander(
-            "Receiver operating characteristic Curve and Precision-Recall Curve"
-        ):
-            # ROC-AUC for Cohorts
-            st.subheader("Receiver operating characteristic")
+        # ROC-AUC for Cohorts
+        with st.expander("Receiver operating characteristic Curve"):
             p = plot_roc_curve_cv(
                 cohort_curves["roc_curves_"], cohort_curves["cohort_combos"]
             )
@@ -415,8 +408,8 @@ def classify_and_plot(state):
                 get_download_link(p, "roc_curve_cohort.pdf")
                 get_download_link(p, "roc_curve_cohort.svg")
 
-            # PR Curve for Cohorts
-            st.subheader("Precision-Recall Curve")
+        # PR Curve for Cohorts
+        with st.expander("Precision-Recall Curve"):
             st.markdown(
                 "Precision-Recall (PR) Curve might be used for imbalanced datasets."
             )
@@ -432,7 +425,6 @@ def classify_and_plot(state):
 
         # Confusion Matrix (CM) for Cohorts
         with st.expander("Confusion matrix"):
-            st.subheader("Confusion matrix")
             names = [
                 "Train on {}, Test on {}".format(_[0], _[1])
                 for _ in cohort_curves["cohort_combos"]
@@ -449,7 +441,7 @@ def classify_and_plot(state):
 
         with st.expander("Table for run results"):
             state["cohort_summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
-            st.write(state.cohort_summary)
+            st.table(state.cohort_summary)
             get_download_link(state.cohort_summary, "run_results_cohort.csv")
 
         state["cohort_combos"] = cohort_curves["cohort_combos"]
@@ -505,7 +497,7 @@ def OmicLearn_Main():
         st.info(
             f"""
             **Running info:**
-            - Using **Class 0: {state.class_0}** and **Class 1: {state.class_1}** targets.
+            - Using **Positive Class: {state.class_0}** and **Negative Class: {state.class_1}** targets.
             - Using **{state.classifier}** classifier.
             - Using a total of **{len(state.features)}** features.
             - ⚠️ **Warning:** OmicLearn is intended to be an exploratory tool to assess the performance of algorithms,
@@ -531,9 +523,6 @@ def OmicLearn_Main():
         widget_values["top_features"] = state.top_features
 
         session_history(widget_values)
-
-        # Generate footer
-        generate_footer_parts(report)
 
     else:
         pass

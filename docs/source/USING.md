@@ -86,9 +86,16 @@ Furthermore, `Additional Features` can be selected. This refers to columns that 
 
 _**Figure 7:** Sample case for `Additional Features` option_
 
-The section `Exclude identifiers` enables users to exclude selected features manually. This can be useful e.g., when wanting to asses performance without a top feature. There is also an option to upload a file with multiple features that should be excluded.
+The section `Exclude features` enables users to exclude selected features manually. This can be useful e.g., when wanting to asses performance without a top feature. There is also an option to upload a file with multiple features that should be excluded.
 
-> To utilize this option, you should upload a CSV (comma `,` separated) file where each row corresponds to a feature to be excluded. Also, the file should include a header (title row).
+To utilize this option, you should upload a CSV (comma `,` separated) file where each row corresponds to a feature to be excluded. The file does not need to include a header (title row). 
+
+> Example file should like look:
+> 
+> ```csv
+> protein_A
+> protein_B
+> ```
 
 ![exclude_identifiers](exclude.png)
 
