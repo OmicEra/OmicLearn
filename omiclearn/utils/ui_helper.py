@@ -1,3 +1,4 @@
+"""OmicLearn UI components."""
 import base64
 import os
 import sys
@@ -8,6 +9,15 @@ import plotly
 import sklearn
 import streamlit as st
 
+from .ui_texts import (
+    ALZHEIMER_CITATION_TEXT,
+    BUG_REPORT_TEXT,
+    CITATION_TEXT,
+    DISCLAIMER_TEXT,
+    FILE_UPLOAD_TEXT,
+    PACKAGES_PLAIN_TEXT,
+)
+
 # Checkpoint for XGBoost
 xgboost_installed = False
 try:
@@ -17,6 +27,11 @@ try:
     xgboost_installed = True
 except ModuleNotFoundError:
     pass
+
+# Define paths
+_this_file = os.path.abspath(__file__)
+_this_directory = os.path.dirname(_this_file)
+_parent_directory = os.path.dirname(_this_directory)
 
 
 # Widget for recording
@@ -34,12 +49,7 @@ def make_recording_widget(f, widget_values):
     return wrapper
 
 
-_this_file = os.path.abspath(__file__)
-_this_directory = os.path.dirname(_this_file)
-_parent_directory = os.path.dirname(_this_directory)
-
-
-# Object for dict
+# Object for state dict
 class objdict(dict):
     """
     Objdict class to conveniently store a state
@@ -62,9 +72,9 @@ class objdict(dict):
 
 
 # Main components
-def main_components():
+def return_widgets():
     """
-    Expose external CSS and create & return widgets
+    Create and return widgets
     """
 
     # Fundemental elements
@@ -87,31 +97,9 @@ def main_components():
     return widget_values, record_widgets
 
 
-# Generate sidebar elements
-def generate_sidebar_elements(state, icon, report, record_widgets):
-    slider_ = record_widgets.slider_
-    selectbox_ = record_widgets.selectbox_
-    number_input_ = record_widgets.number_input_
-
-    # Sidebar -- Image/Title
-    st.sidebar.image(
-        icon,
-        use_column_width=True,
-        caption="OmicLearn " + report["OmicLearn_version"],
-    )
-    st.sidebar.markdown(
-        "# [Options](https://OmicLearn.readthedocs.io/en/latest//METHODS.html)"
-    )
-
-    # Sidebar -- Random State
-    state["random_state"] = slider_(
-        "Random State:", min_value=0, max_value=99, value=23
-    )
-
-    # Sidebar -- Preprocessing
-    st.sidebar.markdown(
-        "## [Preprocessing](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#preprocessing)"
-    )
+# Generate normalization elements for sidebar
+def _generate_normalization_elements(state, selectbox_, number_input_):
+    # Preprocessing -- Normalization
     normalizations = [
         "None",
         "StandardScaler",
@@ -121,9 +109,9 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         "QuantileTransformer",
     ]
     state["normalization"] = selectbox_("Normalization method:", normalizations)
-
     normalization_params = {}
 
+    # Normalization -- Paremeters selection
     if state.normalization == "PowerTransformer":
         normalization_params["method"] = selectbox_(
             "Power transformation method:", ["Yeo-Johnson", "Box-Cox"]
@@ -136,6 +124,13 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         normalization_params["output_distribution"] = selectbox_(
             "Output distribution method:", ["Uniform", "Normal"]
         ).lower()
+    # Save the normalization params
+    state["normalization_params"] = normalization_params
+
+
+# Generate missing value imputation elements for sidebar
+def _generate_imputation_elements(state, selectbox_):
+    # Preprocessing -- Missing value imputation
     if state.n_missing > 0:
         st.sidebar.markdown(
             "## [Missing value imputation](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#imputation-of-missing-values)"
@@ -145,9 +140,9 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     else:
         state["missing_value"] = "None"
 
-    state["normalization_params"] = normalization_params
 
-    # Sidebar -- Feature Selection
+# Generate feature selection elements for sidebar
+def _generate_feature_selection_elements(state, selectbox_, number_input_):
     st.sidebar.markdown(
         "## [Feature selection](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#feature-selection)"
     )
@@ -178,7 +173,13 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     else:
         state["n_trees"] = 0
 
-    # Sidebar -- Classification method selection
+
+# Generate classification method selection elements for sidebar
+def _generate_classification_elements(
+    state,
+    selectbox_,
+    number_input_,
+):
     st.sidebar.markdown(
         "## [Classification](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#classification)"
     )
@@ -201,6 +202,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     classifier_params = {}
     classifier_params["random_state"] = state["random_state"]
 
+    # Classification method -- Hyperparameter selection
     if state.classifier == "AdaBoost":
         classifier_params["n_estimators"] = number_input_(
             "Number of estimators:", value=100, min_value=1, max_value=2000
@@ -295,9 +297,12 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
             "Min. child weight:", value=1, min_value=0, max_value=100
         )
 
+    # Save the classification hyperparameters
     state["classifier_params"] = classifier_params
 
-    # Sidebar -- Cross-Validation
+
+# Generate cross-validation method selection elements for sidebar
+def _generate_cross_validation_elements(state, selectbox_, number_input_):
     st.sidebar.markdown(
         "## [Cross-validation](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#validation)"
     )
@@ -317,31 +322,65 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
             "CV Repeats:", min_value=1, max_value=50, value=10
         )
 
+
+# Generate sidebar elements
+def generate_sidebar_elements(state, icon, report, record_widgets):
+    slider_ = record_widgets.slider_
+    selectbox_ = record_widgets.selectbox_
+    number_input_ = record_widgets.number_input_
+
+    # Image/Title
+    st.sidebar.image(
+        icon,
+        use_column_width=True,
+        caption="OmicLearn " + report["OmicLearn_version"],
+    )
+    st.sidebar.markdown(
+        "# [Options](https://OmicLearn.readthedocs.io/en/latest//METHODS.html)"
+    )
+
+    # Random State
+    state["random_state"] = slider_(
+        "Random State:", min_value=0, max_value=99, value=23
+    )
+
+    # Preprocessing (Normalization and Missing Value Imputation)
+    st.sidebar.markdown(
+        "## [Preprocessing](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#preprocessing)"
+    )
+    _generate_normalization_elements(state, selectbox_, number_input_)
+    _generate_imputation_elements(state, selectbox_)
+
+    # Feature Selection
+    _generate_feature_selection_elements(state, selectbox_, number_input_)
+
+    # Classification Method Selection
+    _generate_classification_elements(state, selectbox_, number_input_)
+
+    # Cross-Validation
+    _generate_cross_validation_elements(state, selectbox_, number_input_)
+
     return state
 
 
+# Generate session history
 def session_history(widget_values):
     """
     Helper function to save / show session history
     """
 
     widget_values["run"] = len(st.session_state.history) + 1
-
     st.session_state.history.append(widget_values)
     sessions_df = pd.DataFrame(st.session_state.history)
-
     new_column_names = {
         k: v.replace(":", "").replace("Select", "")
         for k, v in zip(sessions_df.columns, sessions_df.columns)
     }
     sessions_df = sessions_df.rename(columns=new_column_names)
-
     sessions_df = sessions_df.iloc[::-1]
 
     st.header("Session History")
-    st.dataframe(
-        sessions_df.style.format(precision=3)
-    )  #  Display only 3 decimal points in UI side
+    st.dataframe(sessions_df.style.format(precision=3))
     get_download_link(sessions_df, "session_history.csv")
 
 
@@ -384,53 +423,32 @@ def load_data(file_buffer, delimiter, header=True):
     return df, warnings
 
 
-# Show main text and data upload section
-def main_text_and_data_upload(state, APP_TITLE):
-    st.title(APP_TITLE)
-
+# Generate tab elements for disclaimer, citation and bug report
+def _generate_tabs_elements():
     with st.expander(f"Disclaimer and Citation"):
         disc_tab, citation_tab, bug_tab = st.tabs(
             ["Disclaimer", "Citation", "Bug report"]
         )
-
         with disc_tab:
-            st.markdown(
-                """
-            **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
-            While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
-            it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-            Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
-            page for potential pitfalls and interpret performance metrics accordingly.
-            """
-            )
-
-            st.markdown(
-                """**Note:** By uploading a file, you agree to our
-                [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
-                **Uploaded data will not be saved.**"""
-            )
-
+            st.markdown(DISCLAIMER_TEXT)
         with citation_tab:
-            citation = """**Reference:** 
-            Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).
-                Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
-                Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
-            st.markdown(citation)
-
+            st.markdown(CITATION_TEXT)
         with bug_tab:
-            st.markdown(
-                """We appreciate community contributions to the repository.
-                Here, you can [report a bug on GitHub](https://github.com/MannLabs/OmicLearn/issues/new/choose)."""
-            )
+            st.markdown(BUG_REPORT_TEXT)
 
+
+# Show main text and data upload section
+def main_text_and_data_upload(state, APP_TITLE):
+    # App title
+    st.title(APP_TITLE)
+
+    # Tabs
+    _generate_tabs_elements()
+
+    # File upload or file selection
     with st.expander("Upload or select sample dataset (*Required)", expanded=True):
         file_buffer = st.file_uploader("", type=["csv", "xlsx", "xls", "tsv"])
-
-        st.markdown(
-            """Maximum size 200 MB. One row per sample, one column per feature. 
-            \nFeatures (proteins, genes, etc.) should be uppercase, all other additional features with a leading '_'.
-            """
-        )
+        st.markdown(FILE_UPLOAD_TEXT)
 
         if file_buffer is not None:
             if file_buffer.name.endswith(".xlsx") or file_buffer.name.endswith(".xls"):
@@ -466,15 +484,7 @@ def main_text_and_data_upload(state, APP_TITLE):
             state["df"] = pd.DataFrame()
         elif state.sample_file != "None":
             if state.sample_file == "Alzheimer":
-                st.info(
-                    """
-                    **This dataset was retrieved from the following paper and the code for parsing is available at
-                    [GitHub](https://github.com/MannLabs/OmicLearn/blob/master/data/Alzheimer_paper.ipynb):**\n
-                    Bader, J., Geyer, P., Müller, J., Strauss, M., Koch, M., & Leypoldt, F. et al. (2020).
-                    Proteome profiling in cerebrospinal fluid reveals novel biomarkers of Alzheimer's disease.
-                    Molecular Systems Biology, 16(6). doi: [10.15252/msb.20199356](http://doi.org/10.15252/msb.20199356)
-                    """
-                )
+                st.info(ALZHEIMER_CITATION_TEXT)
 
             folder_to_load = os.path.join(_parent_directory, "data")
             file_to_load = os.path.join(folder_to_load, state.sample_file + ".xlsx")
@@ -508,7 +518,6 @@ def get_system_report():
     report["numpy_version"] = np.version.version
     report["sklearn_version"] = sklearn.__version__
     report["plotly_version"] = plotly.__version__
-
     return report
 
 
@@ -573,17 +582,10 @@ def get_download_link(exported_object, name):
 
 
 # Generate summary text
-def generate_text(state, report):
+def generate_summary_text(state, report):
     text = ""
     # Packages
-    packages_plain_text = """
-        OmicLearn ({OmicLearn_version}) was utilized for performing data analysis, model execution, and creation of plots and charts.
-        Machine learning was done in Python ({python_version}). 
-        Feature tables were imported via the Pandas package ({pandas_version}) and manipulated using the Numpy package ({numpy_version}).
-        The machine learning pipeline was employed using the scikit-learn package ({sklearn_version}).
-        The Plotly ({plotly_version}) library was used for plotting.
-    """
-    text += packages_plain_text.format(**report)
+    text += PACKAGES_PLAIN_TEXT.format(**report)
 
     # Normalization
     if state.normalization == "None":

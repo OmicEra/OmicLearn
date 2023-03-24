@@ -10,7 +10,6 @@ from PIL import Image
 warnings.simplefilter("ignore")
 
 # Session State
-
 if "history" not in st.session_state:
     st.session_state.history = []
 
@@ -33,21 +32,33 @@ from omiclearn.utils.plot_helper import (
 # UI components and others func.
 from omiclearn.utils.ui_helper import (
     generate_sidebar_elements,
-    generate_text,
+    generate_summary_text,
     get_download_link,
     get_system_report,
     load_data,
-    main_components,
     main_text_and_data_upload,
     objdict,
+    return_widgets,
     session_history,
+)
+from omiclearn.utils.ui_texts import (
+    APP_TITLE,
+    CLASSIFICATION_TARGET_TEXT,
+    DEFINE_CLASS_TEXT,
+    EDA_TEXT,
+    EXCLUDE_FEATURES_TEXT,
+    MANUALLY_SELECT_FEATURES_TEXT,
+    RESULTS_TABLE_INFO,
+    RUNNING_INFO_TEXT,
+    SUBSET_TEXT,
+    XGBOOST_NOT_INSTALLED,
 )
 
 _this_file = os.path.abspath(__file__)
 _this_directory = os.path.dirname(_this_file)
 
 # Set the configs
-APP_TITLE = "OmicLearn — ML platform for omics datasets"
+
 st.set_page_config(
     page_title=APP_TITLE,
     page_icon=Image.open(os.path.join(_this_directory, "utils/omiclearn.ico")),
@@ -61,9 +72,7 @@ report = get_system_report()
 try:
     import xgboost
 except ModuleNotFoundError:
-    st.warning(
-        "**WARNING:** Xgboost not installed. To use xgboost install using `conda install py-xgboost`"
-    )
+    st.warning(XGBOOST_NOT_INSTALLED)
 
 
 # Choosing sample dataset and data parameter selections
@@ -83,11 +92,7 @@ def checkpoint_for_data_upload(state, record_widgets):
 
         # Dataset -- Subset
         with st.expander("Create subset"):
-            st.markdown(
-                """
-                        This section allows you to specify a subset of data based on values within a comma.
-                        Hence, you can exclude data that should not be used at all."""
-            )
+            st.markdown(SUBSET_TEXT)
             state["subset_column"] = st.selectbox(
                 "Select subset column:",
                 ["None"] + state.not_proteins,
@@ -111,12 +116,7 @@ def checkpoint_for_data_upload(state, record_widgets):
 
         # Dataset -- Feature selections
         with st.expander("Classification target (*Required)"):
-            st.markdown(
-                """
-                Classification target refers to the column that contains the variables that are used two distinguish the two classes.
-                In the next section, the unique values of this column can be used to define the two classes.
-            """
-            )
+            st.markdown(CLASSIFICATION_TARGET_TEXT)
             state["target_column"] = st.selectbox(
                 "Select target column:",
                 [""] + state.not_proteins,
@@ -135,11 +135,7 @@ def checkpoint_for_data_upload(state, record_widgets):
         # Dataset -- Class definitions
         with st.expander("Define classes (*Required)"):
             st.markdown(
-                f"""
-                For a binary classification task, one needs to define two classes based on the
-                unique values in the **`{state.target_column}`** task column.
-                It is possible to assign multiple values for each class.
-            """
+                DEFINE_CLASS_TEXT.format(STATE_TARGET_COLUMN=state.target_column)
             )
             state["class_0"] = multiselect(
                 "Select Positive Class (e.g., Diseased/Cancer):",
@@ -161,13 +157,7 @@ def checkpoint_for_data_upload(state, record_widgets):
         if state.class_0 and state.class_1:
             # EDA Part
             with st.expander("EDA — Exploratory data analysis (^Recommended)"):
-                st.markdown(
-                    """
-                    Use exploratory data anlysis on your dateset to identify potential correlations and biases.
-                    For more information, please visit
-                    [the dedicated ReadTheDocs page](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#exploratory-data-analysis-eda).
-                    """
-                )
+                st.markdown(EDA_TEXT)
                 state["df_sub_y"] = state.df_sub[state.target_column].isin(
                     state.class_0
                 )
@@ -212,10 +202,7 @@ def checkpoint_for_data_upload(state, record_widgets):
             # Exclude features
             with st.expander("Exclude features"):
                 state["exclude_features"] = []
-                st.markdown(
-                    "Exclude some features from the model training by selecting or uploading a CSV file. "
-                    "This can be useful when, e.g., re-running a model without a top feature and assessing the difference in classification accuracy."
-                )
+                st.markdown(EXCLUDE_FEATURES_TEXT)
                 # File uploading target_column for exclusion
                 exclusion_file_buffer = st.file_uploader(
                     "Upload your CSV (comma(,) seperated) file here in which each row corresponds to a feature to be excluded.",
@@ -245,13 +232,7 @@ def checkpoint_for_data_upload(state, record_widgets):
 
             # Manual feature selection
             with st.expander("Manually select features"):
-                st.markdown(
-                    "Manually select a subset of features. If only these features should be used, additionally set the "
-                    "`Feature selection` method to `None`. "
-                    "Otherwise, feature selection will be applied, and only a subset of the manually selected features is used. "
-                    "Be aware of potential overfitting when manually selecting features and "
-                    "check [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) page for potential pitfalls."
-                )
+                st.markdown(MANUALLY_SELECT_FEATURES_TEXT)
                 manual_users_features = multiselect(
                     "Select your features manually:",
                     state.proteins,
@@ -383,13 +364,7 @@ def classify_and_plot(state):
         st.markdown(f"**Run results for `{state.classifier}` model:**")
         state["summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
         st.table(state.summary)
-        st.info(
-            """
-            **Info:** "Mean precision" and "Mean recall" values provided in the table above
-            are calculated as the mean of all individual splits shown in the confusion matrix,
-            not the "Sum of all splits" matrix.
-            """
-        )
+        st.info(RESULTS_TABLE_INFO)
         get_download_link(state.summary, "run_results.csv")
 
     if state.cohort_checkbox:
@@ -459,7 +434,7 @@ def OmicLearn_Main():
     state["class_1"] = None
 
     # Main components
-    widget_values, record_widgets = main_components()
+    widget_values, record_widgets = return_widgets()
 
     # Welcome text and Data uploading
     state = main_text_and_data_upload(state, APP_TITLE)
@@ -495,23 +470,19 @@ def OmicLearn_Main():
 
         # Show the running info text
         st.info(
-            f"""
-            **Running info:**
-            - Using **Positive Class: {state.class_0}** and **Negative Class: {state.class_1}** targets.
-            - Using **{state.classifier}** classifier.
-            - Using a total of **{len(state.features)}** features.
-            - ⚠️ **Warning:** OmicLearn is intended to be an exploratory tool to assess the performance of algorithms,
-                rather than providing a classification model for production. 
-                Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html)
-                page for potential pitfalls and interpret performance metrics accordingly.
-        """
+            RUNNING_INFO_TEXT.format(
+                STATE_CLASS_0=state.class_0,
+                STATE_CLASS_1=state.class_1,
+                STATE_CLASSIFIER=state.classifier,
+                LEN_STATE_FEATURES=len(state.features),
+            )
         )
 
         # Plotting and Get the results
         state = classify_and_plot(state)
 
         # Generate summary text
-        generate_text(state, report)
+        generate_summary_text(state, report)
 
         # Session and Run info
         widget_values["Date"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S") + " (UTC)"
@@ -522,6 +493,7 @@ def OmicLearn_Main():
 
         widget_values["top_features"] = state.top_features
 
+        # Show session history
         session_history(widget_values)
 
     else:
