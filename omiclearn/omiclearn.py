@@ -13,9 +13,6 @@ warnings.simplefilter("ignore")
 if "history" not in st.session_state:
     st.session_state.history = []
 
-# ML functionalities
-from omiclearn.utils.ml_helper import transform_dataset
-
 # UI components and others func.
 from omiclearn.utils.ui_helper import (
     dataset_handling,
@@ -23,6 +20,7 @@ from omiclearn.utils.ui_helper import (
     generate_sidebar_elements,
     generate_summary_text,
     get_system_report,
+    _main_analysis_run,
     main_text_and_data_upload,
     objdict,
     return_widgets,
@@ -82,26 +80,8 @@ def OmicLearn_Main():
         and (state.class_0 and state.class_1)
         and (st.button("Run analysis", key="run"))
     ):
-        state.features = state.proteins + state.additional_features
-        subset = state.df_sub[
-            state.df_sub[state.target_column].isin(state.class_0)
-            | state.df_sub[state.target_column].isin(state.class_1)
-        ].copy()
-        state.y = subset[state.target_column].isin(state.class_0)
-        state.X = transform_dataset(subset, state.additional_features, state.proteins)
-
-        if state.cohort_column is not None:
-            state["X_cohort"] = subset[state.cohort_column]
-
-        # Show the running info text
-        st.info(
-            RUNNING_INFO_TEXT.format(
-                STATE_CLASS_0=state.class_0,
-                STATE_CLASS_1=state.class_1,
-                STATE_CLASSIFIER=state.classifier,
-                LEN_STATE_FEATURES=len(state.features),
-            )
-        )
+        # Run main analysis
+        _main_analysis_run(state)
 
         # Display all results and plots
         state = display_results_and_plots(state)

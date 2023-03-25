@@ -9,7 +9,7 @@ import plotly
 import sklearn
 import streamlit as st
 
-from .ml_helper import calculate_cm, perform_cross_validation
+from .ml_helper import calculate_cm, perform_cross_validation, transform_dataset
 from .plot_helper import (
     perform_EDA,
     plot_confusion_matrices,
@@ -30,6 +30,7 @@ from .ui_texts import (
     MANUALLY_SELECT_FEATURES_TEXT,
     PACKAGES_PLAIN_TEXT,
     RESULTS_TABLE_INFO,
+    RUNNING_INFO_TEXT,
     SUBSET_TEXT,
 )
 
@@ -738,6 +739,30 @@ def dataset_handling(state, record_widgets):
     return state
 
 
+# Main analysis run section
+def _main_analysis_run(state):
+    state.features = state.proteins + state.additional_features
+    subset = state.df_sub[
+        state.df_sub[state.target_column].isin(state.class_0)
+        | state.df_sub[state.target_column].isin(state.class_1)
+    ].copy()
+    state.y = subset[state.target_column].isin(state.class_0)
+    state.X = transform_dataset(subset, state.additional_features, state.proteins)
+
+    if state.cohort_column is not None:
+        state["X_cohort"] = subset[state.cohort_column]
+
+    # Show the running info text
+    st.info(
+        RUNNING_INFO_TEXT.format(
+            STATE_CLASS_0=state.class_0,
+            STATE_CLASS_1=state.class_1,
+            STATE_CLASSIFIER=state.classifier,
+            LEN_STATE_FEATURES=len(state.features),
+        )
+    )
+
+
 # Prepare system report
 def get_system_report():
     """
@@ -984,6 +1009,7 @@ def _generate_pr_curve_section(cv_curves, cv_results):
             get_download_link(p, "pr_curve.svg")
 
 
+# Display CM
 def _generate_cm_section(state, cv_curves):
     with st.expander("Confusion matrix"):
         names = ["CV_split {}".format(_ + 1) for _ in range(len(cv_curves["y_hats_"]))]
@@ -1006,6 +1032,7 @@ def _generate_cm_section(state, cv_curves):
         st.table(cm_results_)
 
 
+# Display Results Table
 def _generate_results_table_section(state, cv_results):
     with st.expander("Table for run results"):
         st.markdown(f"**Run results for `{state.classifier}` model:**")
@@ -1015,6 +1042,7 @@ def _generate_results_table_section(state, cv_results):
         get_download_link(state.summary, "run_results.csv")
 
 
+# Display Cohort Results
 def _generate_cohort_results_section(state, cv_results):
     st.header("Cohort comparison results")
     cohort_results, cohort_curves = perform_cross_validation(state, state.cohort_column)
