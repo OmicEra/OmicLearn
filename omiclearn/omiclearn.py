@@ -15,12 +15,12 @@ if "history" not in st.session_state:
 
 # UI components and others func.
 from omiclearn.utils.ui_helper import (
+    _main_analysis_run,
     dataset_handling,
     display_results_and_plots,
     generate_sidebar_elements,
     generate_summary_text,
     get_system_report,
-    _main_analysis_run,
     main_text_and_data_upload,
     objdict,
     return_widgets,
