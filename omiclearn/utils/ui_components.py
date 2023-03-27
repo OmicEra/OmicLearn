@@ -17,22 +17,7 @@ from .plot_helper import (
     plot_pr_curve_cv,
     plot_roc_curve_cv,
 )
-from .ui_texts import (
-    ALZHEIMER_CITATION_TEXT,
-    BUG_REPORT_TEXT,
-    CITATION_TEXT,
-    CLASSIFICATION_TARGET_TEXT,
-    DEFINE_CLASS_TEXT,
-    DISCLAIMER_TEXT,
-    EDA_TEXT,
-    EXCLUDE_FEATURES_TEXT,
-    FILE_UPLOAD_TEXT,
-    MANUALLY_SELECT_FEATURES_TEXT,
-    PACKAGES_PLAIN_TEXT,
-    RESULTS_TABLE_INFO,
-    RUNNING_INFO_TEXT,
-    SUBSET_TEXT,
-)
+from .ui_texts import *
 
 # Checkpoint for XGBoost
 xgboost_installed = False

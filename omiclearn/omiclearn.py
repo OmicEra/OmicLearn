@@ -14,7 +14,7 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 # UI components and others func.
-from omiclearn.utils.ui_helper import (
+from utils.ui_components import (
     _main_analysis_run,
     dataset_handling,
     display_results_and_plots,
@@ -26,7 +26,8 @@ from omiclearn.utils.ui_helper import (
     return_widgets,
     session_history,
 )
-from omiclearn.utils.ui_texts import APP_TITLE, RUNNING_INFO_TEXT, XGBOOST_NOT_INSTALLED
+
+from omiclearn.utils.ui_texts import *
 
 _this_file = os.path.abspath(__file__)
 _this_directory = os.path.dirname(_this_file)
