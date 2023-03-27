@@ -58,6 +58,8 @@ EXCLUDE_FEATURES_TEXT = """Exclude some features from the model training by sele
 This can be useful when, e.g., re-running a model without a top feature and assessing the difference in classification accuracy.
 """
 
+ADDITIONAL_FEATURES_TEXT = "Select additional features. All non numerical values will be encoded (e.g. M/F -> 0,1)"
+
 MANUALLY_SELECT_FEATURES_TEXT = "Manually select a subset of features. If only these features should be used, additionally set the "
 "`Feature selection` method to `None`. "
 "Otherwise, feature selection will be applied, and only a subset of the manually selected features is used. "

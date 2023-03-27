@@ -80,7 +80,16 @@ Within `Features`, you should select the target column. This refers to the varia
 
 _**Figure 6:** `Classification target` section for selecting the target columns and `Define classes` section for assigning the classes_
 
-Furthermore, `Additional Features` can be selected. This refers to columns that are not your identifiers such as protein IDs, gene names, lipids or miRNA IDs (not uppercase and have a leading underscore (`_`).
+Furthermore, `Additional Features` can be selected. This refers to columns that are not your identifiers such as protein IDs, gene names, lipids or miRNA IDs (not uppercase and have a leading underscore (`_`). There is also an option to upload a file with multiple additional features that should be included for training.
+
+To utilize this option, you should upload a CSV (comma `,` separated) file where each row corresponds to an additional feature to be included for training. The file does not need to include a header (title row).
+
+> Example file should like look:
+> 
+> ```csv
+> _additional_feature_1
+> _additional_feature_2
+> ```
 
 ![Add Features](additional.png)
 

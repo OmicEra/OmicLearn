@@ -387,7 +387,7 @@ def session_history(widget_values):
 
 # Load data
 @st.cache_data(persist=True, show_spinner=True)
-def load_data(file_buffer, delimiter, header=True):
+def load_data(file_buffer, delimiter, header="infer"):
     """
     Load data to pandas dataframe
     """
@@ -608,14 +608,44 @@ def _generate_eda_section(state):
 # Generate additional feature selection section
 def _generate_additional_feature_selection_section(state, multiselect):
     with st.expander("Additional features"):
-        st.markdown(
-            "Select additional features. All non numerical values will be encoded (e.g. M/F -> 0,1)"
+        st.markdown(ADDITIONAL_FEATURES_TEXT)
+
+        # File uploading for features to be excluded
+        additional_features_file_buffer = st.file_uploader(
+            "Upload your CSV (comma(,) seperated) file here in which each row corresponds to an additional feature to be included for training.",
+            help="Upload your CSV (comma(,) seperated) file here in which each row corresponds to an additional feature to be included for training.",
+            type=["csv"],
         )
-        state["additional_features"] = multiselect(
-            "Select additional features for trainig:",
-            state.remainder,
-            default=None,
+        additional_features_df, add_df_warnings = load_data(
+            additional_features_file_buffer, "Comma (,)", header=None
         )
+        for warning in add_df_warnings:
+            st.warning(warning)
+
+        if len(additional_features_df) > 0:
+            st.markdown(
+                "The following additional features will be included for training:"
+            )
+            additional_features_df.columns = [
+                "Additional features to be included for training"
+            ]
+            st.table(additional_features_df)
+            additional_features_df_list = list(
+                additional_features_df.iloc[:, 0].unique()
+            )
+            state["additional_features"] = multiselect(
+                "Select additional features for training:",
+                help="Select additional features for training:",
+                options=state.remainder,
+                default=additional_features_df_list,
+            )
+        else:
+            state["additional_features"] = multiselect(
+                "Select additional features for training:",
+                help="Select additional features to be includedfor training:",
+                options=state.remainder,
+                default=None,
+            )
 
 
 # Generate exclude features selection section
@@ -623,30 +653,34 @@ def _generate_exclude_features_section(state, multiselect):
     with st.expander("Exclude features"):
         state["exclude_features"] = []
         st.markdown(EXCLUDE_FEATURES_TEXT)
-        # File uploading target_column for exclusion
+        # File uploading for features to be excluded
         exclusion_file_buffer = st.file_uploader(
             "Upload your CSV (comma(,) seperated) file here in which each row corresponds to a feature to be excluded.",
+            help="Upload your CSV (comma(,) seperated) file here in which each row corresponds to a feature to be excluded.",
             type=["csv"],
         )
         exclusion_df, exc_df_warnings = load_data(
-            exclusion_file_buffer, "Comma (,)", header=False
+            exclusion_file_buffer, "Comma (,)", header=None
         )
         for warning in exc_df_warnings:
             st.warning(warning)
 
         if len(exclusion_df) > 0:
             st.markdown("The following features will be excluded:")
+            exclusion_df.columns = ["Features to be excluded from training"]
             st.table(exclusion_df)
             exclusion_df_list = list(exclusion_df.iloc[:, 0].unique())
             state["exclude_features"] = multiselect(
                 "Select features to be excluded:",
-                state.proteins,
+                help="Select features to be excluded from training:",
+                options=state.proteins,
                 default=exclusion_df_list,
             )
         else:
             state["exclude_features"] = multiselect(
                 "Select features to be excluded:",
-                state.proteins,
+                help="Select features to be excluded from training:",
+                options=state.proteins,
                 default=[],
             )
 
