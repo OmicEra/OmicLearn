@@ -1,3 +1,4 @@
+"""OmicLearn UI components."""
 import base64
 import os
 import sys
@@ -8,6 +9,16 @@ import plotly
 import sklearn
 import streamlit as st
 
+from .ml_helper import calculate_cm, perform_cross_validation, transform_dataset
+from .plot_helper import (
+    perform_EDA,
+    plot_confusion_matrices,
+    plot_feature_importance,
+    plot_pr_curve_cv,
+    plot_roc_curve_cv,
+)
+from .ui_texts import *
+
 # Checkpoint for XGBoost
 xgboost_installed = False
 try:
@@ -17,6 +28,11 @@ try:
     xgboost_installed = True
 except ModuleNotFoundError:
     pass
+
+# Define paths
+_this_file = os.path.abspath(__file__)
+_this_directory = os.path.dirname(_this_file)
+_parent_directory = os.path.dirname(_this_directory)
 
 
 # Widget for recording
@@ -34,12 +50,7 @@ def make_recording_widget(f, widget_values):
     return wrapper
 
 
-_this_file = os.path.abspath(__file__)
-_this_directory = os.path.dirname(_this_file)
-_parent_directory = os.path.dirname(_this_directory)
-
-
-# Object for dict
+# Object for state dict
 class objdict(dict):
     """
     Objdict class to conveniently store a state
@@ -62,9 +73,9 @@ class objdict(dict):
 
 
 # Main components
-def main_components():
+def return_widgets():
     """
-    Expose external CSS and create & return widgets
+    Create and return widgets
     """
 
     # Fundemental elements
@@ -87,31 +98,9 @@ def main_components():
     return widget_values, record_widgets
 
 
-# Generate sidebar elements
-def generate_sidebar_elements(state, icon, report, record_widgets):
-    slider_ = record_widgets.slider_
-    selectbox_ = record_widgets.selectbox_
-    number_input_ = record_widgets.number_input_
-
-    # Sidebar -- Image/Title
-    st.sidebar.image(
-        icon,
-        use_column_width=True,
-        caption="OmicLearn " + report["OmicLearn_version"],
-    )
-    st.sidebar.markdown(
-        "# [Options](https://OmicLearn.readthedocs.io/en/latest//METHODS.html)"
-    )
-
-    # Sidebar -- Random State
-    state["random_state"] = slider_(
-        "Random State:", min_value=0, max_value=99, value=23
-    )
-
-    # Sidebar -- Preprocessing
-    st.sidebar.markdown(
-        "## [Preprocessing](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#preprocessing)"
-    )
+# Generate normalization elements for sidebar
+def _generate_normalization_elements(state, selectbox_, number_input_):
+    # Preprocessing -- Normalization
     normalizations = [
         "None",
         "StandardScaler",
@@ -121,9 +110,9 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         "QuantileTransformer",
     ]
     state["normalization"] = selectbox_("Normalization method:", normalizations)
-
     normalization_params = {}
 
+    # Normalization -- Paremeters selection
     if state.normalization == "PowerTransformer":
         normalization_params["method"] = selectbox_(
             "Power transformation method:", ["Yeo-Johnson", "Box-Cox"]
@@ -136,6 +125,13 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         normalization_params["output_distribution"] = selectbox_(
             "Output distribution method:", ["Uniform", "Normal"]
         ).lower()
+    # Save the normalization params
+    state["normalization_params"] = normalization_params
+
+
+# Generate missing value imputation elements for sidebar
+def _generate_imputation_elements(state, selectbox_):
+    # Preprocessing -- Missing value imputation
     if state.n_missing > 0:
         st.sidebar.markdown(
             "## [Missing value imputation](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#imputation-of-missing-values)"
@@ -145,9 +141,9 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     else:
         state["missing_value"] = "None"
 
-    state["normalization_params"] = normalization_params
 
-    # Sidebar -- Feature Selection
+# Generate feature selection elements for sidebar
+def _generate_feature_selection_elements(state, selectbox_, number_input_):
     st.sidebar.markdown(
         "## [Feature selection](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#feature-selection)"
     )
@@ -178,7 +174,13 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     else:
         state["n_trees"] = 0
 
-    # Sidebar -- Classification method selection
+
+# Generate classification method selection elements for sidebar
+def _generate_classification_elements(
+    state,
+    selectbox_,
+    number_input_,
+):
     st.sidebar.markdown(
         "## [Classification](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#classification)"
     )
@@ -201,6 +203,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     classifier_params = {}
     classifier_params["random_state"] = state["random_state"]
 
+    # Classification method -- Hyperparameter selection
     if state.classifier == "AdaBoost":
         classifier_params["n_estimators"] = number_input_(
             "Number of estimators:", value=100, min_value=1, max_value=2000
@@ -295,9 +298,12 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
             "Min. child weight:", value=1, min_value=0, max_value=100
         )
 
+    # Save the classification hyperparameters
     state["classifier_params"] = classifier_params
 
-    # Sidebar -- Cross-Validation
+
+# Generate cross-validation method selection elements for sidebar
+def _generate_cross_validation_elements(state, selectbox_, number_input_):
     st.sidebar.markdown(
         "## [Cross-validation](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#validation)"
     )
@@ -317,31 +323,65 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
             "CV Repeats:", min_value=1, max_value=50, value=10
         )
 
+
+# Generate sidebar elements
+def generate_sidebar_elements(state, icon, report, record_widgets):
+    slider_ = record_widgets.slider_
+    selectbox_ = record_widgets.selectbox_
+    number_input_ = record_widgets.number_input_
+
+    # Image/Title
+    st.sidebar.image(
+        icon,
+        use_column_width=True,
+        caption="OmicLearn " + report["OmicLearn_version"],
+    )
+    st.sidebar.markdown(
+        "# [Options](https://OmicLearn.readthedocs.io/en/latest//METHODS.html)"
+    )
+
+    # Random State
+    state["random_state"] = slider_(
+        "Random State:", min_value=0, max_value=99, value=23
+    )
+
+    # Preprocessing (Normalization and Missing Value Imputation)
+    st.sidebar.markdown(
+        "## [Preprocessing](https://OmicLearn.readthedocs.io/en/latest/METHODS.html#preprocessing)"
+    )
+    _generate_normalization_elements(state, selectbox_, number_input_)
+    _generate_imputation_elements(state, selectbox_)
+
+    # Feature Selection
+    _generate_feature_selection_elements(state, selectbox_, number_input_)
+
+    # Classification Method Selection
+    _generate_classification_elements(state, selectbox_, number_input_)
+
+    # Cross-Validation
+    _generate_cross_validation_elements(state, selectbox_, number_input_)
+
     return state
 
 
+# Get session history
 def session_history(widget_values):
     """
     Helper function to save / show session history
     """
 
     widget_values["run"] = len(st.session_state.history) + 1
-
     st.session_state.history.append(widget_values)
     sessions_df = pd.DataFrame(st.session_state.history)
-
     new_column_names = {
         k: v.replace(":", "").replace("Select", "")
         for k, v in zip(sessions_df.columns, sessions_df.columns)
     }
     sessions_df = sessions_df.rename(columns=new_column_names)
-
     sessions_df = sessions_df.iloc[::-1]
 
     st.header("Session History")
-    st.dataframe(
-        sessions_df.style.format(precision=3)
-    )  #  Display only 3 decimal points in UI side
+    st.dataframe(sessions_df.style.format(precision=3))
     get_download_link(sessions_df, "session_history.csv")
 
 
@@ -384,53 +424,32 @@ def load_data(file_buffer, delimiter, header=True):
     return df, warnings
 
 
-# Show main text and data upload section
-def main_text_and_data_upload(state, APP_TITLE):
-    st.title(APP_TITLE)
-
+# Generate tab elements for disclaimer, citation and bug report
+def _generate_tabs_elements():
     with st.expander(f"Disclaimer and Citation"):
         disc_tab, citation_tab, bug_tab = st.tabs(
             ["Disclaimer", "Citation", "Bug report"]
         )
-
         with disc_tab:
-            st.markdown(
-                """
-            **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
-            While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
-            it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-            Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
-            page for potential pitfalls and interpret performance metrics accordingly.
-            """
-            )
-
-            st.markdown(
-                """**Note:** By uploading a file, you agree to our
-                [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
-                **Uploaded data will not be saved.**"""
-            )
-
+            st.markdown(DISCLAIMER_TEXT)
         with citation_tab:
-            citation = """**Reference:** 
-            Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022).
-                Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
-                Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473"""
-            st.markdown(citation)
-
+            st.markdown(CITATION_TEXT)
         with bug_tab:
-            st.markdown(
-                """We appreciate community contributions to the repository.
-                Here, you can [report a bug on GitHub](https://github.com/MannLabs/OmicLearn/issues/new/choose)."""
-            )
+            st.markdown(BUG_REPORT_TEXT)
 
+
+# Show main text and data upload section
+def main_text_and_data_upload(state, APP_TITLE):
+    # App title
+    st.title(APP_TITLE)
+
+    # Tabs
+    _generate_tabs_elements()
+
+    # File upload or file selection
     with st.expander("Upload or select sample dataset (*Required)", expanded=True):
         file_buffer = st.file_uploader("", type=["csv", "xlsx", "xls", "tsv"])
-
-        st.markdown(
-            """Maximum size 200 MB. One row per sample, one column per feature. 
-            \nFeatures (proteins, genes, etc.) should be uppercase, all other additional features with a leading '_'.
-            """
-        )
+        st.markdown(FILE_UPLOAD_TEXT)
 
         if file_buffer is not None:
             if file_buffer.name.endswith(".xlsx") or file_buffer.name.endswith(".xls"):
@@ -466,15 +485,7 @@ def main_text_and_data_upload(state, APP_TITLE):
             state["df"] = pd.DataFrame()
         elif state.sample_file != "None":
             if state.sample_file == "Alzheimer":
-                st.info(
-                    """
-                    **This dataset was retrieved from the following paper and the code for parsing is available at
-                    [GitHub](https://github.com/MannLabs/OmicLearn/blob/master/data/Alzheimer_paper.ipynb):**\n
-                    Bader, J., Geyer, P., Müller, J., Strauss, M., Koch, M., & Leypoldt, F. et al. (2020).
-                    Proteome profiling in cerebrospinal fluid reveals novel biomarkers of Alzheimer's disease.
-                    Molecular Systems Biology, 16(6). doi: [10.15252/msb.20199356](http://doi.org/10.15252/msb.20199356)
-                    """
-                )
+                st.info(ALZHEIMER_CITATION_TEXT)
 
             folder_to_load = os.path.join(_parent_directory, "data")
             file_to_load = os.path.join(folder_to_load, state.sample_file + ".xlsx")
@@ -496,6 +507,255 @@ def main_text_and_data_upload(state, APP_TITLE):
     return state
 
 
+# Generate data subset section
+def _generate_subset_section(state, multiselect):
+    with st.expander("Create subset"):
+        st.markdown(SUBSET_TEXT)
+        state["subset_column"] = st.selectbox(
+            "Select subset column:",
+            ["None"] + state.not_proteins,
+        )
+
+        if state.subset_column != "None":
+            subset_options = state.df[state.subset_column].value_counts().index.tolist()
+            subset_class = multiselect(
+                "Select values to keep:",
+                subset_options,
+                default=subset_options,
+            )
+            state["df_sub"] = state.df[
+                state.df[state.subset_column].isin(subset_class)
+            ].copy()
+        elif state.subset_column == "None":
+            state["df_sub"] = state.df.copy()
+            state["subset_column"] = "None"
+
+
+# Generate classification target selection section
+def _generate_classification_target_section(state):
+    with st.expander("Classification target (*Required)"):
+        st.markdown(CLASSIFICATION_TARGET_TEXT)
+        state["target_column"] = st.selectbox(
+            "Select target column:",
+            [""] + state.not_proteins,
+            format_func=lambda x: "Select a classification target" if x == "" else x,
+        )
+        if state.target_column == "":
+            unique_elements_list = []
+        else:
+            st.markdown(f"Unique elements in **`{state.target_column}`** column:")
+            unique_elements = state.df_sub[state.target_column].value_counts()
+            st.table(unique_elements)
+            unique_elements_list = unique_elements.index.tolist()
+        return unique_elements_list
+
+
+# Generate classification classes selection section
+def _generate_class_selections(state, multiselect, unique_elements_list):
+    with st.expander("Define classes (*Required)"):
+        st.markdown(DEFINE_CLASS_TEXT.format(STATE_TARGET_COLUMN=state.target_column))
+        state["class_0"] = multiselect(
+            "Select Positive Class:",
+            unique_elements_list,
+            default=None,
+            help="Select the experiment group like cancer, diseased or drug-applied group as positive class.",
+        )
+        state["class_1"] = multiselect(
+            "Select Negative Class:",
+            [_ for _ in unique_elements_list if _ not in state.class_0],
+            default=None,
+            help="Select the control/healthy group as negative class.",
+        )
+        state["remainder"] = [
+            _ for _ in state.not_proteins if _ is not state.target_column
+        ]
+
+
+# Generate exploratory data analysis section
+def _generate_eda_section(state):
+    with st.expander("EDA — Exploratory data analysis (^Recommended)"):
+        st.markdown(EDA_TEXT)
+        state["df_sub_y"] = state.df_sub[state.target_column].isin(state.class_0)
+        state["eda_method"] = st.selectbox(
+            "Select an EDA method:",
+            ["None", "PCA", "Hierarchical clustering"],
+        )
+
+        if (state.eda_method == "PCA") and (len(state.proteins) < 6):
+            state["pca_show_features"] = st.checkbox(
+                "Show the feature attributes on the graph",
+                value=False,
+            )
+
+        if state.eda_method == "Hierarchical clustering":
+            state["data_range"] = st.slider(
+                "Data range to be visualized",
+                0,
+                len(state.proteins),
+                (0, round(len(state.proteins) / 2)),
+                step=3,
+                help="In large datasets, it is not possible to visaulize all the features.",
+            )
+
+        if state.eda_method != "None":
+            with st.spinner(f"Performing {state.eda_method}.."):
+                p = perform_EDA(state)
+                st.plotly_chart(p, use_container_width=True)
+                get_download_link(p, f"{state.eda_method}.pdf")
+                get_download_link(p, f"{state.eda_method}.svg")
+
+
+# Generate additional feature selection section
+def _generate_additional_feature_selection_section(state, multiselect):
+    with st.expander("Additional features"):
+        st.markdown(
+            "Select additional features. All non numerical values will be encoded (e.g. M/F -> 0,1)"
+        )
+        state["additional_features"] = multiselect(
+            "Select additional features for trainig:",
+            state.remainder,
+            default=None,
+        )
+
+
+# Generate exclude features selection section
+def _generate_exclude_features_section(state, multiselect):
+    with st.expander("Exclude features"):
+        state["exclude_features"] = []
+        st.markdown(EXCLUDE_FEATURES_TEXT)
+        # File uploading target_column for exclusion
+        exclusion_file_buffer = st.file_uploader(
+            "Upload your CSV (comma(,) seperated) file here in which each row corresponds to a feature to be excluded.",
+            type=["csv"],
+        )
+        exclusion_df, exc_df_warnings = load_data(
+            exclusion_file_buffer, "Comma (,)", header=False
+        )
+        for warning in exc_df_warnings:
+            st.warning(warning)
+
+        if len(exclusion_df) > 0:
+            st.markdown("The following features will be excluded:")
+            st.table(exclusion_df)
+            exclusion_df_list = list(exclusion_df.iloc[:, 0].unique())
+            state["exclude_features"] = multiselect(
+                "Select features to be excluded:",
+                state.proteins,
+                default=exclusion_df_list,
+            )
+        else:
+            state["exclude_features"] = multiselect(
+                "Select features to be excluded:",
+                state.proteins,
+                default=[],
+            )
+
+
+# Generate manual feature selection section
+def _generate_manual_feature_selection_section(state, multiselect):
+    with st.expander("Manually select features"):
+        st.markdown(MANUALLY_SELECT_FEATURES_TEXT)
+        manual_users_features = multiselect(
+            "Select your features manually:",
+            state.proteins,
+            default=None,
+        )
+    if manual_users_features:
+        state.proteins = manual_users_features
+
+
+# Generate cohort comparison section
+def _generate_cohort_comparison_section(state):
+    with st.expander("Cohort comparison"):
+        st.markdown("Select cohort column to train on one and predict on another:")
+        not_proteins_excluded_target_option = state.not_proteins
+        if state.target_column != "":
+            not_proteins_excluded_target_option.remove(state.target_column)
+        state["cohort_column"] = st.selectbox(
+            "Select cohort column:",
+            [None] + not_proteins_excluded_target_option,
+        )
+        if state["cohort_column"] == None:
+            state["cohort_checkbox"] = None
+        else:
+            state["cohort_checkbox"] = "Yes"
+
+
+# Dataset handling all parts
+def dataset_handling(state, record_widgets):
+    multiselect = record_widgets.multiselect
+    state["n_missing"] = state.df.isnull().sum().sum()
+
+    if len(state.df) > 0:
+        if state.n_missing > 0:
+            st.info(
+                f"**INFO:** Found {state.n_missing} missing values. "
+                "Use missing value imputation or **XGBoost** classifier."
+            )
+        # Distinguish the features from others
+        state["proteins"] = [_ for _ in state.df.columns.to_list() if _[0] != "_"]
+        state["not_proteins"] = [_ for _ in state.df.columns.to_list() if _[0] == "_"]
+
+        # Create subset section
+        _generate_subset_section(state, multiselect)
+
+        # Classification target selection section
+        unique_elements_list = _generate_classification_target_section(state)
+
+        # Class definitions section
+        _generate_class_selections(state, multiselect, unique_elements_list)
+
+        # Once both classes are defined
+        if state.class_0 and state.class_1:
+            # EDA section
+            _generate_eda_section(state)
+
+            # Additional features selection section
+            _generate_additional_feature_selection_section(state, multiselect)
+
+            # Exclude features section
+            _generate_exclude_features_section(state, multiselect)
+
+            # Manual feature selection section
+            _generate_manual_feature_selection_section(state, multiselect)
+
+            # Cohort comparison section
+            _generate_cohort_comparison_section(state)
+
+        # Define excluded features and proteins list
+        if "exclude_features" not in state:
+            state["exclude_features"] = []
+        state["proteins"] = [
+            _ for _ in state.proteins if _ not in state.exclude_features
+        ]
+
+    return state
+
+
+# Main analysis run section
+def main_analysis_run(state):
+    state.features = state.proteins + state.additional_features
+    subset = state.df_sub[
+        state.df_sub[state.target_column].isin(state.class_0)
+        | state.df_sub[state.target_column].isin(state.class_1)
+    ].copy()
+    state.y = subset[state.target_column].isin(state.class_0)
+    state.X = transform_dataset(subset, state.additional_features, state.proteins)
+
+    if state.cohort_column is not None:
+        state["X_cohort"] = subset[state.cohort_column]
+
+    # Show the running info text
+    st.info(
+        RUNNING_INFO_TEXT.format(
+            STATE_CLASS_0=state.class_0,
+            STATE_CLASS_1=state.class_1,
+            STATE_CLASSIFIER=state.classifier,
+            LEN_STATE_FEATURES=len(state.features),
+        )
+    )
+
+
 # Prepare system report
 def get_system_report():
     """
@@ -508,11 +768,10 @@ def get_system_report():
     report["numpy_version"] = np.version.version
     report["sklearn_version"] = sklearn.__version__
     report["plotly_version"] = plotly.__version__
-
     return report
 
 
-# Generate a download link for Plots and CSV
+# Get download link for plots, CSV and TXT
 def get_download_link(exported_object, name):
     """
     Generate download link for charts in SVG and PDF formats and for dataframes in CSV format
@@ -573,17 +832,10 @@ def get_download_link(exported_object, name):
 
 
 # Generate summary text
-def generate_text(state, report):
+def generate_summary_text(state, report):
     text = ""
     # Packages
-    packages_plain_text = """
-        OmicLearn ({OmicLearn_version}) was utilized for performing data analysis, model execution, and creation of plots and charts.
-        Machine learning was done in Python ({python_version}). 
-        Feature tables were imported via the Pandas package ({pandas_version}) and manipulated using the Numpy package ({numpy_version}).
-        The machine learning pipeline was employed using the scikit-learn package ({sklearn_version}).
-        The Plotly ({plotly_version}) library was used for plotting.
-    """
-    text += packages_plain_text.format(**report)
+    text += PACKAGES_PLAIN_TEXT.format(**report)
 
     # Normalization
     if state.normalization == "None":
@@ -677,3 +929,193 @@ def generate_text(state, report):
     with st.expander("Summary text"):
         st.info(text)
         get_download_link(text, "summary_text.txt")
+
+
+# Display feature importances
+def _generate_feature_importances_section(state, cv_curves):
+    top_features = []
+    # Feature importances from the classifier
+    with st.expander("Feature importances from the classifier"):
+        if state.cv_method == "RepeatedStratifiedKFold":
+            st.markdown(
+                f"This is the average feature importance from all {state.cv_splits*state.cv_repeats} cross validation runs."
+            )
+        else:
+            st.markdown(
+                f"This is the average feature importance from all {state.cv_splits} cross validation runs."
+            )
+
+        if cv_curves["feature_importances_"] is not None:
+            # Check whether all feature importance attributes are 0 or not
+            if (
+                pd.DataFrame(cv_curves["feature_importances_"]).isin([0]).all().all()
+                == False
+            ):
+                p, feature_df, feature_df_wo_links = plot_feature_importance(
+                    cv_curves["feature_importances_"]
+                )
+                st.plotly_chart(p, use_container_width=True)
+                if p:
+                    get_download_link(p, "clf_feature_importance.pdf")
+                    get_download_link(p, "clf_feature_importance.svg")
+
+                # Display `feature_df` with NCBI links
+                st.write(
+                    feature_df.to_html(escape=False, index=False),
+                    unsafe_allow_html=True,
+                )
+                get_download_link(feature_df_wo_links, "clf_feature_importances.csv")
+
+                top_features = feature_df.index.to_list()
+
+            else:
+                st.info(
+                    "All feature importance attribute are zero (0). The plot and table are not displayed."
+                )
+        else:
+            st.info(
+                "Feature importance attribute is not implemented for this classifier."
+            )
+    state["top_features"] = top_features
+
+
+# Generate ROC section
+def _generate_roc_curve_section(cv_curves):
+    with st.expander("Receiver operating characteristic Curve"):
+        p = plot_roc_curve_cv(cv_curves["roc_curves_"])
+        st.plotly_chart(p, use_container_width=True)
+        if p:
+            get_download_link(p, "roc_curve.pdf")
+            get_download_link(p, "roc_curve.svg")
+
+
+# Generate PR curve
+def _generate_pr_curve_section(cv_curves, cv_results):
+    with st.expander("Precision-Recall Curve"):
+        st.markdown(
+            "Precision-Recall (PR) Curve might be used for imbalanced datasets."
+        )
+        p = plot_pr_curve_cv(cv_curves["pr_curves_"], cv_results["class_ratio_test"])
+        st.plotly_chart(p, use_container_width=True)
+        if p:
+            get_download_link(p, "pr_curve.pdf")
+            get_download_link(p, "pr_curve.svg")
+
+
+# Generate confusion matrix
+def _generate_cm_section(state, cv_curves):
+    with st.expander("Confusion matrix"):
+        names = ["CV_split {}".format(_ + 1) for _ in range(len(cv_curves["y_hats_"]))]
+        names.insert(0, "Sum of all splits")
+        p = plot_confusion_matrices(
+            state.class_0, state.class_1, cv_curves["y_hats_"], names
+        )
+        st.plotly_chart(p, use_container_width=True)
+        if p:
+            get_download_link(p, "cm.pdf")
+            get_download_link(p, "cm.svg")
+
+        cm_results = [calculate_cm(*_)[1] for _ in cv_curves["y_hats_"]]
+        cm_results = pd.DataFrame(cm_results, columns=["TPR", "FPR", "TNR", "FNR"])
+        cm_results_ = cm_results.mean().to_frame()
+        cm_results_.columns = ["Mean"]
+        cm_results_["Std"] = cm_results.std()
+
+        st.markdown("**Average peformance for all splits:**")
+        st.table(cm_results_)
+
+
+# Display results table
+def _generate_results_table_section(state, cv_results):
+    with st.expander("Table for run results"):
+        st.markdown(f"**Run results for `{state.classifier}` model:**")
+        state["summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
+        st.table(state.summary)
+        st.info(RESULTS_TABLE_INFO)
+        get_download_link(state.summary, "run_results.csv")
+
+
+# Display cohort results
+def _generate_cohort_results_section(state, cv_results):
+    st.header("Cohort comparison results")
+    cohort_results, cohort_curves = perform_cross_validation(state, state.cohort_column)
+
+    # ROC-AUC for Cohorts
+    with st.expander("Receiver operating characteristic Curve"):
+        p = plot_roc_curve_cv(
+            cohort_curves["roc_curves_"], cohort_curves["cohort_combos"]
+        )
+        st.plotly_chart(p, use_container_width=True)
+        if p:
+            get_download_link(p, "roc_curve_cohort.pdf")
+            get_download_link(p, "roc_curve_cohort.svg")
+
+    # PR Curve for Cohorts
+    with st.expander("Precision-Recall Curve"):
+        st.markdown(
+            "Precision-Recall (PR) Curve might be used for imbalanced datasets."
+        )
+        p = plot_pr_curve_cv(
+            cohort_curves["pr_curves_"],
+            cohort_results["class_ratio_test"],
+            cohort_curves["cohort_combos"],
+        )
+        st.plotly_chart(p, use_container_width=True)
+        if p:
+            get_download_link(p, "pr_curve_cohort.pdf")
+            get_download_link(p, "pr_curve_cohort.svg")
+
+    # Confusion Matrix (CM) for Cohorts
+    with st.expander("Confusion matrix"):
+        names = [
+            "Train on {}, Test on {}".format(_[0], _[1])
+            for _ in cohort_curves["cohort_combos"]
+        ]
+        names.insert(0, "Sum of cohort comparisons")
+
+        p = plot_confusion_matrices(
+            state.class_0, state.class_1, cohort_curves["y_hats_"], names
+        )
+        st.plotly_chart(p, use_container_width=True)
+        if p:
+            get_download_link(p, "cm_cohorts.pdf")
+            get_download_link(p, "cm_cohorts.svg")
+
+    with st.expander("Table for run results"):
+        state["cohort_summary"] = pd.DataFrame(pd.DataFrame(cv_results).describe())
+        st.table(state.cohort_summary)
+        get_download_link(state.cohort_summary, "run_results_cohort.csv")
+
+    state["cohort_combos"] = cohort_curves["cohort_combos"]
+    state["cohort_results"] = cohort_results
+
+
+# Display all results and plots
+def display_results_and_plots(state):
+    state.bar = st.progress(0)
+
+    # Cross-Validation
+    st.markdown("Performing analysis and Running cross-validation")
+    cv_results, cv_curves = perform_cross_validation(state)
+    st.header("Cross-validation results")
+
+    # Feature importances
+    _generate_feature_importances_section(state, cv_curves)
+
+    # ROC-AUC
+    _generate_roc_curve_section(cv_curves)
+
+    # Precision-Recall Curve
+    _generate_pr_curve_section(cv_curves, cv_results)
+
+    # Confusion Matrix (CM)
+    _generate_cm_section(state, cv_curves)
+
+    # Results table
+    _generate_results_table_section(state, cv_results)
+
+    # Cohort results
+    if state.cohort_checkbox:
+        _generate_cohort_results_section(state, cv_results)
+
+    return state

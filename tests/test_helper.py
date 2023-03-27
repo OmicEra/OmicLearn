@@ -6,8 +6,9 @@ import numpy as np
 import pandas as pd
 
 sys.path.append("..")
+from utils.ui_components import load_data
+
 from omiclearn.utils.ml_helper import normalize_dataset, transform_dataset
-from omiclearn.utils.ui_helper import load_data
 
 state = {}
 
