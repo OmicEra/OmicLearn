@@ -364,7 +364,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
     return state
 
 
-# Generate session history
+# Get session history
 def session_history(widget_values):
     """
     Helper function to save / show session history
@@ -507,6 +507,7 @@ def main_text_and_data_upload(state, APP_TITLE):
     return state
 
 
+# Generate data subset section
 def _generate_subset_section(state, multiselect):
     with st.expander("Create subset"):
         st.markdown(SUBSET_TEXT)
@@ -530,6 +531,7 @@ def _generate_subset_section(state, multiselect):
             state["subset_column"] = "None"
 
 
+# Generate classification target selection section
 def _generate_classification_target_section(state):
     with st.expander("Classification target (*Required)"):
         st.markdown(CLASSIFICATION_TARGET_TEXT)
@@ -548,6 +550,7 @@ def _generate_classification_target_section(state):
         return unique_elements_list
 
 
+# Generate classification classes selection section
 def _generate_class_selections(state, multiselect, unique_elements_list):
     with st.expander("Define classes (*Required)"):
         st.markdown(DEFINE_CLASS_TEXT.format(STATE_TARGET_COLUMN=state.target_column))
@@ -568,6 +571,7 @@ def _generate_class_selections(state, multiselect, unique_elements_list):
         ]
 
 
+# Generate exploratory data analysis section
 def _generate_eda_section(state):
     with st.expander("EDA — Exploratory data analysis (^Recommended)"):
         st.markdown(EDA_TEXT)
@@ -601,6 +605,7 @@ def _generate_eda_section(state):
                 get_download_link(p, f"{state.eda_method}.svg")
 
 
+# Generate additional feature selection section
 def _generate_additional_feature_selection_section(state, multiselect):
     with st.expander("Additional features"):
         st.markdown(
@@ -613,6 +618,7 @@ def _generate_additional_feature_selection_section(state, multiselect):
         )
 
 
+# Generate exclude features selection section
 def _generate_exclude_features_section(state, multiselect):
     with st.expander("Exclude features"):
         state["exclude_features"] = []
@@ -645,7 +651,8 @@ def _generate_exclude_features_section(state, multiselect):
             )
 
 
-def _manual_feature_selection_section(state, multiselect):
+# Generate manual feature selection section
+def _generate_manual_feature_selection_section(state, multiselect):
     with st.expander("Manually select features"):
         st.markdown(MANUALLY_SELECT_FEATURES_TEXT)
         manual_users_features = multiselect(
@@ -657,6 +664,7 @@ def _manual_feature_selection_section(state, multiselect):
         state.proteins = manual_users_features
 
 
+# Generate cohort comparison section
 def _generate_cohort_comparison_section(state):
     with st.expander("Cohort comparison"):
         st.markdown("Select cohort column to train on one and predict on another:")
@@ -709,7 +717,7 @@ def dataset_handling(state, record_widgets):
             _generate_exclude_features_section(state, multiselect)
 
             # Manual feature selection section
-            _manual_feature_selection_section(state, multiselect)
+            _generate_manual_feature_selection_section(state, multiselect)
 
             # Cohort comparison section
             _generate_cohort_comparison_section(state)
@@ -725,7 +733,7 @@ def dataset_handling(state, record_widgets):
 
 
 # Main analysis run section
-def _main_analysis_run(state):
+def main_analysis_run(state):
     state.features = state.proteins + state.additional_features
     subset = state.df_sub[
         state.df_sub[state.target_column].isin(state.class_0)
@@ -763,7 +771,7 @@ def get_system_report():
     return report
 
 
-# Generate a download link for Plots and CSV
+# Get download link for plots, CSV and TXT
 def get_download_link(exported_object, name):
     """
     Generate download link for charts in SVG and PDF formats and for dataframes in CSV format
@@ -971,7 +979,7 @@ def _generate_feature_importances_section(state, cv_curves):
     state["top_features"] = top_features
 
 
-# Display ROC
+# Generate ROC section
 def _generate_roc_curve_section(cv_curves):
     with st.expander("Receiver operating characteristic Curve"):
         p = plot_roc_curve_cv(cv_curves["roc_curves_"])
@@ -981,7 +989,7 @@ def _generate_roc_curve_section(cv_curves):
             get_download_link(p, "roc_curve.svg")
 
 
-# Display PR Curve
+# Generate PR curve
 def _generate_pr_curve_section(cv_curves, cv_results):
     with st.expander("Precision-Recall Curve"):
         st.markdown(
@@ -994,7 +1002,7 @@ def _generate_pr_curve_section(cv_curves, cv_results):
             get_download_link(p, "pr_curve.svg")
 
 
-# Display CM
+# Generate confusion matrix
 def _generate_cm_section(state, cv_curves):
     with st.expander("Confusion matrix"):
         names = ["CV_split {}".format(_ + 1) for _ in range(len(cv_curves["y_hats_"]))]
@@ -1017,7 +1025,7 @@ def _generate_cm_section(state, cv_curves):
         st.table(cm_results_)
 
 
-# Display Results Table
+# Display results table
 def _generate_results_table_section(state, cv_results):
     with st.expander("Table for run results"):
         st.markdown(f"**Run results for `{state.classifier}` model:**")
@@ -1027,7 +1035,7 @@ def _generate_results_table_section(state, cv_results):
         get_download_link(state.summary, "run_results.csv")
 
 
-# Display Cohort Results
+# Display cohort results
 def _generate_cohort_results_section(state, cv_results):
     st.header("Cohort comparison results")
     cohort_results, cohort_curves = perform_cross_validation(state, state.cohort_column)

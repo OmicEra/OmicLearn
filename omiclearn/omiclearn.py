@@ -15,12 +15,12 @@ if "history" not in st.session_state:
 
 # UI components and others func.
 from utils.ui_components import (
-    _main_analysis_run,
     dataset_handling,
     display_results_and_plots,
     generate_sidebar_elements,
     generate_summary_text,
     get_system_report,
+    main_analysis_run,
     main_text_and_data_upload,
     objdict,
     return_widgets,
@@ -82,7 +82,7 @@ def OmicLearn_Main():
         and (st.button("Run analysis", key="run"))
     ):
         # Run main analysis
-        _main_analysis_run(state)
+        main_analysis_run(state)
 
         # Display all results and plots
         state = display_results_and_plots(state)
