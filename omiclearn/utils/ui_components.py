@@ -633,16 +633,23 @@ def _generate_additional_feature_selection_section(state, multiselect):
             additional_features_df_list = list(
                 additional_features_df.iloc[:, 0].unique()
             )
+            suitable_uploaded_features = [
+                _ for _ in additional_features_df_list if _ in state.remainder
+            ]
+            if len(suitable_uploaded_features) != len(additional_features_df_list):
+                st.warning(FEATURES_UPLOAD_WARNING_TEXT)
+
+            # Selectbox with uploaded available features
             state["additional_features"] = multiselect(
                 "Select additional features for training:",
                 help="Select additional features for training:",
                 options=state.remainder,
-                default=additional_features_df_list,
+                default=suitable_uploaded_features,
             )
         else:
             state["additional_features"] = multiselect(
                 "Select additional features for training:",
-                help="Select additional features to be includedfor training:",
+                help="Select additional features to be included for training:",
                 options=state.remainder,
                 default=None,
             )
@@ -670,11 +677,18 @@ def _generate_exclude_features_section(state, multiselect):
             exclusion_df.columns = ["Features to be excluded from training"]
             st.table(exclusion_df)
             exclusion_df_list = list(exclusion_df.iloc[:, 0].unique())
+
+            suitable_uploaded_features = [
+                _ for _ in exclusion_df_list if _ in state.proteins
+            ]
+            if len(suitable_uploaded_features) != len(exclusion_df_list):
+                st.warning(FEATURES_UPLOAD_WARNING_TEXT)
+
             state["exclude_features"] = multiselect(
                 "Select features to be excluded:",
                 help="Select features to be excluded from training:",
                 options=state.proteins,
-                default=exclusion_df_list,
+                default=suitable_uploaded_features,
             )
         else:
             state["exclude_features"] = multiselect(
