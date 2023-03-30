@@ -58,6 +58,11 @@ EXCLUDE_FEATURES_TEXT = """Exclude some features from the model training by sele
 This can be useful when, e.g., re-running a model without a top feature and assessing the difference in classification accuracy.
 """
 
+ADDITIONAL_FEATURES_TEXT = "Select additional features. All non numerical values will be encoded (e.g. M/F -> 0,1)"
+
+FEATURES_UPLOAD_WARNING_TEXT = """⚠️ **Warning:** All of the features provided can not be used since they might not start with leading '_'. 
+Suitable features are provided in the selectbox below."""
+
 MANUALLY_SELECT_FEATURES_TEXT = "Manually select a subset of features. If only these features should be used, additionally set the "
 "`Feature selection` method to `None`. "
 "Otherwise, feature selection will be applied, and only a subset of the manually selected features is used. "
@@ -71,7 +76,7 @@ are calculated as the mean of all individual splits shown in the confusion matri
 not the "Sum of all splits" matrix.
 """
 
-XGBOOST_NOT_INSTALLED = "**WARNING:** Xgboost not installed. To use xgboost install using `conda install py-xgboost`"
+XGBOOST_NOT_INSTALLED = "⚠️ **Warning:** XGBoost not installed. To use xgboost install using `conda install py-xgboost`"
 
 EDA_TEXT = """Use exploratory data anlysis on your dateset to identify potential correlations and biases.
 For more information, please visit
