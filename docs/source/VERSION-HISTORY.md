@@ -10,9 +10,8 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 >
 > **Updates in this release:**
 >
-> - [x] Now, you can add **Additional features** (which starts with leading '_') in addition to proteins/gene identifiers in `Manual feature selection` section.
+> - [x] Minor fix has been done.
 >
-
 
 
 ### - `v1.3`
