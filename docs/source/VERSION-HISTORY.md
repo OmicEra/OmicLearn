@@ -2,11 +2,23 @@
 
 On this page, you might find the list of the previous releases of **OmicLearn** and the notes and significant changes made within the versions.
 
+### - `v1.3.1`
+
+> 📅  April 2023
+>
+> This is the latest release of **OmicLearn**.
+>
+> **Updates in this release:**
+>
+> - [x] Now, you can add **Additional features** (which starts with leading '_') in addition to proteins/gene identifiers in `Manual feature selection` section.
+>
+
+
+
 ### - `v1.3`
 
 > 📅  October 2022
 >
-> This is the latest release of **OmicLearn**.
 >
 > **Updates in this release:**
 >
