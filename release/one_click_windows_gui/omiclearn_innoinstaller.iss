@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OmicLearn"
-#define MyAppVersion "1.3"
+#define MyAppVersion "1.3.1"
 #define MyAppPublisher "MannLabs"
 #define MyAppURL "https://github.com/MannLabs/OmicLearn"
 #define MyAppExeName "omiclearn_gui.exe"
