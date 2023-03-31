@@ -6,7 +6,7 @@
 ![OmicLearn Tests](https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg)
 ![OmicLearn Python Badges](https://img.shields.io/badge/Tested_with_Python-3.9-blue)
 ![OmicLearn Version](https://img.shields.io/badge/Release-v1.3.1-orange)
-![OmicLearn Release](https://img.shields.io/badge/Release%20Date-July%202022-green)
+![OmicLearn Release](https://img.shields.io/badge/Release%20Date-April%202023-green)
 ![OmicLearn License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
 ---
