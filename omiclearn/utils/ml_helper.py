@@ -133,11 +133,11 @@ def select_features(feature_method, X, y, max_features, n_trees, random_state):
 
     elif "k-best" in feature_method:
         if feature_method == "k-best (mutual_info_classif)":
-            clf = SelectKBest(mutual_info_classif, max_features)
+            clf = SelectKBest(mutual_info_classif, k=max_features)
         elif feature_method == "k-best (f_classif)":
-            clf = SelectKBest(f_classif, max_features)
+            clf = SelectKBest(f_classif, k=max_features)
         elif feature_method == "k-best (chi2)":
-            clf = SelectKBest(chi2, max_features)
+            clf = SelectKBest(chi2, k=max_features)
         else:
             raise NotImplementedError(
                 f"Feature method {feature_method} not implemented."
