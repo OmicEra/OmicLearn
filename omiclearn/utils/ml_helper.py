@@ -380,7 +380,7 @@ def perform_cross_validation(state, cohort_column=None):
             elif state.classifier == "LinearSVC":
                 coef_avg = 0
                 for j in calibrated_clf.calibrated_classifiers_:
-                    coef_avg = coef_avg + j.base_estimator.coef_
+                    coef_avg = coef_avg + j.estimator.coef_
                 coef_avg = coef_avg / len(calibrated_clf.calibrated_classifiers_)
                 feature_importance = coef_avg[0]
             elif state.classifier in [
