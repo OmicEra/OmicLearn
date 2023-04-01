@@ -816,6 +816,7 @@ def get_system_report():
     report["numpy_version"] = np.version.version
     report["sklearn_version"] = sklearn.__version__
     report["plotly_version"] = plotly.__version__
+    report["xgboost_version"] = xgboost.__version__
     return report
 
 
@@ -918,7 +919,10 @@ def generate_summary_text(state, report):
 
     # Classification
     params = [f"{k} = {v}" for k, v in state.classifier_params.items()]
-    text += f"For classification, we used a {state.classifier}-Classifier ({' '.join(params)}). "
+    if state.classifier == "XGBoost":
+        text += f"For classification, we used a {state.classifier}-Classifier (Version: {report['xgboost_version']}, {' '.join(params)}). "
+    else:
+        text += f"For classification, we used a {state.classifier}-Classifier ({' '.join(params)}). "
 
     # Cross-Validation
     if state.cv_method == "RepeatedStratifiedKFold":
