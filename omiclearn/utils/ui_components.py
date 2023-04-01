@@ -896,7 +896,7 @@ def generate_summary_text(state, report):
         text += f"Data was normalized in each using a {state.normalization} approach. "
     else:
         params = [f"{k} = {v}" for k, v in state.normalization_params.items()]
-        text += f"Data was normalized in each using a {state.normalization} ({' '.join(params)}) approach. "
+        text += f"Data was normalized in each using a {state.normalization} ({', '.join(params)}) approach. "
 
     # Missing value imptutation
     if state.n_missing > 0:
@@ -911,13 +911,9 @@ def generate_summary_text(state, report):
     if state.feature_method == "None":
         text += "No feature selection algorithm was applied. "
     elif state.feature_method == "ExtraTrees":
-        text += "Features were selected using a {} (n_trees={}) strategy with the maximum number of {} features. ".format(
-            state.feature_method, state.n_trees, state.max_features
-        )
+        text += f"Features were selected using a {state.feature_method} (n_trees={state.n_trees}) strategy with the maximum number of {state.max_features} features. "
     else:
-        text += "Features were selected using a {} strategy with the maximum number of {} features. ".format(
-            state.feature_method, state.max_features
-        )
+        text += f"Features were selected using a {state.feature_method} strategy with the maximum number of {state.max_features} features. "
     text += "During training, normalization and feature selection was individually performed using the data of each split. "
 
     # Classification
