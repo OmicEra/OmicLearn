@@ -12,7 +12,7 @@ rm -rf dist
 rm -rf build
 
 # Creating a conda environment
-conda create -n omiclearninstaller python=3.8 -y
+conda create -n omiclearninstaller python=3.10 -y
 conda activate omiclearninstaller
 
 # Creating the wheel

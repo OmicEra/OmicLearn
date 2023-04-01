@@ -7,16 +7,16 @@ assignees: ''
 
 ---
 
-> If you are using [`StreamlitShare`](https://mannlabs-OmicLearn-omiclearnomic-learn-hr6cd1.streamlitapp.com/), you can skip the following headline _`Describe your setup`_.
+> If you are using [`StreamlitShare`](https://omiclearn.com/), you can skip the following headline _`Describe your setup`_.
 
 **Describe your setup:**
  - OS (Operating system) with version: `[e.g. Ubuntu 18.04 LTS]`
  - Browser: `[e.g. Chrome, Safari]`
- - Python Verson: `[e.g. 3.8]`
+ - Python Verson: `[e.g. 3.10]`
  - List the versions of packages if you installed different versions specified in [requirements.txt](https://github.com/MannLabs/OmicLearn/blob/master/requirements.txt):
    ```
-   pandas==0.0.0.0
-   numpy==0.0.0.0
+   pandas==0.0.0
+   numpy==0.0.0
    ```
 
 **Provide information for your dataset:**

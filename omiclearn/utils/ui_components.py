@@ -1,7 +1,7 @@
 """OmicLearn UI components."""
 import base64
 import os
-import sys
+import platform
 
 import numpy as np
 import pandas as pd
@@ -811,7 +811,7 @@ def get_system_report():
     """
     report = {}
     report["OmicLearn_version"] = "v1.4"
-    report["python_version"] = sys.version[:5]
+    report["python_version"] = platform.python_version()
     report["pandas_version"] = pd.__version__
     report["numpy_version"] = np.version.version
     report["sklearn_version"] = sklearn.__version__
