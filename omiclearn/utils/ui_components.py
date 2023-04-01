@@ -920,9 +920,9 @@ def generate_summary_text(state, report):
     # Classification
     params = [f"{k} = {v}" for k, v in state.classifier_params.items()]
     if state.classifier == "XGBoost":
-        text += f"For classification, we used a {state.classifier}-Classifier (Version: {report['xgboost_version']}, {' '.join(params)}). "
+        text += f"For classification, we used a {state.classifier}-Classifier (Version: {report['xgboost_version']}, {', '.join(params)}). "
     else:
-        text += f"For classification, we used a {state.classifier}-Classifier ({' '.join(params)}). "
+        text += f"For classification, we used a {state.classifier}-Classifier ({', '.join(params)}). "
 
     # Cross-Validation
     if state.cv_method == "RepeatedStratifiedKFold":
