@@ -902,9 +902,9 @@ def generate_summary_text(state, report):
     # Missing value imptutation
     if state.n_missing > 0:
         if state.missing_value != "None":
-            text += f"To impute missing values, a {state.missing_value}-imputation strategy is used. "
+            text += f"To impute missing values, a {state.missing_value}-imputation strategy was used. "
         else:
-            text += "Even though dataset contained missing values; no imputation was performed. "
+            text += "Missing values were not imputed. "
     else:
         text += "The dataset contained no missing values; hence no imputation was performed. "
 
@@ -912,17 +912,17 @@ def generate_summary_text(state, report):
     if state.feature_method == "None":
         text += "No feature selection algorithm was applied. "
     elif state.feature_method == "ExtraTrees":
-        text += f"Features were selected using a {state.feature_method} (n_trees={state.n_trees}) strategy with the maximum number of {state.max_features} features. "
+        text += f"Features were selected using a {state.feature_method} (n_trees={state.n_trees}) strategy with a maximum number of {state.max_features} features. "
     else:
-        text += f"Features were selected using a {state.feature_method} strategy with the maximum number of {state.max_features} features. "
+        text += f"Features were selected using a {state.feature_method} strategy with a maximum number of {state.max_features} features. "
     text += "During training, normalization and feature selection was individually performed using the data of each split. "
 
     # Classification
     params = [f"{k} = {v}" for k, v in state.classifier_params.items()]
     if state.classifier == "XGBoost":
-        text += f"For classification, we used a {state.classifier}-Classifier (version: {report['xgboost_version']}, {', '.join(params)}). "
+        text += f"For classification, {state.classifier}-Classifier (version: {report['xgboost_version']}, {', '.join(params)}) was used. "
     else:
-        text += f"For classification, we used a {state.classifier}-Classifier ({', '.join(params)}). "
+        text += f"For classification, {state.classifier}-Classifier ({', '.join(params)}) was used. "
 
     # Cross-Validation
     if state.cv_method == "RepeatedStratifiedKFold":
