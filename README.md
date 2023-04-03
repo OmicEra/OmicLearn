@@ -22,8 +22,8 @@ A three minute quickstart video to showcase OmicLearn can be found [here](https:
 ## Manuscript
 - 📰 <a href="https://doi.org/10.1021/acs.jproteome.2c00473" target="_blank">Open-access article: **Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data**</a>
 
-- OmicLearn is featured on the cover of [Journal of Proteome Research in the February 2023 issue](https://pubs.acs.org/doi/10.1021/acs.jproteome.2c00473)!
-
+- OmicLearn was featured as a supplementary cover of the [Special Issue on Software Tools and Resources of the Journal of Proteome Research](https://pubs.acs.org/doi/10.1021/acs.jproteome.2c00473)!
+ 
   <img alt="OmicLearn on the Cover of Journal of Proteome Research" height="500" width="400" src="./JPR_Feb_2023_OmicLearn_Cover.jpg">
 
 <br>
