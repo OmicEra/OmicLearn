@@ -5,7 +5,7 @@
 
 <div align="center">
   <img alt="OmicLearn Test" src="https://github.com/MannLabs/OmicLearn/workflows/OmicLearn%20Tests/badge.svg">
-  <img alt="OmicLearn Python Badges" src="https://img.shields.io/badge/Tested_with_Python-3.9-blue.svg">
+  <img alt="OmicLearn Python Badges" src="https://img.shields.io/badge/Tested_with_Python-3.10-blue.svg">
   <img alt="OmicLearn Version" src="https://img.shields.io/badge/Release-v1.4-orange">
   <img alt="OmicLearn Release" src="https://img.shields.io/badge/Release%20Date-March%202023-green">
   <img alt="OmicLearn License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg">
@@ -20,13 +20,25 @@ Transparent exploration of machine learning for biomarker discovery from proteom
 A three minute quickstart video to showcase OmicLearn can be found [here](https://youtu.be/VE9pj1G89io).
 
 ## Manuscript
-📰 <a href="https://doi.org/10.1021/acs.jproteome.2c00473" target="_blank">Open-access article: **Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data**</a>
+- 📰 <a href="https://doi.org/10.1021/acs.jproteome.2c00473" target="_blank">Open-access article: **Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data**</a>
 
-> **Citation:** <br>
-> Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022). <br>
-> Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data. <br>
-> Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473 <br>
+- OmicLearn was featured as a supplementary cover of the [Special Issue on Software Tools and Resources of the Journal of Proteome Research](https://pubs.acs.org/doi/10.1021/acs.jproteome.2c00473)!
 
+  <img alt="OmicLearn on the Cover of Journal of Proteome Research" height="500" width="400" src="./../../JPR_Feb_2023_OmicLearn_Cover.jpg">
+
+<br>
+
+## Citation:
+
+```
+Torun, F. M., Virreira Winter, S., Doll, S., Riese, F. M., Vorobyev, A., Mueller-Reif, J. B., Geyer, P. E., & Strauss, M. T. (2022). 
+
+Transparent Exploration of Machine Learning for Biomarker Discovery from Proteomics and Omics Data.
+
+Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473
+```
+
+<br>
 
 ## Online Access
 
@@ -58,7 +70,7 @@ For detailed installation instructions of the one-click installers refer to the 
     
   2. Create a new environment for OmicLearn: 
     ```bash
-    conda create --name OmicLearn python=3.9 -y
+    conda create --name OmicLearn python=3.10 -y
     ```
   3. Activate the environment:
     ```bash
