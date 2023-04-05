@@ -140,7 +140,7 @@ def select_features(feature_method, X, y, max_features, n_trees, random_state):
             clf = SelectKBest(chi2, max_features)
         else:
             raise NotImplementedError(
-                "Feature method {} not implemented.".format(feature_method)
+                f"Feature method {feature_method} not implemented."
             )
         clf = clf.fit(X.fillna(0), y)
         feature_importance = clf.scores_
@@ -156,7 +156,7 @@ def select_features(feature_method, X, y, max_features, n_trees, random_state):
         p_values = np.zeros(len(X.columns))
         feature_importance = np.zeros(len(X.columns))
     else:
-        raise NotImplementedError("Method {} not implemented.".format(feature_method))
+        raise NotImplementedError(f"Method {feature_method} not implemented.")
 
     top_features = X.columns[top_sortindex][:max_features][::-1].tolist()
     top_features_importance = feature_importance[top_sortindex][:max_features][::-1]
@@ -189,7 +189,7 @@ def impute_nan(X, missing_value, random_state):
     elif missing_value == "KNNImputer":
         imp = KNNImputer()
     else:
-        raise NotImplementedError("Method {} not implemented".format(missing_value))
+        raise NotImplementedError(f"Method {missing_value} not implemented")
 
     imp.fit(X)
     X = pd.DataFrame(imp.transform(X), columns=X.columns)

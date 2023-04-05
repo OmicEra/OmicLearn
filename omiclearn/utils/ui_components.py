@@ -816,6 +816,7 @@ def get_system_report():
     report["numpy_version"] = np.version.version
     report["sklearn_version"] = sklearn.__version__
     report["plotly_version"] = plotly.__version__
+    report["xgboost_version"] = xgboost.__version__
     return report
 
 
@@ -896,13 +897,14 @@ def generate_summary_text(state, report):
         text += f"Data was normalized in each using a {state.normalization} approach. "
     else:
         params = [f"{k} = {v}" for k, v in state.normalization_params.items()]
-        text += f"Data was normalized in each using a {state.normalization} ({' '.join(params)}) approach. "
+        text += f"Data was normalized in each using a {state.normalization} ({', '.join(params)}) approach. "
 
-    # Missing value impt.
-    if state.missing_value != "None":
-        text += "To impute missing values, a {}-imputation strategy is used. ".format(
-            state.missing_value
-        )
+    # Missing value imptutation
+    if state.n_missing > 0:
+        if state.missing_value != "None":
+            text += f"To impute missing values, a {state.missing_value}-imputation strategy was used. "
+        else:
+            text += "Missing values were not imputed. "
     else:
         text += "The dataset contained no missing values; hence no imputation was performed. "
 
@@ -910,18 +912,17 @@ def generate_summary_text(state, report):
     if state.feature_method == "None":
         text += "No feature selection algorithm was applied. "
     elif state.feature_method == "ExtraTrees":
-        text += "Features were selected using a {} (n_trees={}) strategy with the maximum number of {} features. ".format(
-            state.feature_method, state.n_trees, state.max_features
-        )
+        text += f"Features were selected using a {state.feature_method} (n_trees={state.n_trees}) strategy with a maximum number of {state.max_features} features. "
     else:
-        text += "Features were selected using a {} strategy with the maximum number of {} features. ".format(
-            state.feature_method, state.max_features
-        )
+        text += f"Features were selected using a {state.feature_method} strategy with a maximum number of {state.max_features} features. "
     text += "During training, normalization and feature selection was individually performed using the data of each split. "
 
     # Classification
     params = [f"{k} = {v}" for k, v in state.classifier_params.items()]
-    text += f"For classification, we used a {state.classifier}-Classifier ({' '.join(params)}). "
+    if state.classifier == "XGBoost":
+        text += f"For classification, {state.classifier}-Classifier (version: {report['xgboost_version']}, {', '.join(params)}) was used. "
+    else:
+        text += f"For classification, {state.classifier}-Classifier ({', '.join(params)}) was used. "
 
     # Cross-Validation
     if state.cv_method == "RepeatedStratifiedKFold":

@@ -58,7 +58,7 @@ For detailed installation instructions of the one-click installers refer to the 
     
   2. Create a new environment for OmicLearn: 
     ```bash
-    conda create --name OmicLearn python=3.9
+    conda create --name OmicLearn python=3.9 -y
     ```
   3. Activate the environment:
     ```bash
