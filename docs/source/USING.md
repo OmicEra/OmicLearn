@@ -121,7 +121,8 @@ _**Figure 9:** Selections on the dataset_
 After selecting all parameters you are able to execute the workflow by clicking the `Run Analysis` button.
 
 ![runninginfo](images/runninginfo.png)
-_**Figure 10:** Running info
+
+_**Figure 10:** Running info_
 
 ### Analysis results and plots
 Once the analysis is completed, OmicLearn automatically generates the plots together with a table showing the results of each validation run. The plots are downloadable as `.pdf` and `.svg` format in addition to the `.png` format provided by Plotly.
