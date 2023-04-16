@@ -610,6 +610,13 @@ def _generate_additional_feature_selection_section(state, multiselect):
     with st.expander("Additional features"):
         st.markdown(ADDITIONAL_FEATURES_TEXT)
 
+        # Avoid user introducing target leakage via additional feature selection
+        remainder_features_without_target_class = state.remainder
+        try:
+            remainder_features_without_target_class.remove(state.target_column)
+        except ValueError:
+            pass
+
         # File uploading for features to be excluded
         additional_features_file_buffer = st.file_uploader(
             "Upload your CSV (comma(,) seperated) file here in which each row corresponds to an additional feature to be included for training.",
@@ -634,7 +641,7 @@ def _generate_additional_feature_selection_section(state, multiselect):
                 additional_features_df.iloc[:, 0].unique()
             )
             suitable_uploaded_features = [
-                _ for _ in additional_features_df_list if _ in state.remainder
+                _ for _ in additional_features_df_list if _ in remainder_features_without_target_class
             ]
             if len(suitable_uploaded_features) != len(additional_features_df_list):
                 st.warning(FEATURES_UPLOAD_WARNING_TEXT)
@@ -643,14 +650,14 @@ def _generate_additional_feature_selection_section(state, multiselect):
             state["additional_features"] = multiselect(
                 "Select additional features for training:",
                 help="Select additional features for training:",
-                options=state.remainder,
+                options=remainder_features_without_target_class,
                 default=suitable_uploaded_features,
             )
         else:
             state["additional_features"] = multiselect(
                 "Select additional features for training:",
                 help="Select additional features to be included for training:",
-                options=state.remainder,
+                options=remainder_features_without_target_class,
                 default=None,
             )
 
