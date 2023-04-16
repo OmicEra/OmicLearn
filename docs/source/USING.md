@@ -120,6 +120,9 @@ _**Figure 9:** Selections on the dataset_
 ### Running the Workflow
 After selecting all parameters you are able to execute the workflow by clicking the `Run Analysis` button.
 
+![runninginfo](images/runninginfo.png)
+_**Figure 10:** Running info
+
 ### Analysis results and plots
 Once the analysis is completed, OmicLearn automatically generates the plots together with a table showing the results of each validation run. The plots are downloadable as `.pdf` and `.svg` format in addition to the `.png` format provided by Plotly.
 
@@ -127,17 +130,17 @@ Once the analysis is completed, OmicLearn automatically generates the plots toge
 
 ![FeatAtt_Table](images/feature_importance_table.png)
 
-_**Figure 10:** Bar chart for feature importance values received from the classifier after all cross-validation runs, its table containing links to NCBI search and download options_
+_**Figure 11:** Bar chart for feature importance values received from the classifier after all cross-validation runs, its table containing links to NCBI search and download options_
 
 ![ROC Curve](images/roc_curve.png)
 
 ![PR Curve](images/pr_curve.png)
 
-_**Figure 11:** Receiver operating characteristic (ROC) Curve, Precision-Recall (PR) Curve and download options_
+_**Figure 12:** Receiver operating characteristic (ROC) Curve, Precision-Recall (PR) Curve and download options_
 
 ![CONF-MATRIX](images/confusion.png)
 
-_**Figure 12:** Confusion matrix, slider for looking at the other matrix tables and download options_
+_**Figure 13:** Confusion matrix, slider for looking at the other matrix tables and download options_
 
 OmicLearn generates a `Summary` to describe the method. This can be used for a method section in a publication.
 
@@ -145,7 +148,7 @@ OmicLearn generates a `Summary` to describe the method. This can be used for a m
 
 ![summary text](images/summary_text.png)
 
-_**Figure 13:** Results table of the analysis, its download option, and auto-generated `Summary` text_
+_**Figure 14:** Results table of the analysis, its download option, and auto-generated `Summary` text_
 
 ### Checking the Session History
 
@@ -153,4 +156,4 @@ Each analysis run will be appended to the `Session History` so that you can inve
 
 ![session](images/session_history.png)
 
-_**Figure 14:** Session history table and download option_
+_**Figure 15:** Session history table and download option_
