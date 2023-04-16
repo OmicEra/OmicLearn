@@ -1,9 +1,10 @@
 # Using OmicLearn
+
 **OmicLearn** enables researchers and scientists to explore the latest algorithms in machine learning (ML) for their usage in proteomics/transcriptomics.
 
 The core steps of the pipeline are  `Preprocessing`, `Missing Value Imputation`, `Feature Selection`, `Classification`, and `Validation` of selected method/algorithms and are presented in the flowchart below:
 
-![OmicLearn Workflow](workflow.png)
+![OmicLearn Workflow](images/workflow.png)
 
 _**Figure 1:** Main steps for the workflow of OmicLearn at a glance_
 
@@ -22,14 +23,14 @@ The data should be formatted according to the following conventions:
 >
 > - Additional features should be marked with a leading underscore (`_`).
 
-![DATA_UPLOAD/SELECTION](upload.png)
+![DATA_UPLOAD/SELECTION](images/upload.png)
 
 _**Figure 2:** Uploading a dataset or selecting a sample file_
 
 The data will be checked for consistency, and if your dataset contains missing values (`NaNs`), a notification will appear.
 Then, you might consider using the methods listed on the left sidebar for the imputation of missing values.
 
-![NAN_WARNING](nan_warning.png)
+![NAN_WARNING](images/nan_warning.png)
 
 _**Figure 3:** Missing value warning_
 
@@ -60,7 +61,7 @@ OmicLearn has a large variety of options to choose from which are detailed in th
 
 Moreover, after changing the parameters, you are asked to re-run the analysis. Each analysis result will be stored in the [`Session History` section](#checking-the-session-history).
 
-![OmicLearn SideBar](sidebar.png)
+![OmicLearn SideBar](images/sidebar.png)
 
 _**Figure 4:** OmicLearn sidebar options_
 
@@ -70,13 +71,13 @@ _**Figure 4:** OmicLearn sidebar options_
 
 After uploading the data, the data will be displayed within the OmicLearn window and can be explored. The dropdown menu `Subset` allows you to specify a subset of data based on values within a column. This way, you can exclude data that should not be used at all. An example use case could be that you collected data from different sites and want to exclude a site.
 
-![Subset](subset.png)
+![Subset](images/subset.png)
 
 _**Figure 5:** Example usage for `Subset` section_
 
 Within `Features`, you should select the target column. This refers to the variable that the classifier should be able to distinguish. As we are performing a binary classification task, there are only two options for the outcome of the classifier. By assigning multiple values to a class, multiple combinations of classifications can be tested.
 
-![Classification target](target.png)
+![Classification target](images/target.png)
 
 _**Figure 6:** `Classification target` section for selecting the target columns and `Define classes` section for assigning the classes_
 
@@ -86,12 +87,12 @@ To utilize this option, you should upload a CSV (comma `,` separated) file where
 
 > Example file should like look:
 > 
-> ```csv
+> ```
 > _additional_feature_1
 > _additional_feature_2
 > ```
 
-![Add Features](additional.png)
+![Add Features](images/additional.png)
 
 _**Figure 7:** Sample case for `Additional Features` option_
 
@@ -101,18 +102,18 @@ To utilize this option, you should upload a CSV (comma `,` separated) file where
 
 > Example file should like look:
 > 
-> ```csv
+> ```
 > protein_A
 > protein_B
 > ```
 
-![exclude_identifiers](exclude.png)
+![exclude_identifiers](images/exclude.png)
 
 _**Figure 8:** Selections on the dataset_
 
 The option `Cohort comparison` allows comparing results over different cohorts (i.e., train on one cohort and predict on another)
 
-![dataselections](cohort.png)
+![dataselections](images/cohort.png)
 
 _**Figure 9:** Selections on the dataset_
 
@@ -122,27 +123,27 @@ After selecting all parameters you are able to execute the workflow by clicking 
 ### Analysis results and plots
 Once the analysis is completed, OmicLearn automatically generates the plots together with a table showing the results of each validation run. The plots are downloadable as `.pdf` and `.svg` format in addition to the `.png` format provided by Plotly.
 
-![FeatAtt_Chart](feature_importance.png)
+![FeatAtt_Chart](images/feature_importance.png)
 
-![FeatAtt_Table](feature_importance_table.png)
+![FeatAtt_Table](images/feature_importance_table.png)
 
 _**Figure 10:** Bar chart for feature importance values received from the classifier after all cross-validation runs, its table containing links to NCBI search and download options_
 
-![ROC Curve](roc_curve.png)
+![ROC Curve](images/roc_curve.png)
 
-![PR Curve](pr_curve.png)
+![PR Curve](images/pr_curve.png)
 
 _**Figure 11:** Receiver operating characteristic (ROC) Curve, Precision-Recall (PR) Curve and download options_
 
-![CONF-MATRIX](confusion.png)
+![CONF-MATRIX](images/confusion.png)
 
 _**Figure 12:** Confusion matrix, slider for looking at the other matrix tables and download options_
 
 OmicLearn generates a `Summary` to describe the method. This can be used for a method section in a publication.
 
-![Results table](summary.png)
+![Results table](images/summary.png)
 
-![summary text](summary_text.png)
+![summary text](images/summary_text.png)
 
 _**Figure 13:** Results table of the analysis, its download option, and auto-generated `Summary` text_
 
@@ -150,6 +151,6 @@ _**Figure 13:** Results table of the analysis, its download option, and auto-gen
 
 Each analysis run will be appended to the `Session History` so that you can investigate the different results for different parameter sets.
 
-![session](session_history.png)
+![session](images/session_history.png)
 
 _**Figure 14:** Session history table and download option_

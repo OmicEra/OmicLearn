@@ -7,12 +7,11 @@ Welcome to OmicLearn's documentation!
 =====================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
 
-   README.md
+   INDEX.md
    ONE_CLICK.md
    USING.md
    METHODS.md
    VERSION-HISTORY.md
-   recommendations.md
+   RECOMMENDATIONS.md
