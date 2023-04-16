@@ -92,7 +92,7 @@ This part is primarily based on the [Scikit-learn documentation about preprocess
 
 A common requirement for machine learning estimators is that datasets are standardized. The rationale behind this requirement can be easily understood when considering an iterative optimization method, such as the `gradient descent`. Here, the probability of finding a global optimum within a certain number of iterations strongly depends on the step size in each iteration (learning rate). Arguably, when having values outside of a normal range, optimization with a default learning rate is less likely to succeed.
 
-As different classifiers use different optimizers, they are more or less suspective to proper standardization. Scalers for linear transformation and non-linear transformation such as [QuantileTransformer](#1-1-5-quantiletransformer) and  [PowerTransformer](#1-1-4-powertransformer) can be distinguished.
+As different classifiers use different optimizers, they are more or less suspective to proper standardization. Scalers for linear transformation and non-linear transformation such as [QuantileTransformer](#quantiletransformer) and [PowerTransformer](#powertransformer) can be distinguished.
 
 Within OmicLearn, the following options can be selected:
 
@@ -116,7 +116,7 @@ Another option to scale data is to transform it according to their minimum and m
 
 Note that, similar to the StandardScaler, [MinMaxScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html) is very susceptible to outliers as they would define the minimum / maximum.
 
-### [1. 1. 3. RobustScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html)
+#### [1. 1. 3. RobustScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html)
 To achieve a more robust scaling, we can employ the [`RobustScaler`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html). Here, the data is scaled on percentiles and hence not easily influenced by some outliers. More precisely, the median and the `IQR (Interquartile Range) = Q3 (75th Quantile) - Q1 (25th Quantile) ` are used.
 
 #### [1. 1. 4. PowerTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PowerTransformer.html)

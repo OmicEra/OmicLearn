@@ -7,7 +7,7 @@ extensions = ["myst_parser"]
 templates_path = ["_templates"]
 exclude_patterns = []
 html_sidebars = {
-    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+    "**": ["globaltoc.html", "localtoc.html", "searchbox.html"]
 }
 html_theme = 'sphinx_material'
 html_title = f"OmicLearn v{release}"
@@ -24,6 +24,7 @@ html_theme_options = {
     'base_url': 'https://omiclearn.readthedocs.io/',
     'repo_url': 'https://github.com/MannLabs/OmicLearn/',
     'repo_name': 'OmicLearn',
+    "nav_title": f"OmicLearn v{release} Docs",
     'html_minify': True,
     'css_minify': True,
     'color_primary': 'red',
@@ -32,6 +33,14 @@ html_theme_options = {
     'globaltoc_collapse': True,
     'globaltoc_includehidden': True,
     "version_dropdown": False,
-    'nav_links': [], # {"href": "METHODS.html", "title": "METHODS", "internal": False}
+    'logo_icon': 'description',
+    'nav_links': [
+    {"href": "index.html", "title": "Home Page", "internal": False},
+    {"href": "ONE_CLICK.html", "title": "One-Click Installation", "internal": False},
+    {"href": "USING.html", "title": "Using OmicLearn", "internal": False},
+    {"href": "METHODS.html", "title": "Methods", "internal": False},
+    {"href": "VERSION-HISTORY.html", "title": "Version History", "internal": False},
+    {"href": "RECOMMENDATIONS.html", "title": "Recommendations", "internal": False},
+    ]
 }
 
