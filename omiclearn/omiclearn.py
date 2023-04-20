@@ -27,7 +27,7 @@ from utils.ui_components import (
     session_history,
 )
 
-from omiclearn.utils.ui_texts import *
+from utils.ui_texts import *
 
 _this_file = os.path.abspath(__file__)
 _this_directory = os.path.dirname(_this_file)
