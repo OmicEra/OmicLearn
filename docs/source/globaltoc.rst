@@ -3,16 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. image:: images/OmicLearn.png
+   :width: 25%
+   :alt: Omiclearn
+   :align: left
+
+
 Welcome to OmicLearn's documentation!
 =====================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+Here is the list of all pages of OmicLearn documentation (or you can navigate them on the left side bar):
 
-   README.md
+.. toctree::
+   :maxdepth: 1
+
+   INDEX.md
    ONE_CLICK.md
    USING.md
    METHODS.md
    VERSION-HISTORY.md
-   recommendations.md
+   RECOMMENDATIONS.md
+

@@ -91,8 +91,6 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 > - [X] The Streamlit and other packages/libraries are upgraded to their new versions.
 >
 
-<br>
-
 ### - `v1.0.0`
 
 > 📅 March 2021

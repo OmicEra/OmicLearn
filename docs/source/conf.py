@@ -1,54 +1,46 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
-# -- Path setup --------------------------------------------------------------
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
-
-
-# -- Project information -----------------------------------------------------
-
+#import sphinx_material
 project = "OmicLearn"
-copyright = "2022, Furkan Torun, Maximilian Strauss"
-author = "Furkan Torun, Maximilian Strauss"
-
-# The full version, including alpha/beta/rc tags
+copyright = "2023, Furkan M. Torun, Maximilian T. Strauss"
+author = "Furkan M. Torun, Maximilian T. Strauss"
 release = "1.4"
-
-
-# -- General configuration ---------------------------------------------------
-
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
 extensions = ["myst_parser"]
-
-# Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
-
-# List of patterns, relative to source directory, that match files and
-# directories to ignore when looking for source files.
-# This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
+html_sidebars = {
+    "**": ["globaltoc.html", "localtoc.html", "searchbox.html"]
+}
+html_theme = 'sphinx_material'
+html_title = f"OmicLearn v{release}"
+html_short_title = f"OmicLearn v{release}"
+language = 'en'
+html_last_updated_fmt = ''
+html_favicon = 'images/OmicLearn.ico'
+html_logo = 'images/OmicLearn_white.png'
+source_suffix = ['.md', ".rst"]
+master_doc = 'globaltoc'
+extensions.append('sphinx_material')
 
+html_theme_options = {
+    'base_url': 'https://omiclearn.readthedocs.io/',
+    'repo_url': 'https://github.com/MannLabs/OmicLearn/',
+    'repo_name': 'OmicLearn',
+    "nav_title": f"OmicLearn v{release} Docs",
+    'html_minify': True,
+    'css_minify': True,
+    'color_primary': 'red',
+    'color_accent': 'light-red',
+    'globaltoc_depth': 1,
+    'globaltoc_collapse': True,
+    'globaltoc_includehidden': True,
+    "version_dropdown": False,
+    'logo_icon': 'description',
+    'nav_links': [
+    {"href": "index.html", "title": "Home Page", "internal": False},
+    {"href": "ONE_CLICK.html", "title": "One-Click Installation", "internal": False},
+    {"href": "USING.html", "title": "Using OmicLearn", "internal": False},
+    {"href": "METHODS.html", "title": "Methods", "internal": False},
+    {"href": "VERSION-HISTORY.html", "title": "Version History", "internal": False},
+    {"href": "RECOMMENDATIONS.html", "title": "Recommendations", "internal": False},
+    ]
+}
 
-# -- Options for HTML output -------------------------------------------------
-
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
-html_theme = "sphinx_rtd_theme"
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
