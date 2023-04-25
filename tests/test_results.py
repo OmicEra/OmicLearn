@@ -5,10 +5,10 @@ expected_cv_results = {
     "num_feat_test": [4, 4, 4, 4, 4, 4],
     "n_obs_train": [12, 13, 13, 12, 13, 13],
     "n_obs_test": [7, 6, 6, 7, 6, 6],
-    "n_class_0_train": ["6", "6", "6", "6", "6", "6"],
-    "n_class_0_test": ["3", "3", "3", "3", "3", "3"],
-    "n_class_1_train": ["6", "7", "7", "6", "7", "7"],
-    "n_class_1_test": ["4", "3", "3", "4", "3", "3"],
+    "n_class_0_train": [6, 6, 6, 6, 6, 6],
+    "n_class_0_test": [3, 3, 3, 3, 3, 3],
+    "n_class_1_train": [6, 7, 7, 6, 7, 7],
+    "n_class_1_test": [4, 3, 3, 4, 3, 3],
     "class_ratio_train": [
         0.5,
         0.46153846153846156,
@@ -47,141 +47,5 @@ expected_cv_results = {
     ],
     "pr_auc": [0.875, 0.9166666666666666, 1, 0.875, 0.9166666666666666, 1],
 }
-expected_cv_curves = {
-    "pr_auc": [0.875, 0.9166666666666666, 1, 0.875, 0.9166666666666666, 1],
-    "roc_curves_": [
-        np.array(
-            [
-                np.array([0.0, 0.25, 1.0]),
-                np.array([0.0, 1.0, 1.0]),
-                np.array([1.7956569, 0.7956569, 0.20434304]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.0, 0.0, 1.0]),
-                np.array([0.0, 0.66666667, 1.0]),
-                np.array([1.8162205, 0.8162206, 0.15752529]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.0, 0.0, 0.33333333, 1.0]),
-                np.array([0.0, 1.0, 1.0, 1.0]),
-                np.array([1.8069754, 0.8069754, 0.502567, 0.14227661]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.0, 0.25, 1.0]),
-                np.array([0.0, 1.0, 1.0]),
-                np.array([1.7956569, 0.7956569, 0.20434304]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.0, 0.0, 1.0]),
-                np.array([0.0, 0.66666667, 1.0]),
-                np.array([1.8162205, 0.8162206, 0.15752529]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.0, 0.0, 1.0]),
-                np.array([0.0, 1.0, 1.0]),
-                np.array([1.8069754, 0.8069754, 0.14227661]),
-            ]
-        ),
-    ],
-    "pr_curves_": [
-        np.array(
-            [
-                np.array([0.42857143, 0.75, 1.0]),
-                np.array([1.0, 1.0, 0.0]),
-                np.array([0.20434304, 0.7956569]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.5, 1.0, 1.0]),
-                np.array([1.0, 0.66666667, 0.0]),
-                np.array([0.15752529, 0.8162206]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.5, 0.75, 1.0, 1.0]),
-                np.array([1.0, 1.0, 1.0, 0.0]),
-                np.array([0.14227661, 0.502567, 0.8069754]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.42857143, 0.75, 1.0]),
-                np.array([1.0, 1.0, 0.0]),
-                np.array([0.20434304, 0.7956569]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.5, 1.0, 1.0]),
-                np.array([1.0, 0.66666667, 0.0]),
-                np.array([0.15752529, 0.8162206]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([0.5, 1.0, 1.0]),
-                np.array([1.0, 1.0, 0.0]),
-                np.array([0.14227661, 0.8069754]),
-            ]
-        ),
-    ],
-    "y_hats_": [
-        np.array(
-            [
-                np.array([True, True, True, False, False, False, False]),
-                np.array([1, 1, 1, 1, 0, 0, 0]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([True, True, True, False, False, False]),
-                np.array([1, 1, 0, 0, 0, 0]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([True, True, True, False, False, False]),
-                np.array([1, 1, 1, 1, 0, 0]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([True, True, True, False, False, False, False]),
-                np.array([1, 1, 1, 1, 0, 0, 0]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([True, True, True, False, False, False]),
-                np.array([1, 1, 0, 0, 0, 0]),
-            ]
-        ),
-        np.array(
-            [
-                np.array([True, True, True, False, False, False]),
-                np.array([1, 1, 1, 0, 0, 0]),
-            ]
-        ),
-    ],
-    "feature_importances_": [
-        {"_study": "0.0", "CCC": "1.0", "BBB": "0.0", "AAA": "0.0"},
-        {"_study": "0.0", "CCC": "1.0", "BBB": "0.0", "AAA": "0.0"},
-        {"_study": "0.0", "AAA": "0.0717181", "CCC": "0.9282819", "BBB": "0.0"},
-        {"_study": "0.0", "CCC": "1.0", "BBB": "0.0", "AAA": "0.0"},
-        {"_study": "0.0", "CCC": "1.0", "BBB": "0.0", "AAA": "0.0"},
-        {"_study": "0.0", "AAA": "0.0717181", "CCC": "0.9282819", "BBB": "0.0"},
-    ],
-    "features_": [],
-}
+
+expected_cv_curves_str = """{'pr_auc': [0.875, 0.9166666666666666, 1.0, 0.875, 0.9166666666666666, 1.0], 'roc_curves_': [(array([0.  , 0.25, 1.  ]), array([0., 1., 1.]), array([1.7956569 , 0.7956569 , 0.20434304], dtype=float32)), (array([0., 0., 1.]), array([0.        , 0.66666667, 1.        ]), array([1.8162205 , 0.8162206 , 0.15752529], dtype=float32)), (array([0.        , 0.        , 0.33333333, 1.        ]), array([0., 1., 1., 1.]), array([1.8069754 , 0.8069754 , 0.502567  , 0.14227661], dtype=float32)), (array([0.  , 0.25, 1.  ]), array([0., 1., 1.]), array([1.7956569 , 0.7956569 , 0.20434304], dtype=float32)), (array([0., 0., 1.]), array([0.        , 0.66666667, 1.        ]), array([1.8162205 , 0.8162206 , 0.15752529], dtype=float32)), (array([0., 0., 1.]), array([0., 1., 1.]), array([1.8069754 , 0.8069754 , 0.14227661], dtype=float32))], 'pr_curves_': [(array([0.42857143, 0.75      , 1.        ]), array([1., 1., 0.]), array([0.20434304, 0.7956569 ], dtype=float32)), (array([0.5, 1. , 1. ]), array([1.        , 0.66666667, 0.        ]), array([0.15752529, 0.8162206 ], dtype=float32)), (array([0.5 , 0.75, 1.  , 1.  ]), array([1., 1., 1., 0.]), array([0.14227661, 0.502567  , 0.8069754 ], dtype=float32)), (array([0.42857143, 0.75      , 1.        ]), array([1., 1., 0.]), array([0.20434304, 0.7956569 ], dtype=float32)), (array([0.5, 1. , 1. ]), array([1.        , 0.66666667, 0.        ]), array([0.15752529, 0.8162206 ], dtype=float32)), (array([0.5, 1. , 1. ]), array([1., 1., 0.]), array([0.14227661, 0.8069754 ], dtype=float32))], 'y_hats_': [(array([ True,  True,  True, False, False, False, False]), array([1, 1, 1, 1, 0, 0, 0])), (array([ True,  True,  True, False, False, False]), array([1, 1, 0, 0, 0, 0])), (array([ True,  True,  True, False, False, False]), array([1, 1, 1, 1, 0, 0])), (array([ True,  True,  True, False, False, False, False]), array([1, 1, 1, 1, 0, 0, 0])), (array([ True,  True,  True, False, False, False]), array([1, 1, 0, 0, 0, 0])), (array([ True,  True,  True, False, False, False]), array([1, 1, 1, 0, 0, 0]))], 'feature_importances_': [{'_study': 0.0, 'CCC': 1.0, 'BBB': 0.0, 'AAA': 0.0}, {'_study': 0.0, 'CCC': 1.0, 'BBB': 0.0, 'AAA': 0.0}, {'_study': 0.0, 'AAA': 0.0717181, 'CCC': 0.9282819, 'BBB': 0.0}, {'_study': 0.0, 'CCC': 1.0, 'BBB': 0.0, 'AAA': 0.0}, {'_study': 0.0, 'CCC': 1.0, 'BBB': 0.0, 'AAA': 0.0}, {'_study': 0.0, 'AAA': 0.0717181, 'CCC': 0.9282819, 'BBB': 0.0}], 'features_': []}"""
