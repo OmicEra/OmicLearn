@@ -641,7 +641,9 @@ def _generate_additional_feature_selection_section(state, multiselect):
                 additional_features_df.iloc[:, 0].unique()
             )
             suitable_uploaded_features = [
-                _ for _ in additional_features_df_list if _ in remainder_features_without_target_class
+                _
+                for _ in additional_features_df_list
+                if _ in remainder_features_without_target_class
             ]
             if len(suitable_uploaded_features) != len(additional_features_df_list):
                 st.warning(FEATURES_UPLOAD_WARNING_TEXT)

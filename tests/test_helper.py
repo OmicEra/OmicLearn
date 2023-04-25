@@ -7,14 +7,15 @@ import pandas as pd
 import streamlit as st
 
 sys.path.append("..")
+from test_results import *
+
 from omiclearn.utils.ml_helper import (
-    normalize_dataset,
-    transform_dataset,
-    perform_cross_validation,
     calculate_cm,
+    normalize_dataset,
+    perform_cross_validation,
+    transform_dataset,
 )
 from omiclearn.utils.ui_components import load_data, main_analysis_run, objdict
-from test_results import *
 
 state = {}
 
