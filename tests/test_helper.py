@@ -157,10 +157,8 @@ def test_integration():
 
     # print("\n", test_state, "\n")
     _cv_results, _cv_curves = perform_cross_validation(test_state, cohort_column=None)
-    assert (_cv_results, str(_cv_curves)) == (
-        expected_cv_results,
-        str(expected_cv_curves_str),
-    ), "Error in CV"
+    assert _cv_results == expected_cv_results, "Error in CV Results"
+    assert str(_cv_curves) == str(expected_cv_curves_str), "Error in CV Curves"
 
 
 def test_calculate_cm():
