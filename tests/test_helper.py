@@ -161,7 +161,7 @@ def test_integration():
     assert _cv_results == expected_cv_results, "Error in CV Results"
 
     print("\n\n ACTUAL", str(_cv_curves), "\n\n")
-    print("\n\n\ EXPECTED", str(expected_cv_curves_str), "n\n")
+    print("\n\n EXPECTED", str(expected_cv_curves_str), "\n\n")
     assert str(_cv_curves) == str(expected_cv_curves_str), "Error in CV Curves"
 
 
