@@ -11,8 +11,8 @@ jobs:
   omiclearn_tests:
     strategy:
         matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ strategy.os }}
+          os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     env:
       ENVIRONMENT_STAGE: production
     steps:
