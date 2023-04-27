@@ -1,42 +1,39 @@
-# OmicLearn Tests CI
 name: OmicLearn Tests
-
-on:
+'on':
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: "*"
-
+    branches: '*'
 jobs:
   omiclearn_tests:
     strategy:
-        matrix:
-          os: [ubuntu-latest, macos-latest, windows-latest]
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]t
     runs-on: ${{ matrix.os }}
-    env:
-      ENVIRONMENT_STAGE: production
+    # Steps
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
-        architecture: "x64"
-        cache: "pip"
-    - name: Display Python version
-      run: python --version
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f reqs.txt ]; then pip install -r reqs.txt; fi
-        pip install .
-    - name: List the installed packages
-      run: pip list
-    - name: Run black formatting check
-      run: black --check .
-    - name: Run isort sorting check
-      run: isort --profile black --check-only .
-    - name: Run tests
-      run: |
-        cd tests/
-        pytest test_helper.py
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          architecture: x64
+          cache: pip
+      - name: Display Python version
+        run: python --version
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f reqs.txt ]; then pip install -r reqs.txt; fi
+          pip install .
+      - name: List the installed packages
+        run: pip list
+      - name: Run black formatting check
+        run: black --check .
+      - name: Run isort sorting check
+        run: isort --profile black --check-only .
+      - name: Run tests
+        run: |
+          cd tests/
+          pytest test_helper.py
