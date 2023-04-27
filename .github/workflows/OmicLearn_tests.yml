@@ -9,7 +9,7 @@ jobs:
   omiclearn_tests:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]t
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     # Steps
     steps:
