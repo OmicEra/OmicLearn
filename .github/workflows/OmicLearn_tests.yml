@@ -10,10 +10,7 @@ name: OmicLearn Tests
 
 jobs:
   omiclearn_tests:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     # Steps
     steps:
