@@ -5,7 +5,7 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 
 ### - `v1.4`
 
-> 📅  April 2023
+> 📅  May 2023
 >
 > This is the latest release of **OmicLearn**.
 >

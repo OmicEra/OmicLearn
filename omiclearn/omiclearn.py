@@ -26,7 +26,6 @@ from utils.ui_components import (
     return_widgets,
     session_history,
 )
-
 from utils.ui_texts import *
 
 _this_file = os.path.abspath(__file__)
