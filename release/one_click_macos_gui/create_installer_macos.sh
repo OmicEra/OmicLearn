@@ -33,15 +33,14 @@ conda deactivate
 # Wrapping the pyinstaller folder in a .pkg package
 mkdir -p dist/omiclearn/Contents/Resources
 cp ../logos/omiclearn_logo.icns dist/omiclearn/Contents/Resources
-cp ../logos/omiclearn_logo.ico dist/omiclearn/Contents/Resources/omiclearn.ico
-cp ../logos/omiclearn_logo.ico dist/omiclearn/Contents/Resources/omiclearn_logo.ico
 mv dist/omiclearn_gui dist/omiclearn/Contents/MacOS
+cp ../logos/omiclearn_logo.ico dist/omiclearn/Contents/MacOS/omiclearn/utils/
+cp ../../omiclearn/utils/omiclearn_black.png dist/omiclearn/Contents/MacOS/omiclearn/utils/
 cp Info.plist dist/omiclearn/Contents
 cp omiclearn_terminal dist/omiclearn/Contents/MacOS
 cp ../../LICENSE.txt Resources/LICENSE.txt
 cp ../logos/omiclearn_logo.png Resources/omiclearn_logo.png
-cp ../logos/omiclearn_logo.ico Resources/omiclearn_logo.ico
-cp ../logos/omiclearn_logo.ico Resources/omiclearn.ico
+cp ../logos/omiclearn_logo.ico dist/omiclearn/Contents/Resources
 chmod 777 scripts/*
 
 pkgbuild --root dist/omiclearn --identifier de.mpg.biochem.omiclearn.app --version 0.3.0 --install-location /Applications/omiclearn.app --scripts scripts omiclearn.pkg
