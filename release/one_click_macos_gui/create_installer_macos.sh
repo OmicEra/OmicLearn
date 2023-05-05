@@ -3,9 +3,9 @@
 # Initial cleanup
 rm -rf dist
 rm -rf build
-FILE=omiclearn.pkg
+FILE=OmicLearn.pkg
 if test -f "$FILE"; then
-  rm omiclearn.pkg
+  rm OmicLearn.pkg
 fi
 cd ../..
 rm -rf dist
@@ -38,7 +38,11 @@ cp Info.plist dist/omiclearn/Contents
 cp omiclearn_terminal dist/omiclearn/Contents/MacOS
 cp ../../LICENSE.txt Resources/LICENSE.txt
 cp ../logos/omiclearn_logo.png Resources/omiclearn_logo.png
+cp ../logos/omiclearn_logo.ico dist/omiclearn/Contents/MacOS/omiclearn/utils/
+cp ../../omiclearn/utils/omiclearn_black.png dist/omiclearn/Contents/MacOS/omiclearn/utils/
+cp ../logos/omiclearn_logo.ico dist/omiclearn/utils
+cp ../../omiclearn/utils/omiclearn_black.png dist/omiclearn/utils
 chmod 777 scripts/*
 
-pkgbuild --root dist/omiclearn --identifier de.mpg.biochem.omiclearn.app --version 0.3.0 --install-location /Applications/omiclearn.app --scripts scripts omiclearn.pkg
-productbuild --distribution distribution.xml --resources Resources --package-path omiclearn.pkg dist/omiclearn_gui_installer_macos.pkg
+pkgbuild --root dist/omiclearn --identifier de.mpg.biochem.omiclearn.app --version 0.3.0 --install-location /Applications/OmicLearn.app --scripts scripts OmicLearn.pkg
+productbuild --distribution distribution.xml --resources Resources --package-path OmicLearn.pkg dist/omiclearn_gui_installer_macos.pkg

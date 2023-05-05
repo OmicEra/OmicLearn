@@ -21,7 +21,7 @@ block_cipher = None
 location = os.getcwd()
 project = "omiclearn"
 remove_tests = True
-bundle_name = "omiclearn"
+bundle_name = "OmicLearn"
 #####################
 
 
