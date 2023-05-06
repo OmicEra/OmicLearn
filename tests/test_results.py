@@ -1,4 +1,4 @@
-import numpy as np
+# OmicLearn Expected Test Results
 
 expected_cv_results = {
     "num_feat_train": [4, 4, 4, 4, 4, 4],

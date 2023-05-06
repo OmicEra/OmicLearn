@@ -11,7 +11,7 @@ from scipy.spatial.distance import pdist, squareform
 from sklearn.decomposition import PCA
 from sklearn.metrics import auc
 
-# ML funcs
+# ML functions
 from .ml_helper import calculate_cm
 
 # Define common colors

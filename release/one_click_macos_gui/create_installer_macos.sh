@@ -44,5 +44,6 @@ cp ../logos/omiclearn_logo.ico dist/omiclearn/utils
 cp ../../omiclearn/utils/omiclearn_black.png dist/omiclearn/utils
 chmod 777 scripts/*
 
+# Building the package
 pkgbuild --root dist/omiclearn --identifier de.mpg.biochem.omiclearn.app --version 0.3.0 --install-location /Applications/OmicLearn.app --scripts scripts OmicLearn.pkg
 productbuild --distribution distribution.xml --resources Resources --package-path OmicLearn.pkg dist/omiclearn_gui_installer_macos.pkg
