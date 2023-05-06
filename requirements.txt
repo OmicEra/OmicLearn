@@ -1,1 +1,2 @@
+# OmicLearn req. file for Streamlit Community Cloud
 git+https://github.com/MannLabs/OmicLearn@OmicLearn-v1.4
