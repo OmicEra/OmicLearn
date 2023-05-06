@@ -58,6 +58,7 @@ abstract: >-
   format for proteomics and other omics sciences.
 keywords:
   - machine learning
+  - data science
   - mass spectrometry
   - diagnostics
   - omics

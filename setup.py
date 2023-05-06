@@ -1,8 +1,5 @@
-#!python
-
 import setuptools
 
-# local
 import omiclearn as package2install
 
 

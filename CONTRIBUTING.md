@@ -1,4 +1,4 @@
-# Contributing
+# Contributing to OmicLearn
 
 Firstly, contributions are welcome and we appreciate all of them!.
 
