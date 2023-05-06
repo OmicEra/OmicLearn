@@ -17,17 +17,13 @@ assignees: ''
 **Provide information for your dataset:**
 
 - Link for full or truncated version of the dataset OR name of the sample dataset:
-- Any details for your dataset if applicable for you.
-
-  ```
-  ...
-  ```
+- Any details for your dataset if applicable for you: 
 
 **Describe the bug/problem:**
 
 A clear and concise description of what the bug/problem is.
 
-**To Reproduce:**
+**To reproduce:**
 
 Steps to reproduce the behavior:
 1. Go to '...'
