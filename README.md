@@ -38,8 +38,6 @@ Transparent Exploration of Machine Learning for Biomarker Discovery from Proteom
 Journal of Proteome Research. https://doi.org/10.1021/acs.jproteome.2c00473
 ```
 
-<br>
-
 ## Online Access
 
 🟢  <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank"> Streamlit share</a>
@@ -88,7 +86,7 @@ For detailed installation instructions of the one-click installers refer to the 
   python -m omiclearn
   ```
 
- - After starting the streamlit server, the OmicLearn page should be automatically opened in your browser (Default link: [`http://localhost:8501`](http://localhost:8501)
+ - After starting the Streamlit server, the OmicLearn page should be automatically opened in your browser (Default link: [`http://localhost:8501`](http://localhost:8501)
 
 
 ## Getting Started with OmicLearn
@@ -98,8 +96,6 @@ The following image displays the main steps of OmicLearn:
 ![OmicLearn Workflow](workflow.png)
 
 Detailed instructions on how to get started with OmicLearn can be found **[here.](https://OmicLearn.readthedocs.io/en/latest/USING.html)**
-
-On this page, you can click on the titles listed in the *Table of Contents*, which contain instructions for each section.
 
 ## Contributing
 All contributions are welcome. 👍
