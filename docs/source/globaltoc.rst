@@ -5,7 +5,7 @@
 
 .. image:: images/OmicLearn.png
    :width: 25%
-   :alt: Omiclearn
+   :alt: OmicLearn
    :align: left
 
 
