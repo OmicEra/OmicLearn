@@ -1,4 +1,4 @@
-## Version History
+# Version History
 
 On this page, you might find the list of the previous releases of **OmicLearn** and the notes and significant changes made within the versions.
 
