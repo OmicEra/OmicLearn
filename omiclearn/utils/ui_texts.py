@@ -5,7 +5,7 @@ DISCLAIMER_TEXT = """
 **⚠️ Warning:** It is possible to get artificially high or low performance because of technical and biological artifacts in the data.
 While OmicLearn has the functionality to perform basic exploratory data analysis (EDA) such as PCA, 
 it is not meant to substitute throughout data exploration but rather add a machine learning layer.
-Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) 
+Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/RECOMMENDATIONS.html) 
 page for potential pitfalls and interpret performance metrics accordingly.
 
 **Note:** By uploading a file, you agree to our [Apache License](https://github.com/MannLabs/OmicLearn/blob/master/LICENSE.txt).
@@ -25,8 +25,7 @@ FILE_UPLOAD_TEXT = """Maximum size 200 MB. One row per sample, one column per fe
 """
 
 ALZHEIMER_CITATION_TEXT = """
-**This dataset was retrieved from the following paper and the code for parsing is available at
-[GitHub](https://github.com/MannLabs/OmicLearn/blob/master/data/Alzheimer_paper.ipynb):**\n
+**This dataset was retrieved from the following paper:**\n
 Bader, J., Geyer, P., Müller, J., Strauss, M., Koch, M., & Leypoldt, F. et al. (2020).
 Proteome profiling in cerebrospinal fluid reveals novel biomarkers of Alzheimer's disease.
 Molecular Systems Biology, 16(6). doi: [10.15252/msb.20199356](http://doi.org/10.15252/msb.20199356)
@@ -67,7 +66,7 @@ MANUALLY_SELECT_FEATURES_TEXT = "Manually select a subset of features. If only t
 "`Feature selection` method to `None`. "
 "Otherwise, feature selection will be applied, and only a subset of the manually selected features is used. "
 "Be aware of potential overfitting when manually selecting features and "
-"check [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html) page for potential pitfalls."
+"check [recommendations](https://OmicLearn.readthedocs.io/en/latest/RECOMMENDATIONS.html) page for potential pitfalls."
 
 
 RESULTS_TABLE_INFO = """
@@ -90,6 +89,6 @@ RUNNING_INFO_TEXT = """
 - Using a total of **{LEN_STATE_FEATURES}** features.
 - ⚠️ **Warning:** OmicLearn is intended to be an exploratory tool to assess the performance of algorithms,
     rather than providing a classification model for production. 
-    Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/recommendations.html)
+    Please check our [recommendations](https://OmicLearn.readthedocs.io/en/latest/RECOMMENDATIONS.html)
     page for potential pitfalls and interpret performance metrics accordingly.
 """

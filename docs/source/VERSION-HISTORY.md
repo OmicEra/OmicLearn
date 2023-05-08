@@ -14,7 +14,8 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 > - [x] `New Feature`: The section "Summary text" now has "Download as *.txt" button so that you can get it via a single click to save for your paper.
 > - [x] `New Feature`: The section "Additional features" supports file upload.
 > - [x] `Change`: The files to be uploaded in the section "Exclude features" now does not need to include header/title row at the top of the file. [See details here.](./USING.md)
-> - [x]: `Change`: The summary text is now updated and grammar mistake is fixed.
+> - [x] `Change`: The summary text is now updated and grammar mistake is fixed.
+> - [x] Documentation pages and theme are updated.
 > - [X] The Streamlit and other packages/libraries are upgraded to their new versions.
 > - [x] Several improvements on UI and UX sides have been made.
 > - [x] OmicLearn is now faster!
