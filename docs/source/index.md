@@ -1,4 +1,4 @@
-<p align="center"> <img src="../html/_images/omiclearn.png" height="270" width="277" /> </p>
+<p align="center"> <img src="./images/omiclearn.png" height="270" width="277" /> </p>
 <h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank">OmicLearn</a> </h2>
 
 <h2 align="center"> 📰 Manual and Documentation: <a href="https://OmicLearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
@@ -93,7 +93,7 @@ For detailed installation instructions of the one-click installers refer to the 
 
 The following image displays the main steps of OmicLearn:
 
-![OmicLearn Workflow](workflow.png)
+![OmicLearn Workflow](./images/workflow.png)
 
 Detailed instructions on how to get started with OmicLearn can be found **[here.](https://OmicLearn.readthedocs.io/en/latest/USING.html)**
 
