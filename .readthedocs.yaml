@@ -1,24 +1,22 @@
 # Read the Docs configuration file
-
-# Required
 version: 2
 
-# Set the version of Python and other tools you might need
+# Build env
 build:
   os: ubuntu-22.04
   tools:
     python: "3.10"
 
-# Build documentation in the docs/ directory with Sphinx
+# Docs configurations
 sphinx:
    configuration: docs/source/conf.py
 
-# If using Sphinx, optionally build your docs in additional formats such as PDF
+# Output formats
 formats:
   - htmlzip
   - pdf
 
-# Optionally declare the Python requirements required to build your docs
+# Requirements
 python:
    install:
    - requirements: ./reqs.txt
