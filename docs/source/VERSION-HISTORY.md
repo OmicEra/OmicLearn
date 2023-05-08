@@ -24,7 +24,6 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 
 > 📅  April 2023
 >
-> Available on https://ol-v131.streamlit.app/
 > 
 > **Updates in this release:**
 >
