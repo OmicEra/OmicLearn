@@ -20,7 +20,7 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 > - [x] OmicLearn is now faster!
 >
 
-## - `v1.3.1`
+### - `v1.3.1`
 
 > 📅  April 2023
 >
