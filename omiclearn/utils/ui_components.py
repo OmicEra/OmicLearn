@@ -337,7 +337,7 @@ def generate_sidebar_elements(state, icon, report, record_widgets):
         caption="OmicLearn " + report["OmicLearn_version"],
     )
     st.sidebar.markdown(
-        "# [Options](https://OmicLearn.readthedocs.io/en/latest//METHODS.html)"
+        "# [Options](https://OmicLearn.readthedocs.io/en/latest/METHODS.html)"
     )
 
     # Random State
