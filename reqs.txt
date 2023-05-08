@@ -1,12 +1,22 @@
-streamlit==1.10.0
-pandas==1.5.0
-numpy==1.23.3
-scikit-learn==1.1.2
+# OmicLearn
+streamlit==1.20.0
+pandas==1.5.3
+numpy==1.24.2
+scikit-learn==1.2.2
 openpyxl==3.0.10
 plotly==5.9.0
 kaleido==0.2.1
 XlsxWriter==3.0.3
-watchdog==2.1.9
-xgboost==1.6.2
+watchdog==3.0.0
+xgboost==1.7.4
 protobuf==3.20
-myst_parser==0.18.1
+myst_parser==1.0.0
+
+# Development
+isort==5.12.0
+black==23.1.0
+pytest==7.2.2
+
+# Documentation
+sphinx==6.2.1
+sphinx-material==0.0.35

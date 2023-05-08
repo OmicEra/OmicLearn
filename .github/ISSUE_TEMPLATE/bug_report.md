@@ -7,32 +7,23 @@ assignees: ''
 
 ---
 
-> If you are using [`StreamlitShare`](https://mannlabs-omiclearn-omiclearnomic-learn-hr6cd1.streamlitapp.com/), you can skip the following headline _`Describe your setup`_.
+> If you are using [`online version`](https://omiclearn.com/), you can skip the following headline _`Describe your setup`_.
 
 **Describe your setup:**
+- OmicLearn Version: `[e.g. v.1.3.1]`
  - OS (Operating system) with version: `[e.g. Ubuntu 18.04 LTS]`
  - Browser: `[e.g. Chrome, Safari]`
- - Python Verson: `[e.g. 3.8]`
- - List the versions of packages if you installed different versions specified in [requirements.txt](https://github.com/MannLabs/OmicLearn/blob/master/requirements.txt):
-   ```
-   pandas==0.0.0.0
-   numpy==0.0.0.0
-   ```
 
 **Provide information for your dataset:**
 
-- Link for full or truncated version of the dataset OR name of the sample dataset: `[e.g. http://www.google.com]`
-- Any details for your dataset if applicable for you.
-
-  ```
-  ...
-  ```
+- Link for full or truncated version of the dataset OR name of the sample dataset:
+- Any details for your dataset if applicable for you: 
 
 **Describe the bug/problem:**
 
 A clear and concise description of what the bug/problem is.
 
-**To Reproduce:**
+**To reproduce:**
 
 Steps to reproduce the behavior:
 1. Go to '...'

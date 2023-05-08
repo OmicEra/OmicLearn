@@ -1,4 +1,4 @@
-<p align="center"> <img src="omiclearn.png" height="270" width="277" /> </p>
+<p align="center"> <img src="../html/_images/omiclearn.png" height="270" width="277" /> </p>
 <h2 align="center">Online version: <a href="https://share.streamlit.io/MannLabs/OmicLearn/OmicLearn/OmicLearn.py" target="_blank">OmicLearn</a> </h2>
 
 <h2 align="center"> 📰 Manual and Documentation: <a href="https://OmicLearn.readthedocs.io/en/latest/" target="_blank">OmicLearn ReadTheDocs </a> </h2>
@@ -24,7 +24,7 @@ A three minute quickstart video to showcase OmicLearn can be found [here](https:
 
 - OmicLearn was featured as a supplementary cover of the [Special Issue on Software Tools and Resources of the Journal of Proteome Research](https://pubs.acs.org/doi/10.1021/acs.jproteome.2c00473)!
  
-  <img alt="OmicLearn on the Cover of Journal of Proteome Research" height="500" width="400" src="./JPR_Feb_2023_OmicLearn_Cover.jpg">
+  <img alt="OmicLearn on the Cover of Journal of Proteome Research" height="500" width="400" src="https://raw.githubusercontent.com/MannLabs/OmicLearn/OmicLearn-v1.4/JPR_Feb_2023_OmicLearn_Cover.jpg">
 
 <br>
 

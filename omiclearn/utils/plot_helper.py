@@ -1,23 +1,24 @@
 # Plotly Graphs
-import plotly.express as px
-import plotly.graph_objects as go
-import plotly.figure_factory as ff
-from scipy.spatial.distance import pdist, squareform
-
-# ML funcs
-from .ml_helper import calculate_cm
+from itertools import chain
 
 # Others
 import numpy as np
 import pandas as pd
-from itertools import chain
-from sklearn.metrics import auc
+import plotly.express as px
+import plotly.figure_factory as ff
+import plotly.graph_objects as go
+from scipy.spatial.distance import pdist, squareform
 from sklearn.decomposition import PCA
+from sklearn.metrics import auc
+
+# ML functions
+from .ml_helper import calculate_cm
 
 # Define common colors
-blue_color = "#035672"
-red_color = "#f84f57"
-gray_color = "#ccc"
+BLUE_COLOR = "#035672"
+RED_COLOR = "#f84f57"
+GRAY_COLOR = "#ccc"
+
 
 # Prepare feature importance chart
 def plot_feature_importance(feature_importance):
@@ -70,7 +71,7 @@ def plot_feature_importance(feature_importance):
         if not x.startswith("_") and x != "Remainder"
         else x
     )
-    marker_color = red_color
+    marker_color = RED_COLOR
     title = "Top features from the classifier"
     labels = {
         "Feature_importance": "Feature importances from the classifier",
@@ -195,11 +196,14 @@ def plot_confusion_matrices(class_0, class_1, results, names):
     # Add slider
     sliders = [
         dict(
-            currentvalue={"prefix": "CV Split: "}, pad={"t": 72}, active=0, steps=steps
+            currentvalue={"prefix": "CV Split: "},
+            pad={"t": 72},
+            active=0,
+            steps=steps,
         )
     ]
     p.layout.update(sliders=sliders)
-    p.update_layout(autosize=False, width=700, height=700)
+    p.update_layout(autosize=False, width=685, height=685)
 
     return p
 
@@ -241,7 +245,7 @@ def plot_roc_curve_cv(roc_curve_results, cohort_combos=None):
             )
         else:
             pass
-            # p.add_trace(go.Scatter(x=fpr, y=tpr, hoverinfo='skip', mode='lines', line=dict(color=blue_color), showlegend=False,  opacity=0.1))
+            # p.add_trace(go.Scatter(x=fpr, y=tpr, hoverinfo='skip', mode='lines', line=dict(color=BLUE_COLOR), showlegend=False,  opacity=0.1))
         tpr = np.interp(base_fpr, fpr, tpr)
         tpr[0] = 0.0
         tprs.append(tpr)
@@ -295,14 +299,17 @@ def plot_roc_curve_cv(roc_curve_results, cohort_combos=None):
             go.Scatter(
                 x=[0, 1],
                 y=[0, 1],
-                line=dict(color=red_color, dash="dash"),
+                line=dict(color=RED_COLOR, dash="dash"),
                 name="Chance",
             )
         )
     else:
         p.add_trace(
             go.Scatter(
-                x=[0, 1], y=[0, 1], line=dict(color="black", dash="dash"), name="Chance"
+                x=[0, 1],
+                y=[0, 1],
+                line=dict(color="black", dash="dash"),
+                name="Chance",
             )
         )
 
@@ -311,8 +318,8 @@ def plot_roc_curve_cv(roc_curve_results, cohort_combos=None):
     p.update_yaxes(showline=True, linewidth=1, linecolor="black")
     p.update_layout(
         autosize=True,
-        width=700,
-        height=700,
+        width=685,
+        height=685,
         xaxis_title="False Positive Rate",
         yaxis_title="True Positive Rate",
         xaxis_showgrid=False,
@@ -374,7 +381,7 @@ def plot_pr_curve_cv(pr_curve_results, class_ratio_test, cohort_combos=None):
             )
         else:
             pass
-            # p.add_trace(go.Scatter(x=recall, y=precision, hoverinfo='skip', mode='lines', line=dict(color=blue_color'), showlegend=False,  opacity=0.1))
+            # p.add_trace(go.Scatter(x=recall, y=precision, hoverinfo='skip', mode='lines', line=dict(color=BLUE_COLOR'), showlegend=False,  opacity=0.1))
         precision = np.interp(base_recall, recall, precision, period=100)
         precision[0] = 1.0
         precisions.append(precision)
@@ -431,7 +438,7 @@ def plot_pr_curve_cv(pr_curve_results, class_ratio_test, cohort_combos=None):
             go.Scatter(
                 x=[0, 1],
                 y=[no_skill, no_skill],
-                line=dict(color=red_color, dash="dash"),
+                line=dict(color=RED_COLOR, dash="dash"),
                 name="Chance",
             )
         )
@@ -451,8 +458,8 @@ def plot_pr_curve_cv(pr_curve_results, class_ratio_test, cohort_combos=None):
     p.update_yaxes(showline=True, linewidth=1, range=[0, 1], linecolor="black")
     p.update_layout(
         autosize=True,
-        width=700,
-        height=700,
+        width=685,
+        height=685,
         xaxis_title="Recall",
         yaxis_title="Precision",
         xaxis_showgrid=False,
@@ -488,14 +495,14 @@ def generate_dendrogram(
         matrix,
         orientation="bottom",
         labels=labels,
-        colorscale=[gray_color] * 8,
+        colorscale=[GRAY_COLOR] * 8,
     )
     for i in range(len(fig["data"])):
         fig["data"][i]["yaxis"] = "y2"
 
     # Create side dendrogram
     dendro_side = ff.create_dendrogram(
-        matrix, orientation="right", colorscale=[gray_color] * 8
+        matrix, orientation="right", colorscale=[GRAY_COLOR] * 8
     )
     for i in range(len(dendro_side["data"])):
         dendro_side["data"][i]["xaxis"] = "x2"
@@ -525,9 +532,9 @@ def generate_dendrogram(
             y=dendro_leaves,
             z=heat_data,
             colorscale=[
-                [0.0, blue_color],
+                [0.0, BLUE_COLOR],
                 [0.5, "#ffffff"],
-                [1.0, red_color],
+                [1.0, RED_COLOR],
             ],
             colorbar={"title": colorbar_title},
             hovertemplate=(
@@ -616,14 +623,23 @@ def perform_EDA(state):
         }
         labels["color"] = state.target_column
         p = px.scatter(
-            components, x=0, y=1, color=pca_color, labels=labels, hover_name=data.index
+            components,
+            x=0,
+            y=1,
+            color=pca_color,
+            labels=labels,
+            hover_name=data.index,
         )
 
         # Show feature lines
         if hasattr(state, "pca_show_features") and (state.pca_show_features == True):
             for i, feature in enumerate(data.columns):
                 p.add_shape(
-                    type="line", x0=0, y0=0, x1=loadings[i, 0], y1=loadings[i, 1]
+                    type="line",
+                    x0=0,
+                    y0=0,
+                    x1=loadings[i, 0],
+                    y1=loadings[i, 1],
                 )
                 p.add_annotation(
                     x=loadings[i, 0],
@@ -640,7 +656,7 @@ def perform_EDA(state):
         p.update_yaxes(showline=True, linewidth=1, linecolor="black")
         p.update_layout(
             autosize=True,
-            width=700,
+            width=685,
             height=500,
             xaxis_title="PCA 1",
             yaxis_title="PCA 2",

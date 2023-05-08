@@ -1,10 +1,5 @@
-#!python
-
-# builtin
 import setuptools
-import re
-import os
-# local
+
 import omiclearn as package2install
 
 
@@ -13,8 +8,10 @@ def get_long_description():
         long_description = readme_file.read()
     return long_description
 
-with open('reqs.txt') as f:
+
+with open("reqs.txt") as f:
     required = f.read().splitlines()
+
 
 def create_pip_wheel():
     requirements = required
@@ -34,10 +31,7 @@ def create_pip_wheel():
         entry_points={
             "console_scripts": package2install.__console_scripts__,
         },
-        install_requires=requirements + [
-            # TODO Remove hardcoded requirement?
-            "pywin32==225; sys_platform=='win32'"
-        ],
+        install_requires=requirements,
         python_requires=package2install.__python_version__,
     )
 

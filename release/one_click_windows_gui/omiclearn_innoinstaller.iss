@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OmicLearn"
-#define MyAppVersion "1.3.1"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "MannLabs"
 #define MyAppURL "https://github.com/MannLabs/OmicLearn"
 #define MyAppExeName "omiclearn_gui.exe"
@@ -10,7 +10,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{omiclearn}
+AppId={{OmicLearn}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}

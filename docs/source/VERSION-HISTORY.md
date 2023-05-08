@@ -2,7 +2,25 @@
 
 On this page, you might find the list of the previous releases of **OmicLearn** and the notes and significant changes made within the versions.
 
-### - `v1.3.1`
+
+### - `v1.4`
+
+> 📅  May 2023
+>
+> This is the latest release of **OmicLearn**.
+>
+> **Updates in this release:**
+>
+> - [x] `New Feature`: The section "Summary text" now has "Download as *.txt" button so that you can get it via a single click to save for your paper.
+> - [x] `New Feature`: The section "Additional features" supports file upload.
+> - [x] `Change`: The files to be uploaded in the section "Exclude features" now does not need to include header/title row at the top of the file. [See details here.](./USING.md)
+> - [x]: `Change`: The summary text is now updated and grammar mistake is fixed.
+> - [X] The Streamlit and other packages/libraries are upgraded to their new versions.
+> - [x] Several improvements on UI and UX sides have been made.
+> - [x] OmicLearn is now faster!
+>
+
+## - `v1.3.1`
 
 > 📅  April 2023
 >
@@ -11,7 +29,6 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 > **Updates in this release:**
 >
 > - [x] Minor fix has been done.
->
 
 
 ### - `v1.3`
@@ -83,8 +100,6 @@ On this page, you might find the list of the previous releases of **OmicLearn** 
 > - [X] The user interface has been updated to make it more easy-to-follow.
 > - [X] The Streamlit and other packages/libraries are upgraded to their new versions.
 >
-
-<br>
 
 ### - `v1.0.0`
 
