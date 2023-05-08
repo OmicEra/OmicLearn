@@ -17,7 +17,7 @@ Here is the list of all pages of OmicLearn documentation (or you can navigate th
 .. toctree::
    :maxdepth: 1
 
-   INDEX.md
+   index.md
    ONE_CLICK.md
    USING.md
    METHODS.md
