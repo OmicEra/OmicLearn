@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. image:: images/omiclearn.png
+.. image:: _images/omiclearn.png
    :width: 25%
    :alt: OmicLearn
    :align: left
