@@ -33,7 +33,7 @@ html_theme_options = {
     "version_dropdown": False,
     "logo_icon": "description",
     "nav_links": [
-        {"href": "index.html", "title": "Home Page", "internal": False},
+        {"href": "INDEX.html", "title": "Home Page", "internal": False},
         {
             "href": "ONE_CLICK.html",
             "title": "One-Click Installation",
